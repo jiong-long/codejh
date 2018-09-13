@@ -1,0 +1,24 @@
+<beans xmlns="http://www.springframework.org/schema/beans"  
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+    xmlns:jaxrs="http://cxf.apache.org/jaxrs"  
+    xmlns:jaxws="http://cxf.apache.org/jaxws"
+    xsi:schemaLocation="   
+       http://www.springframework.org/schema/beans 
+       http://www.springframework.org/schema/beans/spring-beans-2.5.xsd   
+       http://cxf.apache.org/jaxrs 
+       http://cxf.apache.org/schemas/jaxrs.xsd   
+       http://cxf.apache.org/jaxws 
+       http://cxf.apache.org/schemas/jaxws.xsd">  
+	
+	
+	<import resource="classpath:META-INF/cxf/cxf.xml"/>
+	<import resource="classpath:META-INF/cxf/cxf-extension-soap.xml"/>
+	<import resource="classpath:META-INF/cxf/cxf-servlet.xml"/>
+	
+	<bean id="getUserInfo" class="com.jianghu.web.webservice.GetUserInfo" />  
+    <jaxrs:server id="getUserInfoServer" address="/getUserInfo">  
+        <jaxrs:serviceBeans>  
+            <ref bean="getUserInfo" />  
+        </jaxrs:serviceBeans>  
+    </jaxrs:server>
+</beans>  

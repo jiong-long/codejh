@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans 
+	http://www.springframework.org/schema/beans/spring-beans.xsd
+	http://www.springframework.org/schema/context
+	http://www.springframework.org/schema/context/spring-context.xsd
+	http://www.springframework.org/schema/aop
+	http://www.springframework.org/schema/aop/spring-aop.xsd
+	http://www.springframework.org/schema/tx 
+	http://www.springframework.org/schema/tx/spring-tx.xsd">
+	<context:property-placeholder location="classpath:jdbc.properties"/>
+	<bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource" destroy-method="close">
+		<!-- 驱动 -->
+		<property name="driverClass" value="${sqlite.driver}"></property>
+		<!-- URL -->
+		<property name="jdbcUrl" value="${sqlite.url}"></property>
+		<!-- 用户名 -->
+		<property name="user" value="${sqlite.username}"></property>
+		<!-- 密码 -->
+		<property name="password" value="${sqlite.password}"></property>
+		<!-- 解决sqlite日期转换错误的问题 -->
+		<property name="properties">
+	    	<map value-type="java.lang.String" key-type="java.lang.String">
+	        	<entry key="date_string_format" value="yyyy-MM-dd HH:mm:ss" />
+	        </map>
+	    </property>
+		<!-- 最大连接数
+		<property name="maxPoolSize" value="${mysql.maxPoolSize}"></property> -->
+		<!-- 最小连接数
+		<property name="minPoolSize" value="${mysql.minPoolSize}"></property> -->
+		<!-- 初始连接数
+		<property name="initialPoolSize" value="${mysql.initPoolSize}"></property> -->
+		<!-- 最大空闲时间 
+		<property name="maxIdleTime" value="${mysql.maxIdleTime}"></property> -->
+	</bean>
+	
+	<bean id="sessionFactory" class="org.springframework.orm.hibernate3.annotation.AnnotationSessionFactoryBean">
+		<property name="dataSource" ref="dataSource"></property>
+		<property name="hibernateProperties">
+			<props>
+				<prop key="hibernate.dialect">${sqlite.dialect}</prop>
+				<prop key="hibernate.hbm2ddl.auto">update</prop>
+				<prop key="hibernate.show_sql">false</prop>
+				<prop key="hibernate.format_sql">false</prop>
+				<prop key="hibernate.current_session_context_class">thread</prop>
+				<!-- 解决Disabling contextual LOB creation as createClob() method threw error : java.lang.reflect.Invocation -->
+				<prop key="hibernate.temp.use_jdbc_metadata_defaults">false</prop>
+			</props>
+		</property>
+		<property name="packagesToScan">
+			<list>
+				<value>com.jianghu.domain</value>
+			</list>
+		</property>
+	</bean>
+	
+	<!-- 用户 -->
+	<bean id="userDao" class="com.jianghu.dao.impl.GenericDAOImpl">
+		<!-- 注入User对象 -->
+		<constructor-arg index="0" value="com.jianghu.domain.basic.User"/>
+		<!-- 注入sessionFactory -->
+		<property name="sessionFactory" ref="sessionFactory"/>
+	</bean>
+	
+	<!-- 目录结构zTree-->
+	<bean id="ztreeDAO" class="com.jianghu.dao.impl.GenericDAOImpl">
+		<!-- 注入User对象 -->
+		<constructor-arg index="0" value="com.jianghu.domain.zTree.Ztree"/>
+		<!-- 注入sessionFactory -->
+		<property name="sessionFactory" ref="sessionFactory"/>
+	</bean>
+	
+</beans>

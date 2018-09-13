@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts PUBLIC
+    "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+    "http://struts.apache.org/dtds/struts-2.0.dtd">
+<struts>
+	<constant name="struts.devMode" value="false" />
+	<constant name="struts.objectFactory" value="spring"/>
+	<constant name="struts.custom.i18n.resources" value="message"/>
+	<constant name="struts.serve.static.browserCache" value="false" />
+	<constant name="struts.configuration.xml.reload" value="true" />
+	<!-- 由于与webservice冲突，所以struts规则配置为.do -->
+	<constant name="struts.action.extension" value="do"/>
+	
+	<!-- 设置临时文件上传路径 -->
+	<constant name="struts.multipart.saveDir" value="/tmp"/>
+	
+	<!-- 自定义拦截器，判断是否需要使用Struts2的上传，当struts的拦截规则为/*时需要 -->
+	<!-- 
+    <constant name="struts.multipart.handler" value="myMultiPartRequest" />   
+	<bean type="org.apache.struts2.dispatcher.multipart.MultiPartRequest"   
+          name="myMultiPartRequest" class="com.jianghu.web.servlet.upLoad.MyMultiPartRequest"   
+          scope="default" optional="true"/>  
+	 -->
+
+	<package name="default" namespace="/" extends="struts-default">
+		<!-- 用户 -->
+		<action name="user_*" class="com.jianghu.web.action.basic.UserAction" method="{1}">
+		</action>
+		
+		<!-- zTree -->
+		<action name="zTree_*" class="com.jianghu.web.action.zTree.ZtreeAction" method="{1}">
+		</action>
+		
+		<!-- ECharts -->
+		<action name="eCharts_*" class="com.jianghu.web.action.eCharts.EChartsAction" method="{1}">
+			<result name="success">/page/echarts/echarts.jsp</result>
+		</action>
+		
+		<!-- 爬虫andMail -->
+		<action name="pcAndMail_*" class="com.jianghu.web.action.pcAndMail.PcAndMailAction" method="{1}">
+			<!-- 结果类型必须要写成 type="stream",与之对应的处理类是 org.apache.struts2.dispatcher.StreamResult -->
+			<result name="successExport" type="stream">
+				<!-- xls的MIME类型 -->
+				 <param name="contentType">application/vnd.ms-excel</param>
+				<!-- 以附件的方式下载，并解决中文乱码 -->
+				<param name="contentDisposition">attachment;filename="${fileName}"</param>
+		        <param name="inputName">input</param>
+			</result>
+			<result name="success">/page/pcAndMail/pc.jsp</result>
+		</action>
+		
+		<!-- AngularJS -->
+		<action name="angularJS_*" class="com.jianghu.web.action.angularJS.AngularJSAction" method="{1}">
+		</action>
+		
+		<!-- 游戏 -->
+		<action name="game_*" class="com.jianghu.web.action.game.GameAction" method="{1}">
+		</action>
+		
+		<!-- 序列管理 -->
+		<action name="seq_*" class="com.jianghu.web.action.basic.SequenceAction" method="{1}">
+		</action>
+		
+		<!-- 首页条目管理 -->
+		<action name="item_*" class="com.jianghu.web.action.basic.ItemAction" method="{1}">
+			<!-- 类型转换出错后会跳转到input结果中 -->
+			<result name="input">/page/basic/addItem.jsp</result>
+		</action>
+		
+		<!-- 获取天气信息 -->
+		<action name="wea_*" class="com.jianghu.web.action.webServices.Weather" method="{1}">
+		</action>	
+	</package>
+</struts>

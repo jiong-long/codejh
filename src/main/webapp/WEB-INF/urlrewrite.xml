@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE urlrewrite PUBLIC "-//tuckey.org//DTD UrlRewrite 4.0//EN" "http://www.tuckey.org/res/dtds/urlrewrite4.0.dtd">
+<urlrewrite>
+	<!-- 规则有冲突的，靠前的有效 -->
+	<!-- &需要用&amp;代替 -->
+
+	<rule>
+		<note>lucune搜索</note>
+		<!-- \s空白符，\S非空白符 -->
+	  	<from>/index_([\s\S]*).html$</from>
+	  	<to>/index.jsp?params=$1</to>
+	</rule>
+
+	<rule>
+		<note>增加案例</note>
+	  	<from>/addItem_([0-9]+).html$</from>
+	  	<to>/addItem.jsp?id=$1</to>
+	</rule>
+	
+	<rule>
+		<note>将jsp换为html</note>
+		<from>(.*).html</from>
+		<to>$1.jsp</to>
+	</rule>
+</urlrewrite>

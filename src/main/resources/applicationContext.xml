@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans 
+	http://www.springframework.org/schema/beans/spring-beans.xsd
+	http://www.springframework.org/schema/context
+	http://www.springframework.org/schema/context/spring-context.xsd
+	http://www.springframework.org/schema/aop
+	http://www.springframework.org/schema/aop/spring-aop.xsd
+	http://www.springframework.org/schema/tx 
+	http://www.springframework.org/schema/tx/spring-tx.xsd">
+
+	<context:annotation-config />
+	<import resource="classpath:service.xml"/>
+	<import resource="classpath:dao.xml"/>
+	
+	<!-- 把标记了@Controller等注解的类转换为bean -->
+	<context:component-scan base-package="com.jianghu" />
+	
+	<!-- 定时器相关配置 -->
+	<!-- 报错Line: 230 - com/opensymphony/xwork2/spring/SpringObjectFactory.java:230:-1 -->
+	<!-- spring与quartz的版本不一致，需要更换版本 -->
+    <bean id="SpringQtzJob" class="com.jianghu.core.func.SpringQuartz"/>
+    
+    <bean id="SpringQtzJobMethod" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">  
+	    <property name="targetObject" ref="SpringQtzJob"/>  
+	    <!-- 调用的方法 -->
+	    <property name="targetMethod" value="execute"/>
+	    <!-- 上一个任务未执行完，是否执行下一下任务 -->
+	    <property name="concurrent" value="false"/>
+	</bean>  
+  
+	<!--调度触发器 -->  
+	<bean id="CronTriggerBean" class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">  
+	    <property name="jobDetail" ref="SpringQtzJobMethod"></property>  
+	    <!-- 配置规则 -->
+	    <!-- 一个小时一次 -->
+	    <property name="cronExpression" value="0 0 0-23 * * ?"></property>  
+	    <!-- 每天一次，24点执行
+	    <property name="cronExpression" value="0 0 0 * * ?"></property>  
+	     -->
+	</bean>  
+  
+	<!-- 调度工厂  -->  
+	<bean id="SpringJobSchedulerFactoryBean" class="org.springframework.scheduling.quartz.SchedulerFactoryBean">  
+	    <property name="triggers">  
+	        <list>  
+	            <ref bean="CronTriggerBean"/>  
+	        </list>  
+	    </property>  
+	</bean>    
+</beans>

@@ -1,0 +1,193 @@
+.jumbotron1{
+	padding-top: 35px;
+	padding-bottom: 25px;
+	margin-bottom: 0px;
+}
+
+.topTitle{
+	font-family: "STXingkai",华文行楷;
+	font-size: 30pt;
+	color: white;
+}
+
+.topLocation{
+	font-family: "STXingkai",华文行楷;
+	font-size: 13pt;
+	color: white;
+}
+
+.input-group{
+	width: 40%;
+	margin: 0 auto; 
+	margin-top: 60px;
+}
+
+.pageTop{
+	margin-top: -30px;
+}
+
+.topLogo{
+	float:left;
+	margin-left: 60px;
+	margin-top: 10px;
+	margin-bottom: 10px;
+	cursor: pointer;
+}
+
+.topToolBar{
+	float: right;
+	margin-right: 60px;
+	margin-top: 25px;
+	margin-bottom: 25px;
+	color: white;
+	cursor: pointer;
+}
+
+.glyphicon-tint{
+	font-size: 20pt;
+	color: white;
+	margin-left: 10px;
+}
+
+.list-group{
+	width: 60%;
+	margin: 0 auto;
+}
+
+a.list-group-item{
+	height: 60px;
+	padding-top: 10px;
+	padding-bottom: 10px;
+	cursor: pointer;
+}
+
+.liClass{
+	margin-left: 30px;
+	font-family: "KaiTi",楷体;
+	font-size: 13pt;
+}
+
+.list-group-item-text{
+	margin-left: 30px;
+}
+
+/*右侧客服开始*/
+/*reset css*/
+*{margin:0;padding:0;list-style:none;border:none;}
+body{background:#CCC;font-family:'microsoft yahei';}
+.izl-rmenu{
+	 margin-right: 0;
+	 width: 82px;
+	 position: fixed;
+	 right: 2px;
+	 top: 45%;
+	 -webkit-box-shadow: #DDD 0px 1px 5px;
+	 -moz-box-shadow: #DDD 0px 1px 5px;
+	 box-shadow: #DDD 0px 1px 5px;
+	 z-index:999;
+}
+.izl-rmenu .consult{    
+	background-image: url(/jiong/images/consult_icon.gif);
+    background-repeat: no-repeat;
+    background-position: center -77px;
+    display: block;
+    height: 76px;
+    width: 82px;
+}
+.izl-rmenu .consult .phone {
+    background-color: rgb(247,247,255);
+    position: absolute;
+    width: 160px;
+    left: -160px;
+    top: 0px;
+    line-height: 73px;
+    color: #000;
+    font-size: 18px;
+    text-align: center;
+    display: none;
+    box-shadow: #DDD -1px 1px 4px;
+}
+.izl-rmenu a.consult:hover .phone{display:inline !important;}
+.izl-rmenu .cart {
+    background-image: url(/jiong/images/consult_icon.gif);
+    background-repeat: no-repeat;
+    background-position: center bottom;
+    display: block;
+    height: 76px;
+    width: 82px;
+    font-size: 12px;
+    line-height: 16px;
+    color: #45BDFF;
+    text-align: center;
+    padding-top: 15px;
+    padding-right: 18px;
+    padding-bottom: 47px;
+    padding-left: 48px;
+}
+.izl-rmenu a.cart:hover .pic{display:block;}
+.izl-rmenu .btn_top {
+    background-image: url(/jiong/images/float_top.gif);
+    background-repeat: no-repeat;
+    background-position: center top;
+    display: block;
+    height: 39px;
+    width: 82px;
+    -webkit-transition: all 0s ease-in-out;
+    -moz-transition: all 0s ease-in-out;
+    -o-transition: all 0s ease-in-out;
+    transition: all 0s ease-in-out;
+}
+.izl-rmenu .btn_top:hover {
+	background-image: url(/jiong/images/float_top.gif);
+	background-repeat: no-repeat;
+	background-position: center bottom;
+}
+.izl-rmenu .cart .pic {
+	display:none;
+    position: absolute;
+    left: -160px;
+    top: 65px;
+    width: 160px;
+    height: 160px;
+    background:url(/jiong/images/weixin.jpg);
+}
+#udesk-feedback-tab {
+    position: fixed;
+    right: 2px;
+    top: 45%;
+    margin-top: -76px;
+    -webkit-box-shadow: #DDD 0px -1px 5px;
+    -moz-box-shadow: #DDD 0px -1px 5px;
+    box-shadow: #DDD 0px -1px 5px;
+    z-index: 10000;
+    cursor: pointer;
+    background-image: url(/jiong/images/consult_icon.gif);
+    background-repeat: no-repeat;
+    background-position: center top;
+    display: block;
+    height: 76px;
+    width: 82px;
+    background-color: #FFF!important;
+    z-index:999;
+}
+/*右侧客服结束*/
+
+.lb_gl{
+	height: 485px !important;
+}
+
+.for_btn {
+    height: 195px !important;
+}
+
+.zwjs {
+    font-size: 14px !important;
+}
+
+.xxgy{
+	cursor: pointer;
+}
+
+.lb_gl{
+	background: none !important;
+}
