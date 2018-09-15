@@ -118,7 +118,8 @@
 				idStr += "," + luceneField.getNo() ;
 			}
 		}
-		String getAllSql = "select id, itemname, itemdsc, seecount,strftime('%Y-%m-%d', updatetime,'localtime') updatetime, img_path from bc_item ";
+		//sqlite 日期装换 strftime('%Y-%m-%d', updatetime,'localtime') updatetime
+		String getAllSql = "select id, itemname, itemdsc, seecount, updatetime, img_path from bc_item ";
 		if("".equals(idStr)){
 			getAllSql += " order by updateTime desc";
 		}else{

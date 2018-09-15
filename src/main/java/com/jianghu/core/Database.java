@@ -11,7 +11,6 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Properties;
 import java.util.ResourceBundle;
 
 /**
@@ -23,15 +22,15 @@ import java.util.ResourceBundle;
 public class Database {
 	private static final String DRIVERCLASS;
 	private static final String URL;
-	// private static final String USERNAME;
-	// private static final String PSW;
+	private static final String USERNAME;
+	private static final String PSW;
 	// 读取配置文件中的内容
 	static {
 		ResourceBundle bundle = ResourceBundle.getBundle("jdbc");
-		DRIVERCLASS = bundle.getString("sqlite.driver");
-		URL = bundle.getString("sqlite.url");
-		// USERNAME = bundle.getString("mysql.username");
-		// PSW = bundle.getString("mysql.password");
+		DRIVERCLASS = bundle.getString("mysql.driver");
+		URL = bundle.getString("mysql.url");
+		USERNAME = bundle.getString("mysql.username");
+		PSW = bundle.getString("mysql.password");
 	}
 
 	public static void main(String[] args) throws Exception {
@@ -46,11 +45,11 @@ public class Database {
 	public static Connection getconnection() throws Exception {
 		LoadDriver();
 		try {
-			// return DriverManager.getConnection(URL, USERNAME, PSW);
-			Properties pro = new Properties();
+			return DriverManager.getConnection(URL, USERNAME, PSW);
 			// sqlite解决getDate时日期格式不正确的问题
-			pro.put("date_string_format", "yyyy-MM-dd HH:mm:ss"); // 默认是yyyy-MM-dd HH:mm:ss.SSS
-			return DriverManager.getConnection(URL, pro);
+			// Properties pro = new Properties();
+			// pro.put("date_string_format", "yyyy-MM-dd HH:mm:ss"); // 默认是yyyy-MM-dd HH:mm:ss.SSS
+			// return DriverManager.getConnection(URL, pro);
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}

@@ -15,19 +15,19 @@
 	<context:property-placeholder location="classpath:jdbc.properties"/>
 	<bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource" destroy-method="close">
 		<!-- 驱动 -->
-		<property name="driverClass" value="${sqlite.driver}"></property>
+		<property name="driverClass" value="${mysql.driver}"></property>
 		<!-- URL -->
-		<property name="jdbcUrl" value="${sqlite.url}"></property>
+		<property name="jdbcUrl" value="${mysql.url}"></property>
 		<!-- 用户名 -->
-		<property name="user" value="${sqlite.username}"></property>
+		<property name="user" value="${mysql.username}"></property>
 		<!-- 密码 -->
-		<property name="password" value="${sqlite.password}"></property>
-		<!-- 解决sqlite日期转换错误的问题 -->
+		<property name="password" value="${mysql.password}"></property>
+		<!-- 解决sqlite日期转换错误的问题 
 		<property name="properties">
 	    	<map value-type="java.lang.String" key-type="java.lang.String">
 	        	<entry key="date_string_format" value="yyyy-MM-dd HH:mm:ss" />
 	        </map>
-	    </property>
+	    </property> -->
 		<!-- 最大连接数
 		<property name="maxPoolSize" value="${mysql.maxPoolSize}"></property> -->
 		<!-- 最小连接数
@@ -42,7 +42,7 @@
 		<property name="dataSource" ref="dataSource"></property>
 		<property name="hibernateProperties">
 			<props>
-				<prop key="hibernate.dialect">${sqlite.dialect}</prop>
+				<prop key="hibernate.dialect">${mysql.dialect}</prop>
 				<prop key="hibernate.hbm2ddl.auto">update</prop>
 				<prop key="hibernate.show_sql">false</prop>
 				<prop key="hibernate.format_sql">false</prop>
