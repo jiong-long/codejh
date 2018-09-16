@@ -1,4 +1,0 @@
-代码：Github:https://github.com/jiong-long/jianghu.git
-服务器：tomcat8
-JDK:jdk1.7
-数据库：sqlite
