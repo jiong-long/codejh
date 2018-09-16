@@ -1,4 +1,4 @@
-<%@page import="com.jianghu.core.tools.NetUtil"%>
+<%@page import="com.jianghu.core.func.Location"%>
 <%@page import="com.jianghu.domain.lucene.LuceneField"%>
 <%@page import="com.jianghu.core.tools.LuceneUtil"%>
 <%@page import="org.json.JSONArray"%>
@@ -48,7 +48,7 @@
 		String webPath = Tools.getWebPath(request);
 		
 		//获取客户端所在的市
-		String location = NetUtil.getLocationFromRequest(request);
+		String location = Location.getLocationFromRequest(request);
   	%>
   	<script>
 	  $(function() {
@@ -119,7 +119,7 @@
 			}
 		}
 		//sqlite 日期装换 strftime('%Y-%m-%d', updatetime,'localtime') updatetime
-		String getAllSql = "select id, itemname, itemdsc, seecount, updatetime, img_path from bc_item ";
+		String getAllSql = "select id, itemname, itemdsc, seecount, date_format(updatetime,'%Y-%m-%d') updatetime, img_path from bc_item ";
 		if("".equals(idStr)){
 			getAllSql += " order by updateTime desc";
 		}else{

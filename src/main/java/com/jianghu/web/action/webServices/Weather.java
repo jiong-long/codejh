@@ -18,7 +18,7 @@ import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
 import com.jianghu.core.Tools;
-import com.jianghu.core.tools.NetUtil;
+import com.jianghu.core.func.Location;
 import com.opensymphony.xwork2.ActionSupport;
 
 /**
@@ -41,7 +41,7 @@ public class Weather extends ActionSupport {
 	public String getWeatherInfo() {
 		try {
 			HttpServletRequest request = ServletActionContext.getRequest();
-			String city = NetUtil.getServerCity();
+			String city = Location.getServerCity();
 			if ("".equals(city)) {
 				city = request.getParameter("localtion");
 			} else {//city带有市，要去掉

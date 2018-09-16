@@ -8,7 +8,11 @@ import java.io.Reader;
 import java.net.URL;
 import java.nio.charset.Charset;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.json.JSONObject;
+
+import com.jianghu.core.tools.NetUtil;
 
 /**
  * 百度地图根据IP获取地理位置
@@ -17,7 +21,7 @@ import org.json.JSONObject;
  * @author jinlong
  * 
  */
-public class GetLocation {
+public class Location {
 	private static String readAll(Reader rd) throws IOException {
 		StringBuilder sb = new StringBuilder();
 		int cp;
@@ -42,6 +46,39 @@ public class GetLocation {
 		} finally {
 			is.close();
 		}
+	}
+
+	/**
+	 * 通过request获取客户端的地址（市）
+	 * 
+	 * @creatTime 2017年10月3日 下午11:41:42
+	 * @author jinlong
+	 * @param ip
+	 * @return
+	 * @throws Exception
+	 */
+	public static String getLocationFromRequest(HttpServletRequest request) throws Exception {
+		String ip = NetUtil.getIpFromRequest(request);
+		return getLocationFromIp(ip);
+	}
+
+	/**
+	 * 获取服务器的城市
+	 * 
+	 * @author wangjinlong
+	 * @creatTime 2017年10月21日 下午10:53:04
+	 * @return
+	 * @throws Exception
+	 */
+	public static String getServerCity() {
+		String city = "";
+		try {
+			String serverIp = NetUtil.REMOTE_IP;
+			city = getLocationFromIp(serverIp);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return city;
 	}
 
 	/**

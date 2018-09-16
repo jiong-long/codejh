@@ -2,6 +2,7 @@ package com.jianghu.core.tools;
 
 import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.InetAddress;
@@ -15,8 +16,6 @@ import java.util.regex.Pattern;
 
 import javax.servlet.http.HttpServletRequest;
 
-import com.jianghu.core.func.GetLocation;
-
 /**
  * 网络（IP）相关的工具类
  * 
@@ -25,12 +24,18 @@ import com.jianghu.core.func.GetLocation;
  * 
  */
 public class NetUtil {
+	public static String urlString = "http://2018.ip138.com/ic.asp";//获取IP的网站
+	public static String LOCAL_IP = getIpFromLocation();//内网IP
+	public static String REMOTE_IP = getIpFromUrl();//外网IP
+
 	public static void main(String[] args) throws Exception {
-		System.out.println(getIpFromCmd());
+		System.out.println(REMOTE_IP);
 	}
 
 	/**
-	 * 从cmd中获取ip相关信息
+	 * 从cmd中获取ip(内网)
+	 * 
+	 * 不同的机器可能会在后面拼接上其他字符串需要截取
 	 * 
 	 * @creatTime 2017年10月23日 下午10:47:43
 	 * @author jinlong
@@ -38,7 +43,7 @@ public class NetUtil {
 	 * @throws IOException
 	 * @throws InterruptedException
 	 */
-	private static String getIpFromCmd() throws IOException, InterruptedException {
+	public static String getIpFromCmd() throws IOException, InterruptedException {
 		String ip = "";
 		String s1 = "ipconfig /all";
 		Process process = Runtime.getRuntime().exec(s1);
@@ -62,12 +67,17 @@ public class NetUtil {
 	/**
 	 * 获得外网IP(通过第三方网站，读取url内容，匹配获取)
 	 * 
+	 * 如果访问次数过多，需要验证才能正常访问
+	 * 
+	 * 该方法只针对一个网站，现使用getIpFromUrl()
+	 * 
 	 * @return 外网IP
 	 * @throws MalformedURLException
 	 * @throws UnknownHostException
 	 * @throws SocketException
 	 */
-	public static String getOutIpFromUrl() throws Exception {
+	@Deprecated
+	public static String getOutIpFromUrl() {
 		String chinaz = "http://ip.chinaz.com";
 		StringBuilder inputLine = new StringBuilder();
 		BufferedReader in = null;
@@ -79,9 +89,15 @@ public class NetUtil {
 			while ((read = in.readLine()) != null) {
 				inputLine.append(read + "\r\n");
 			}
+		} catch (Exception e) {
+			Log.error(e);
 		} finally {
 			if (in != null) {
-				in.close();
+				try {
+					in.close();
+				} catch (IOException e) {
+					Log.error(e);
+				}
 			}
 		}
 
@@ -97,6 +113,84 @@ public class NetUtil {
 	}
 
 	/**
+	 * 通过网站url获取IP(外网)
+	 * 
+	 * @param urlString
+	 * @return
+	 */
+	public static String getIpFromUrl() {
+		String returnedhtml = getWebContent();
+		if (returnedhtml == null) {
+			return "";
+		}
+		return parse(returnedhtml);
+	}
+
+	/**
+	 * 通过URL获取网站的内容
+	 * 
+	 * @return
+	 */
+	private static String getWebContent() {
+		// 输入流
+		InputStream in = null;
+		// 到外网提供者的Http连接
+		HttpURLConnection httpConn = null;
+		try {
+			// 打开连接
+			URL url = new URL(urlString);
+			httpConn = (HttpURLConnection) url.openConnection();
+			// 连接设置
+			HttpURLConnection.setFollowRedirects(true);
+			httpConn.setRequestMethod("GET");
+			httpConn.setRequestProperty("User-Agent", "Mozilla/4.0 (compatible; MSIE 6.0; Windows 2000)");
+			// 获取连接的输入流
+			in = httpConn.getInputStream();
+			byte[] bytes = new byte[in.available()];// 此大小可根据实际情况调整
+			// 读取到数组中
+			int offset = 0;
+			int numRead = 0;
+			while (offset < bytes.length && (numRead = in.read(bytes, offset, bytes.length - offset)) >= 0) {
+				offset += numRead;
+			}
+			// 将字节转化为为UTF-8的字符串
+			String receivedString = new String(bytes, "UTF-8");
+			// 返回
+			return receivedString;
+		} catch (MalformedURLException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				if (in != null)
+					in.close();
+				httpConn.disconnect();
+			} catch (Exception ex) {
+				ex.printStackTrace();
+			}
+		}
+
+		// 出现异常则返回空
+		return null;
+	}
+
+	/**
+	 * 使用正则表达式解析返回的HTML文本,得到本机外网地址
+	 * 
+	 * @param html
+	 */
+	private static String parse(String html) {
+		Pattern pattern = Pattern.compile("(\\d{1,3})[.](\\d{1,3})[.](\\d{1,3})[.](\\d{1,3})", Pattern.CASE_INSENSITIVE);
+		Matcher matcher = pattern.matcher(html);
+		String ip = "";
+		while (matcher.find()) {
+			ip = matcher.group(0);
+		}
+		return ip;
+	}
+
+	/**
 	 * 获取本机的IP(内网)
 	 * 
 	 * @creatTime 2017年10月4日 上午12:35:44
@@ -104,12 +198,17 @@ public class NetUtil {
 	 * @return
 	 * @throws UnknownHostException
 	 */
-	public static String getIpFromLocation() throws UnknownHostException {
-		return InetAddress.getLocalHost().getHostAddress();
+	public static String getIpFromLocation() {
+		try {
+			return InetAddress.getLocalHost().getHostAddress();
+		} catch (UnknownHostException e) {
+			Log.error(e);
+		}
+		return "";
 	}
 
 	/**
-	 * 从request中获取客户端实际IP
+	 * 从request中获取客户端IP（外网）
 	 * 
 	 * @creatTime 2017年10月3日 下午11:56:36
 	 * @author jinlong
@@ -134,7 +233,7 @@ public class NetUtil {
 		if (null == ip || 0 == ip.length() || "unknown".equalsIgnoreCase(ip)) {
 			ip = request.getRemoteAddr();
 			if (ip.equals("127.0.0.1") || ip.equals("0:0:0:0:0:0:0:1")) {// 如果是本机
-				ip = getOutIpFromUrl();
+				ip = REMOTE_IP;
 			}
 		}
 		// 对于通过多个代理的情况，第一个IP为客户端真实IP,多个IP按照','分割
@@ -144,38 +243,5 @@ public class NetUtil {
 			}
 		}
 		return ip;
-	}
-
-	/**
-	 * 通过request获取客户端的地址（市）
-	 * 
-	 * @creatTime 2017年10月3日 下午11:41:42
-	 * @author jinlong
-	 * @param ip
-	 * @return
-	 * @throws Exception
-	 */
-	public static String getLocationFromRequest(HttpServletRequest request) throws Exception {
-		String ip = NetUtil.getIpFromRequest(request);
-		return GetLocation.getLocationFromIp(ip);
-	}
-
-	/**
-	 * 获取服务器的城市
-	 * 
-	 * @author wangjinlong
-	 * @creatTime 2017年10月21日 下午10:53:04
-	 * @return
-	 * @throws Exception
-	 */
-	public static String getServerCity() {
-		String city = "";
-		try {
-			String serverIp = NetUtil.getOutIpFromUrl();
-			city = GetLocation.getLocationFromIp(serverIp);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		return city;
 	}
 }
