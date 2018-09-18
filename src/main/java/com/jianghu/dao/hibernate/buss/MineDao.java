@@ -1,17 +1,17 @@
-package com.jianghu.dao.buss;
+package com.jianghu.dao.hibernate.buss;
 
 import javax.annotation.Resource;
 
 import org.hibernate.SessionFactory;
 import org.springframework.stereotype.Repository;
 
-import com.jianghu.dao.impl.GenericDAOImpl;
-import com.jianghu.domain.basic.Task;
+import com.jianghu.dao.hibernate.impl.GenericDAOImpl;
+import com.jianghu.domain.layim.Mine;
 
-@Repository("taskDao")
-public class TaskDaoImpl extends GenericDAOImpl<Task> {
-	public TaskDaoImpl() {
-		super("com.jianghu.domain.basic.Task");
+@Repository("mineDao")
+public class MineDao extends GenericDAOImpl<Mine> {
+	public MineDao() {
+		super();
 	}
 
 	@Resource(name = "sessionFactory")

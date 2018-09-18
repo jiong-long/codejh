@@ -1,4 +1,4 @@
-package com.jianghu.dao.impl;
+package com.jianghu.dao.hibernate.impl;
 
 import java.io.Serializable;
 import java.util.List;
@@ -6,7 +6,7 @@ import java.util.List;
 import org.hibernate.criterion.DetachedCriteria;
 import org.springframework.orm.hibernate3.support.HibernateDaoSupport;
 
-import com.jianghu.dao.GenericDAO;
+import com.jianghu.dao.hibernate.GenericDAO;
 
 // 实现GenericDAO 接口
 public class GenericDAOImpl<T> extends HibernateDaoSupport implements GenericDAO<T> {

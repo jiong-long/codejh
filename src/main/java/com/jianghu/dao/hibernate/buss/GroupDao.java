@@ -1,16 +1,16 @@
-package com.jianghu.dao.buss;
+package com.jianghu.dao.hibernate.buss;
 
 import javax.annotation.Resource;
 
 import org.hibernate.SessionFactory;
 import org.springframework.stereotype.Repository;
 
-import com.jianghu.dao.impl.GenericDAOImpl;
+import com.jianghu.dao.hibernate.impl.GenericDAOImpl;
 import com.jianghu.domain.layim.Mine;
 
-@Repository("mineDao")
-public class MineDao extends GenericDAOImpl<Mine> {
-	public MineDao() {
+@Repository("groupDao")
+public class GroupDao extends GenericDAOImpl<Mine> {
+	public GroupDao() {
 		super();
 	}
 

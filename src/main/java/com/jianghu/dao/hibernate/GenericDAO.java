@@ -1,4 +1,4 @@
-package com.jianghu.dao;
+package com.jianghu.dao.hibernate;
 
 import java.io.Serializable;
 import java.util.List;

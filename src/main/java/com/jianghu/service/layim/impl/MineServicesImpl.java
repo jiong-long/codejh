@@ -7,7 +7,7 @@ import javax.annotation.Resource;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.jianghu.dao.GenericDAO;
+import com.jianghu.dao.hibernate.GenericDAO;
 import com.jianghu.domain.layim.Mine;
 import com.jianghu.service.layim.MineServices;
 

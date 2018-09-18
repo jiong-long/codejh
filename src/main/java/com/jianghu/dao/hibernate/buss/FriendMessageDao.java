@@ -1,16 +1,16 @@
-package com.jianghu.dao.buss;
+package com.jianghu.dao.hibernate.buss;
 
 import javax.annotation.Resource;
 
 import org.hibernate.SessionFactory;
 import org.springframework.stereotype.Repository;
 
-import com.jianghu.dao.impl.GenericDAOImpl;
-import com.jianghu.domain.layim.Mine;
+import com.jianghu.dao.hibernate.impl.GenericDAOImpl;
+import com.jianghu.domain.layim.FriendMessage;
 
-@Repository("groupDao")
-public class GroupDao extends GenericDAOImpl<Mine> {
-	public GroupDao() {
+@Repository("friendMessageDao")
+public class FriendMessageDao extends GenericDAOImpl<FriendMessage> {
+	public FriendMessageDao() {
 		super();
 	}
 

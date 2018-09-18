@@ -2,7 +2,7 @@ package com.jianghu.service.zTree.impl;
 
 import java.util.List;
 
-import com.jianghu.dao.GenericDAO;
+import com.jianghu.dao.hibernate.GenericDAO;
 import com.jianghu.domain.zTree.Ztree;
 import com.jianghu.service.zTree.ZtreeServices;
 
