@@ -59,7 +59,7 @@
 	</bean>
 	
 	<!-- 用户 -->
-	<bean id="userDao" class="com.jianghu.dao.impl.GenericDAOImpl">
+	<bean id="userDao" class="com.jianghu.dao.hibernate.impl.GenericDAOImpl">
 		<!-- 注入User对象 -->
 		<constructor-arg index="0" value="com.jianghu.domain.basic.User"/>
 		<!-- 注入sessionFactory -->
@@ -67,7 +67,7 @@
 	</bean>
 	
 	<!-- 目录结构zTree-->
-	<bean id="ztreeDAO" class="com.jianghu.dao.impl.GenericDAOImpl">
+	<bean id="ztreeDAO" class="com.jianghu.dao.hibernate.impl.GenericDAOImpl">
 		<!-- 注入User对象 -->
 		<constructor-arg index="0" value="com.jianghu.domain.zTree.Ztree"/>
 		<!-- 注入sessionFactory -->
