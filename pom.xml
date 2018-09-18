@@ -9,6 +9,13 @@
 	<url>http://maven.apache.org</url>
 	
 	<dependencies>
+		<!-- MyBatis -->
+		<dependency>
+		    <groupId>org.mybatis</groupId>
+		    <artifactId>mybatis</artifactId>
+		    <version>3.4.1</version>
+		</dependency>
+	
 		<!-- 是Hibernate中默认的CacheProvider。 -->
 		<dependency>
 		    <groupId>net.sf.ehcache</groupId>
@@ -652,6 +659,17 @@
 		        </configuration>  
 		    </plugin>  
 		</plugins>  
+		
+		<resources>
+			<resource>
+				<directory>src/main/java</directory>
+				<includes>
+					<include>**/*.properties</include>
+					<include>**/*.xml</include>
+				</includes>
+				<filtering>false</filtering>
+			</resource>
+		</resources>
 	</build>
 	
 	<repositories>
