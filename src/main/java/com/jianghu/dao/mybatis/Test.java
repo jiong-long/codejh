@@ -16,9 +16,8 @@ public class Test {
 	private static void selectUserById() {
 		SqlSession session = MyBatisDB.getSession();
 		try {
-			User user = session.selectOne("com.jianghu.dao.mybatis.xml.UserMapper", "1");
+			User user = session.selectOne("com.jianghu.dao.mybatis.xml.UserMapper.selectUserById", 1);
 			System.out.println(user.toString());
-
 			session.commit();
 		} catch (Exception e) {
 			e.printStackTrace();

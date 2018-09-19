@@ -5,9 +5,9 @@
 	<properties resource="jdbc.properties"></properties>
 	
 	<!-- 为JAVA Bean起类别名 -->
-   	<typeAliases >
-        <!-- 别名方式1：一个一个的配置 type中放置的是类的全路径，alias中放置的是类别名
-        <typeAliase type="com.jianghu.domain.basic.User" alias="User"/> -->
+   	<typeAliases>
+        <!-- 别名方式1：一个一个的配置 type中放置的是类的全路径，alias中放置的是类别名 
+        <typeAlias type="com.jianghu.domain.basic.User" alias="User"/>-->
         <!-- 别名方式2：自动扫描，将JAVA类的类名作为类的类别名 ，则该包下不能有重名的实体类-->
         <package name="com.jianghu.domain.basic"/>
    	</typeAliases>
@@ -32,9 +32,9 @@
 	
 	<!-- 配置映射文件 -->
    	<mappers>
-        <!-- 1：一个一个的配置
-        <mapper resource="com/jianghu/dao/mybatis/xml/UserMapper.xml"/>-->
-        <!-- 2：自动扫描包内的Mapper接口与配置文件 -->
-        <package name="com/jianghu/dao/mybatis/xml"/>
+        <!-- 1：一个一个的配置 -->
+        <mapper resource="com/jianghu/dao/mybatis/xml/UserMapper.xml"/>
+        <!-- 2：自动扫描包内的Mapper接口与配置文件 
+        <package name="com.jianghu.dao.mybatis.xml"/> -->
     </mappers>
 </configuration>
