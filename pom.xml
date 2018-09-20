@@ -16,6 +16,13 @@
 		    <version>3.4.1</version>
 		</dependency>
 	
+		<!-- hibernate3.6 -->
+		<dependency>
+		    <groupId>org.hibernate</groupId>
+		    <artifactId>hibernate-core</artifactId>
+		    <version>3.6.10.Final</version>
+		</dependency>
+	
 		<!-- 是Hibernate中默认的CacheProvider。 -->
 		<dependency>
 		    <groupId>net.sf.ehcache</groupId>
@@ -639,8 +646,8 @@
 		        <!-- 与Servlet版本对应,否则会出现警告--> 
 		        <version>3.1</version> 
 		        <configuration>  
-		        	<source>1.7</source>  
-		          	<target>1.7</target>  
+		        	<source>1.8</source>  
+		          	<target>1.8</target>  
 		          	<encoding>UTF-8</encoding>
 		          	<!-- 某些jar包中心仓库没有，指定本地加载目录 -->
 		          	<compilerArguments> 
