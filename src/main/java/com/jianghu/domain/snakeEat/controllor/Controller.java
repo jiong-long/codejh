@@ -3,12 +3,15 @@ package com.jianghu.domain.snakeEat.controllor;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 
+import org.apache.ibatis.type.Alias;
+
 import com.jianghu.domain.snakeEat.domain.Food;
 import com.jianghu.domain.snakeEat.domain.Ground;
 import com.jianghu.domain.snakeEat.domain.Snake;
 import com.jianghu.domain.snakeEat.listener.SnakeListener;
 import com.jianghu.domain.snakeEat.panel.GamePanel;
 
+@Alias("Controller2")
 public class Controller extends KeyAdapter implements SnakeListener {
 
 	private Snake snake;

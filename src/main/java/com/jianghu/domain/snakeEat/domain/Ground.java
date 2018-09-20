@@ -5,8 +5,11 @@ import java.awt.Graphics;
 import java.awt.Point;
 import java.util.Random;
 
+import org.apache.ibatis.type.Alias;
+
 import com.jianghu.domain.snakeEat.util.Global;
 
+@Alias("Ground2")
 public class Ground {
 	private int[][] rocks = new int[Global.WIDTH][Global.HEIGTJ];
 
@@ -49,8 +52,7 @@ public class Ground {
 			for (int j = 0; j < Global.HEIGTJ; j++) {
 				if (rocks[i][j] == 1) {
 					g.setColor(Color.RED);
-					g.fill3DRect(i * Global.CELL_SIZE, j * Global.CELL_SIZE, Global.CELL_SIZE,
-							Global.CELL_SIZE, true);
+					g.fill3DRect(i * Global.CELL_SIZE, j * Global.CELL_SIZE, Global.CELL_SIZE, Global.CELL_SIZE, true);
 				}
 			}
 		}

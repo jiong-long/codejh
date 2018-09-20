@@ -4,6 +4,8 @@ import java.awt.BorderLayout;
 
 import javax.swing.JFrame;
 
+import org.apache.ibatis.type.Alias;
+
 import com.jianghu.domain.snakeEat.controllor.Controller;
 import com.jianghu.domain.snakeEat.domain.Food;
 import com.jianghu.domain.snakeEat.domain.Ground;
@@ -11,6 +13,7 @@ import com.jianghu.domain.snakeEat.domain.Snake;
 import com.jianghu.domain.snakeEat.panel.GamePanel;
 import com.jianghu.domain.snakeEat.util.Global;
 
+@Alias("Game2")
 public class Game {
 	public static void main(String[] args) {
 		Snake snake = new Snake();

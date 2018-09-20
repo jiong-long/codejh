@@ -5,11 +5,14 @@ import java.awt.Graphics;
 
 import javax.swing.JPanel;
 
+import org.apache.ibatis.type.Alias;
+
 import com.jianghu.domain.snakeEat.domain.Food;
 import com.jianghu.domain.snakeEat.domain.Ground;
 import com.jianghu.domain.snakeEat.domain.Snake;
 import com.jianghu.domain.snakeEat.util.Global;
 
+@Alias("GamePanel2")
 public class GamePanel extends JPanel {
 	private static final long serialVersionUID = 1130677437761849334L;
 	private Snake snake;
