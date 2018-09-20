@@ -39,11 +39,11 @@ public class User implements HttpSessionBindingListener {
 	private String infactname;
 	@Transient
 	private String firstcode;
-	
+
 	//mappedBy标签一定是定义在被拥有方的，他指向拥有方,ManyToOne不存在该属性;
 	//cascade默认值none
 	//fetch默认值FetchType EAGER
-	@OneToOne(mappedBy = "user",fetch = FetchType.LAZY)
+	@OneToOne(mappedBy = "user", fetch = FetchType.LAZY)
 	private Mine mine;//关联的layim用户（一对一）
 
 	public Mine getMine() {
@@ -132,4 +132,8 @@ public class User implements HttpSessionBindingListener {
 		System.out.println("销毁了用户");
 	}
 
+	@Override
+	public String toString() {
+		return "User [id=" + id + ", username=" + username + ", password=" + password + ", infactname=" + infactname + "]";
+	}
 }
