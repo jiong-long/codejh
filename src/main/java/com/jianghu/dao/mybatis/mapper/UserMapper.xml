@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org/DTD Mapper 3.0" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- namespace最好为全限定名+文件名称 -->
+<mapper namespace="com.jianghu.dao.mybatis.mapper.UserMapper">
+	<!-- 自定义返回结果集 -->
+	<resultMap id="userMap" type="User">
+		<id property="id" column="id" javaType="java.math.BigDecimal"></id>
+		<result property="username" column="username" javaType="java.lang.String"></result>
+		<result property="password" column="password" javaType="java.lang.String"></result>
+		<result property="infactname" column="infactname" javaType="java.lang.String"></result>
+	</resultMap>
+
+	<insert id="insertUser" useGeneratedKeys="true" keyProperty="id">
+		insert into bc_user (username,password,infactname) values
+		(#{username},#{password},#{infactname})
+	</insert>
+
+	<update id="updateUser">
+		update bc_user set
+		username = #{username}, password = #{password}, infactname = #{infactname} where
+		id = #{id}
+	</update>
+
+	<delete id="deleteUser" parameterType="int">
+		delete from bc_user where id = #{id}
+	</delete>
+
+	<select id="selectUserById" parameterType="int" resultMap="userMap">
+		select * from bc_user where id = #{id}
+	</select>
+
+	<select id="selectAllUser" resultMap="userMap">
+		select * from bc_user
+	</select>
+</mapper>
