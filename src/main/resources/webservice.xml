@@ -10,10 +10,12 @@
        http://cxf.apache.org/jaxws 
        http://cxf.apache.org/schemas/jaxws.xsd">  
 	
-	
 	<import resource="classpath:META-INF/cxf/cxf.xml"/>
-	<import resource="classpath:META-INF/cxf/cxf-extension-soap.xml"/>
-	<import resource="classpath:META-INF/cxf/cxf-servlet.xml"/>
+	<!-- 
+		cxf3.0之后的jar不需要这两个，之前的需要 
+		<import resource="classpath:META-INF/cxf/cxf-extension-soap.xml"/>
+		<import resource="classpath:META-INF/cxf/cxf-servlet.xml"/>
+	-->
 	
 	<bean id="getUserInfo" class="com.jianghu.web.webservice.GetUserInfo" />  
     <jaxrs:server id="getUserInfoServer" address="/getUserInfo">  
