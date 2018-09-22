@@ -16,9 +16,9 @@ import com.jianghu.domain.basic.User;
  */
 public class Test {
 	public static void main(String[] args) {
-		//配置文件模式
+		// 配置文件模式
 		selectUserById();
-		//接口模式
+		// 接口模式
 		selectAllUser();
 	}
 
@@ -40,7 +40,7 @@ public class Test {
 	}
 
 	/**
-	 * 查询所有的用户
+	 * 查询所有的用户,接口版
 	 */
 	private static void selectAllUser() {
 		SqlSession session = MyBatisDB.getSession();
