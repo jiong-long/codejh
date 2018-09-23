@@ -43,12 +43,13 @@ public class Database {
 	 * @throws Exception
 	 */
 	public static Connection getconnection() throws Exception {
-		LoadDriver();
+		loadDriver();
 		try {
 			return DriverManager.getConnection(URL, USERNAME, PSW);
 			// sqlite解决getDate时日期格式不正确的问题
 			// Properties pro = new Properties();
-			// pro.put("date_string_format", "yyyy-MM-dd HH:mm:ss"); // 默认是yyyy-MM-dd HH:mm:ss.SSS
+			// pro.put("date_string_format", "yyyy-MM-dd HH:mm:ss"); //
+			// 默认是yyyy-MM-dd HH:mm:ss.SSS
 			// return DriverManager.getConnection(URL, pro);
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -61,7 +62,7 @@ public class Database {
 	 * 
 	 * @throws ClassNotFoundException
 	 */
-	private static void LoadDriver() throws ClassNotFoundException {
+	private static void loadDriver() throws ClassNotFoundException {
 		Class.forName(DRIVERCLASS);
 	}
 

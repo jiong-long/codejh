@@ -12,6 +12,7 @@ public class LuceneThread implements Runnable {
 		this.field_list = field_list;
 	}
 
+	@Override
 	public void run() {
 		LuceneUtil lucene = LuceneUtil.instance();
 		try {

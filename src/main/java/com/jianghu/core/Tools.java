@@ -425,14 +425,17 @@ public class Tools {
 	/**
 	 * 判断该字符串是否是数字类型的
 	 * 
+	 * 在使用正则表达式时，利用好其预编译功能，可以有效加快正则匹配速度。
+	 * 
 	 * @author wangjinlong
 	 * @creatTime 2017年7月27日 下午11:25:27
 	 * @param str
 	 * @return
 	 */
+	private static Pattern NUMBER_PATTERN = Pattern.compile("-?[0-9]+.?[0-9]+");
+
 	public static boolean stringIsNumber(String str) {
-		Pattern pattern = Pattern.compile("-?[0-9]+.?[0-9]+");
-		Matcher isNum = pattern.matcher(str);
+		Matcher isNum = NUMBER_PATTERN.matcher(str);
 		if (!isNum.matches()) {
 			return false;
 		}

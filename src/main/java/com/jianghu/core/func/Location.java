@@ -93,8 +93,8 @@ public class Location {
 	public static String getLocationFromIp(String ip) throws Exception {
 		JSONObject json = readJsonFromUrl(ip);
 		JSONObject content = (JSONObject) json.get("content");
-		JSONObject address_detail = (JSONObject) content.get("address_detail");
-		String city = (String) address_detail.get("city");
+		JSONObject addressDetail = (JSONObject) content.get("address_detail");
+		String city = (String) addressDetail.get("city");
 		return city;
 	}
 

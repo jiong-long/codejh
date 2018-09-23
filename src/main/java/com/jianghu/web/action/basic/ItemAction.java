@@ -221,14 +221,17 @@ public class ItemAction extends ActionSupport implements ModelDriven<Item> {
 	/**
 	 * 实现ActionSupport中的三个方法，可以将struts中的错误信息打印出来
 	 */
+	@Override
 	public void addActionError(String errorMsg) {
 		System.out.println(errorMsg);
 	}
 
+	@Override
 	public void addActionMessage(String msg) {
 		System.out.println(msg);
 	}
 
+	@Override
 	public void addFieldError(String fieldName, String errorMessage) {
 		System.out.println(fieldName);
 		System.out.println(errorMessage);

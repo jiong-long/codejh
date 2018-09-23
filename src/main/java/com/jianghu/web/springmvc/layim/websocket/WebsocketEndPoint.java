@@ -27,7 +27,7 @@ import com.jianghu.web.springmvc.SpringUtil;
  *
  */
 public class WebsocketEndPoint extends TextWebSocketHandler {
-	public static Map<String, WebSocketSession> usersMap;//key是mine的id
+	public static Map<String, WebSocketSession> usersMap;// key是mine的id
 	static {
 		usersMap = new HashMap<String, WebSocketSession>();
 	}
@@ -52,18 +52,19 @@ public class WebsocketEndPoint extends TextWebSocketHandler {
 	public void handleTextMessage(WebSocketSession session, TextMessage message) throws Exception {
 		FriendMessage friendMessage = getFriendMessage(message);
 		TextMessage sendMsg = changeToTextMsg(message, friendMessage);
-		//获取接收方的id（如果是私聊，则是用户id，如果是群聊，则是群组id）
+		// 获取接收方的id（如果是私聊，则是用户id，如果是群聊，则是群组id）
 		String toId = friendMessage.getToid() + "";
 		String type = friendMessage.getType();
-		if ("friend".equals(type)) {//好友消息
+		if ("friend".equals(type)) {// 好友消息
 			sendMessageToUser(toId, sendMsg);
-		} else {//群消息
+		} else {// 群消息
 			String fromId = friendMessage.getFromid() + "";
 			sendMessageToUsers(toId, fromId, sendMsg);
 		}
 	}
 
-	public TextMessage changeToTextMsg(TextMessage textMessage, FriendMessage friendMessage) throws JSONException, UnsupportedEncodingException {
+	public TextMessage changeToTextMsg(TextMessage textMessage, FriendMessage friendMessage)
+			throws JSONException, UnsupportedEncodingException {
 		String messageStr = textMessage.getPayload();
 		JSONObject object = new JSONObject(messageStr);
 		String type = object.getString("type");
@@ -94,7 +95,7 @@ public class WebsocketEndPoint extends TextWebSocketHandler {
 	 */
 	public FriendMessage getFriendMessage(TextMessage message) throws Exception {
 		String messageStr = message.getPayload();
-		JSONObject object = new JSONObject(messageStr);//获取发送的消息
+		JSONObject object = new JSONObject(messageStr);// 获取发送的消息
 		JSONObject dataObject = object.getJSONObject("data");
 		JSONObject mineObject = dataObject.getJSONObject("mine");
 		JSONObject toObject = dataObject.getJSONObject("to");
@@ -105,10 +106,11 @@ public class WebsocketEndPoint extends TextWebSocketHandler {
 		int toid = toObject.getInt("id");
 		String type = toObject.getString("type");
 		String content = mineObject.getString("content");
-		boolean mine = false;//mineObject.getBoolean("mine");
+		boolean mine = false;// mineObject.getBoolean("mine");
 		int fromid = mineObject.getInt("id");
 		long timestamp = System.currentTimeMillis();
-		FriendMessage friendMessage = new FriendMessage(cid, username, avatar, id, toid, type, content, mine, fromid, timestamp);
+		FriendMessage friendMessage = new FriendMessage(cid, username, avatar, id, toid, type, content, mine, fromid,
+				timestamp);
 		SpringUtil.saveFriendMessage(friendMessage);
 		return friendMessage;
 	}
@@ -175,11 +177,12 @@ public class WebsocketEndPoint extends TextWebSocketHandler {
 	@Override
 	public void afterConnectionClosed(WebSocketSession session, CloseStatus closeStatus) throws Exception {
 		Object usr_id = session.getAttributes().get(SessionConstants.WEBSOCKET_USER_ID);
-		if (usr_id != null) {//已登录
+		if (usr_id != null) {// 已登录
 			usersMap.remove(usr_id);
 		}
 	}
 
+	@Override
 	public boolean supportsPartialMessages() {
 		return false;
 	}

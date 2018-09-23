@@ -54,14 +54,15 @@ public class MailUtils {
 		Mail mail = new Mail(from, to, subject, content);
 
 		// 附件,fileName必须有后缀名，否则文件没有后缀
-		 AttachBean attachBean = new AttachBean("F:\\BIM\\bimserverwar-1.5.76.war","bimserverwar-1.5.76.war");
-		 mail.addAttach(attachBean);
-		// AttachBean attachBean2 = new AttachBean(new File("F:\\反编译插件\\安装过程.docx"), "安装过程.docx");
+		AttachBean attachBean = new AttachBean("F:\\BIM\\bimserverwar-1.5.76.war", "bimserverwar-1.5.76.war");
+		mail.addAttach(attachBean);
+		// AttachBean attachBean2 = new AttachBean(new
+		// File("F:\\反编译插件\\安装过程.docx"), "安装过程.docx");
 		// mail.addAttach(attachBean2);
 
 		MailUtils.send(session, mail);
 		long end = System.currentTimeMillis();
-		System.out.println(end-begin);
+		System.out.println(end - begin);
 	}
 
 	public static Session createSession(String host, final String username, final String password) {
@@ -74,6 +75,7 @@ public class MailUtils {
 
 		// 创建验证器
 		Authenticator auth = new Authenticator() {
+			@Override
 			public PasswordAuthentication getPasswordAuthentication() {
 				return new PasswordAuthentication(username, password);
 			}
@@ -92,7 +94,7 @@ public class MailUtils {
 
 		MimeMessage msg = new MimeMessage(session);// 创建邮件对象
 		// 设置邮件的别名
-		Address address = new InternetAddress(mail.getFrom(),"江湖");
+		Address address = new InternetAddress(mail.getFrom(), "江湖");
 		msg.setFrom(address);// 设置发件人
 		msg.addRecipients(RecipientType.TO, mail.getToAddress());// 设置收件人
 
@@ -122,9 +124,9 @@ public class MailUtils {
 			for (AttachBean attach : attachBeanList) {
 				MimeBodyPart attachPart = new MimeBodyPart();// 创建一个部件
 				File attchFile = new File(attach.getFilePath());
-				//小附件
-				//attachPart.attachFile(attchFile);// 设置附件文件
-				//大附件
+				// 小附件
+				// attachPart.attachFile(attchFile);// 设置附件文件
+				// 大附件
 				DataSource source = new FileDataSource(attchFile);
 				attachPart.setDataHandler(new DataHandler(source));
 				attachPart.setFileName(MimeUtility.encodeText(attach.getFileName()));// 设置附件文件名

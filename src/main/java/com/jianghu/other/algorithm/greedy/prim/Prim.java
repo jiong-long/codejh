@@ -59,8 +59,9 @@ public class Prim {
 				}
 			}
 
-			if (minid == 0)
+			if (minid == 0) {
 				return;
+			}
 			list.add(c[minid]);
 			lowcost[minid] = 0;
 			sum += min;

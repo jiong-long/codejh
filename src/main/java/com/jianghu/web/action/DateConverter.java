@@ -26,6 +26,7 @@ public class DateConverter extends StrutsTypeConverter {
 	/**
 	 * 将指定格式字符串转换为日期类型
 	 */
+	@Override
 	@SuppressWarnings("rawtypes")
 	public Object convertFromString(Map arg0, String[] arg1, Class arg2) {
 		// 获取日期的字符串
@@ -49,6 +50,7 @@ public class DateConverter extends StrutsTypeConverter {
 	 * 将日期转换为指定的字符串格式
 	 */
 	@SuppressWarnings("rawtypes")
+	@Override
 	public String convertToString(Map arg0, Object arg1) {
 		Date date = (Date) arg1;
 		// 输出格式是yyyy-MM-dd

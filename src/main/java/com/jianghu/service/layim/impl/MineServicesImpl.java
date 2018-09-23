@@ -18,7 +18,8 @@ public class MineServicesImpl implements MineServices {
 	@Resource(name = "mineDao")
 	private GenericDAO<Mine> mineDao;
 
-	//获取个人信息
+	// 获取个人信息
+	@Override
 	public Mine getMineInfo(BigDecimal user_id) {
 		return mineDao.findById(Mine.class, user_id.intValue());
 	}

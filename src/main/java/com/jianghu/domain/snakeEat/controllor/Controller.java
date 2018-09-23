@@ -45,6 +45,7 @@ public class Controller extends KeyAdapter implements SnakeListener {
 		}
 	}
 
+	@Override
 	public void snakeMoved(Snake snake) {
 		gamePanel.display(snake, food, ground);
 		if (food.isSnakeEatFood(snake)) {

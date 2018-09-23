@@ -8,10 +8,12 @@ public abstract class Decorator extends SchoolReport {
 		this.report = report;
 	}
 
+	@Override
 	public void report() {
 		report.report();
 	}
 
+	@Override
 	public void sign(String name) {
 		report.sign(name);
 	}

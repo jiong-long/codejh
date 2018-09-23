@@ -17,8 +17,10 @@ public class UrlRewriteFilter extends org.tuckey.web.filters.urlrewrite.UrlRewri
 	public UrlRewriteFilter() {
 	}
 
-	public void doFilter(ServletRequest req, ServletResponse res, FilterChain filterChain) throws IOException, ServletException {
-		//放行
+	@Override
+	public void doFilter(ServletRequest req, ServletResponse res, FilterChain filterChain)
+			throws IOException, ServletException {
+		// 放行
 		super.doFilter(req, res, filterChain);
 	}
 }

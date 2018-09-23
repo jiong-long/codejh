@@ -11,6 +11,7 @@ import com.jianghu.other.designPattern.factory.demo.Human;
  */
 public class HumanFactory implements AbstractHumanFactory {
 	@SuppressWarnings("unchecked")
+	@Override
 	public <T extends Human> T createHuman(Class<T> c) {
 		Human human = null;
 		try {

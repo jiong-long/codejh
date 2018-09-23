@@ -7,7 +7,6 @@ import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 import javax.swing.filechooser.FileSystemView;
@@ -20,21 +19,20 @@ import javax.swing.filechooser.FileSystemView;
  * 
  */
 public class FileUtil {
-	//工作空间名称
+	// 工作空间名称
 	private static final String WORKSPACE = "E:\\Workspace3,E:\\Workspaces2,E:\\Workspaces";
 	// 读取配置文件中的内容
-	//static {
-	//	ResourceBundle bundle = ResourceBundle.getBundle("file");
-	//	WORKSPACE = bundle.getString("workSpace");
-	//}
-	
-	
-	public static void main(String[] args){
-		try{
+	// static {
+	// ResourceBundle bundle = ResourceBundle.getBundle("file");
+	// WORKSPACE = bundle.getString("workSpace");
+	// }
+
+	public static void main(String[] args) {
+		try {
 			String deskPath = getDeskPath();// 桌面的路径
-			//String proName = getCurrProName();// 项目名称
+			// String proName = getCurrProName();// 项目名称
 			String proName = getDeskProNam();
-			if("".equals(proName)){
+			if ("".equals(proName)) {
 				System.out.println("桌面上没有找到项目或者存在多个，请确认！！！");
 				System.out.println("失败！！！");
 				return;
@@ -49,17 +47,18 @@ public class FileUtil {
 				String[] str = string.split("src");
 				// 获取java文件对应的class文件位置
 				String fromPath = getClassPath + str[1].substring(1).replaceAll(".java", ".class");
-				String toPath = deskPath + "\\" + proName + fromPath.split(proName)[1] + proName + fromPath.split(proName)[2];
+				String toPath = deskPath + "\\" + proName + fromPath.split(proName)[1] + proName
+						+ fromPath.split(proName)[2];
 				// 判断该java有没有内部类
 				// No.1 去掉结尾的class
 				int lastSplit = fromPath.lastIndexOf(".");
 				String newPath = fromPath.substring(0, lastSplit);
 				// No.2然后以最后一个\区分出class名称与文件夹名称
 				lastSplit = newPath.lastIndexOf("\\");
-				String classPath = newPath.substring(0,lastSplit);
-				String fileName = newPath.substring(lastSplit+1);
+				String classPath = newPath.substring(0, lastSplit);
+				String fileName = newPath.substring(lastSplit + 1);
 				// No.3获取该文件路径下（不包括文件夹）中该名称开头的文件
-				List<String> innerClassList = findAllFileByName(classPath,fileName);
+				List<String> innerClassList = findAllFileByName(classPath, fileName);
 				for (String innerClass : innerClassList) {
 					// No.4 将内部类转出
 					String innerFromPath = fromPath.replace(fileName + ".class", innerClass);
@@ -76,7 +75,7 @@ public class FileUtil {
 				System.out.println("src文件夹删除失败，请手动删除！！！");
 			}
 			System.out.println("成功");
-		}catch(Exception e){
+		} catch (Exception e) {
 			System.out.println("失败：" + e.getMessage());
 			e.printStackTrace();
 		}
@@ -113,7 +112,8 @@ public class FileUtil {
 		// 最后一个为文件，不去掉会创建为文件夹
 		String createToPath = toPath.substring(0, toPath.lastIndexOf("\\"));
 		File toPathFile = new File(createToPath);
-		if (!toPathFile.exists()) {// 如果复制到的目录不存在，就创建目录
+		// 如果复制到的目录不存在，就创建目录
+		if (!toPathFile.exists()) {
 			toPathFile.mkdirs();
 		}
 		File toFile = new File(toPath);
@@ -142,7 +142,7 @@ public class FileUtil {
 		int beginIndex = proPath.lastIndexOf("\\") + 1;
 		return proPath.substring(beginIndex);
 	}
-	
+
 	/**
 	 * 获取桌面上项目的名称
 	 * 
@@ -150,32 +150,33 @@ public class FileUtil {
 	 * @creatTime 2017年9月6日 下午9:20:59
 	 * @return
 	 */
-	public static String getDeskProNam(){
+	public static String getDeskProNam() {
 		String returnFileName = "";
 		// 桌面的路径
 		String deskPath = getDeskPath();
 		// 获取桌面上所有的文件
 		File allFile = new File(deskPath);
-		//遍历桌面上所有的文件
+		// 遍历桌面上所有的文件
 		File[] fileStr = allFile.listFiles();
-		int i = 0;//用于判断桌面上是否存在多个项目文件夹
+		int i = 0;// 用于判断桌面上是否存在多个项目文件夹
 		for (File file : fileStr) {
-			if(file.isDirectory()){//是文件夹
+			if (file.isDirectory()) {// 是文件夹
 				// 获取文件夹的名字
 				String fileName = file.getName();
-				if(fileName.startsWith("jianghu")){//LiEMS
-					//为了防止桌面上出现多个满足条件的的文件夹，取最近半个小时修改的
+				if (fileName.startsWith("jianghu")) {// LiEMS
+					// 为了防止桌面上出现多个满足条件的的文件夹，取最近半个小时修改的
 					long modifiTime = file.lastModified();
-					long time = new Date().getTime() - modifiTime;
-					if(time < 30 * 60 * 1000){
-						//满足条件的项目名称
+					// 使用System.currentTimeMillis()替代new Date().getTime()
+					long time = System.currentTimeMillis() - modifiTime;
+					if (time < 30 * 60 * 1000) {
+						// 满足条件的项目名称
 						returnFileName = fileName;
 						i++;
 					}
 				}
 			}
 		}
-		if(i != 1){//没有找到,或者多个
+		if (i != 1) {// 没有找到,或者多个
 			returnFileName = "";
 		}
 		return returnFileName;
@@ -187,13 +188,13 @@ public class FileUtil {
 	 * @creatTime 2017年5月11日 下午10:01:00
 	 * @author jinlong
 	 * @return
-	 * @throws IOException 
+	 * @throws IOException
 	 */
 	public static String getClassesPath() {
 		String path = Thread.currentThread().getContextClassLoader().getResource("").getPath();
 		return path.substring(1).replaceAll("/", "\\\\");
 	}
-	
+
 	/**
 	 * 获得该工程classes路径（通过项目名称）
 	 * 
@@ -203,28 +204,29 @@ public class FileUtil {
 	 */
 	public static String getClassesPath(String proNam) throws IOException {
 		String trueWorkSpace = WORKSPACE;
-		if(trueWorkSpace.contains(",")){
-			trueWorkSpace = getWorkSpaceFromPro(trueWorkSpace,proNam);
+		if (trueWorkSpace.contains(",")) {
+			trueWorkSpace = getWorkSpaceFromPro(trueWorkSpace, proNam);
 		}
 		return trueWorkSpace + "\\" + proNam + "\\jiong\\WEB-INF\\classes\\";
 	}
-	
+
 	/**
 	 * 取项目存在的WorkSpace
+	 * 
 	 * @author wangjinlong
 	 * @creatTime 2017年9月6日 下午11:55:05
 	 * @param workSpace
 	 * @return
 	 */
-	public static String getWorkSpaceFromPro(String workSpaces,String proNam){
-		//遍历每个workSpaces，找到存在项目的workSpaces
+	public static String getWorkSpaceFromPro(String workSpaces, String proNam) {
+		// 遍历每个workSpaces，找到存在项目的workSpaces
 		String[] workSpace = workSpaces.split(",");
 		for (String string : workSpace) {
 			File file = new File(string);
 			File[] listFile = file.listFiles();
 			for (File file2 : listFile) {
 				System.out.println(file2.getName());
-				if(proNam.equals(file2.getName())){
+				if (proNam.equals(file2.getName())) {
 					return string;
 				}
 			}
@@ -254,7 +256,7 @@ public class FileUtil {
 	 */
 	public static void deleteFileBatch(File f, String returnFlag) {
 		File[] files = f.listFiles();
-		if(files != null){
+		if (files != null) {
 			for (File file : files) {
 				if (file.isDirectory()) {
 					deleteFileBatch(file, returnFlag);
@@ -313,7 +315,7 @@ public class FileUtil {
 		}
 		return newFileList;
 	}
-	
+
 	/**
 	 * 获取当前目录下所有的复合要求的内部类
 	 * 
@@ -329,9 +331,9 @@ public class FileUtil {
 		List<String> fileList = new ArrayList<String>();
 		File[] files = file.listFiles();// 获得该目录下所有的文件和文件夹
 		for (File f : files) {// 遍历
-			if(f.isFile()){// 是文件
+			if (f.isFile()) {// 是文件
 				String fileName = f.getName();
-				if(fileName.startsWith(startName + "$")){
+				if (fileName.startsWith(startName + "$")) {
 					fileList.add(f.getName());
 				}
 			}
@@ -349,7 +351,7 @@ public class FileUtil {
 	 */
 	public static void getAllFile(File dir, List<String> fileList) {
 		File[] files = dir.listFiles();// 获得该目录下所有的文件和文件夹
-		if(files != null){//没有Java文件
+		if (files != null) {// 没有Java文件
 			for (File f : files) {// 遍历
 				if (f.isDirectory()) {// 如果是文件夹，递归
 					getAllFile(f, fileList);

@@ -116,8 +116,7 @@ public class Snake {
 		System.out.println("snake drawMe");
 		for (Point p : body) {
 			g.setColor(Color.BLUE);
-			g.fill3DRect(p.x * Global.CELL_SIZE, p.y * Global.CELL_SIZE, Global.CELL_SIZE,
-					Global.CELL_SIZE, true);
+			g.fill3DRect(p.x * Global.CELL_SIZE, p.y * Global.CELL_SIZE, Global.CELL_SIZE, Global.CELL_SIZE, true);
 		}
 	}
 
@@ -127,6 +126,7 @@ public class Snake {
 
 	public class SnakeDriver extends Thread {
 
+		@Override
 		public void run() {
 			while (life) {
 
