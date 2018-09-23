@@ -3,6 +3,14 @@ package com.jianghu.other.algorithm.greedy.prim;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * 普里姆算法
+ * 
+ * 网上抄的，原理清楚，代码未细看
+ * 
+ * @author wangjinlong
+ * @createTime 2018年9月23日 下午7:21:22
+ */
 public class Prim {
 	static int MAX_VALUE = Integer.MAX_VALUE;
 
