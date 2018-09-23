@@ -32,17 +32,21 @@ public class PicUtil {
 	 * @throws IOException
 	 */
 	public PicUtil(String filePath) throws IOException {
-		File _file = new File(filePath); // 读入文件
+		// 读入文件
+		File file = new File(filePath);
 		this.srcFile = filePath;
 		// 查找最后一个.
 		int index = this.srcFile.lastIndexOf(".");
 		String ext = this.srcFile.substring(index);
 		this.destFile = this.srcFile.substring(0, index) + "_s" + ext;
 
-		InputStream fileInputStream = new FileInputStream(_file);
-		img = javax.imageio.ImageIO.read(fileInputStream); // 构造Image对象
-		width = img.getWidth(null); // 得到源图宽
-		height = img.getHeight(null); // 得到源图长
+		InputStream fileInputStream = new FileInputStream(file);
+		// 构造Image对象
+		img = javax.imageio.ImageIO.read(fileInputStream);
+		// 得到源图宽
+		width = img.getWidth(null);
+		// 得到源图长
+		height = img.getHeight(null);
 	}
 
 	/**

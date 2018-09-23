@@ -21,7 +21,7 @@ public class DateUtil {
 	 * @param date
 	 * @return
 	 */
-	public static String toY_M_D(Date date) {
+	public static String toYMD(Date date) {
 		if (date == null) {
 			return "";
 		}
@@ -37,7 +37,7 @@ public class DateUtil {
 	 * @param date
 	 * @return
 	 */
-	public static String toY_M_D_H_M_S(Date date) {
+	public static String toYMDHMS(Date date) {
 		if (date == null) {
 			return "";
 		}
@@ -47,9 +47,9 @@ public class DateUtil {
 
 	public static void main(String[] args) {
 		Date a = nextMonthFirstDate(new Date());
-		System.out.println(toY_M_D(a));
+		System.out.println(toYMD(a));
 		Date b = nextMonthFirstDate(a);
-		System.out.println(toY_M_D(b));
+		System.out.println(toYMD(b));
 	}
 
 	/**

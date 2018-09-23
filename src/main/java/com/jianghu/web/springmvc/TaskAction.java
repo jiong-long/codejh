@@ -50,7 +50,7 @@ public class TaskAction {
 	public String save(HttpServletRequest request, HttpServletResponse response) throws ParseException {
 		Task task = new Task();
 
-		//TODO 前台自动注入bean
+		// TODO 前台自动注入bean
 		String task_id = request.getParameter("task_id");
 		String task_content = request.getParameter("task_content");
 		String task_sta = request.getParameter("task_sta");
@@ -67,7 +67,7 @@ public class TaskAction {
 		}
 
 		if ("".equals(end_dtm_str)) {
-			if ("on".equals(task_sta)) {//完成
+			if ("on".equals(task_sta)) {// 完成
 				task.setEnd_dtm(new Date());
 			} else {
 				task.setEnd_dtm(null);
@@ -81,7 +81,7 @@ public class TaskAction {
 		task.setTask_res(task_res);
 		task.setTask_url(task_url);
 
-		if ("".equals(task_id)) {//新建
+		if ("".equals(task_id)) {// 新建
 			task_id = taskServices.save(task);
 		} else {
 			task.setTask_id(Long.parseLong(task_id));
@@ -96,8 +96,8 @@ public class TaskAction {
 		ModelAndView mv = new ModelAndView("task/task_add");
 		if (task_id != null && !"".equals(task_id)) {
 			Task task = taskServices.findById(task_id);
-			//TODO model与mv封装参数的区别
-			//model.addAttribute("task", task);
+			// TODO model与mv封装参数的区别
+			// model.addAttribute("task", task);
 			mv.addObject("task", task);
 		}
 		return mv;
@@ -151,8 +151,8 @@ public class TaskAction {
 			}
 			roleObj.put("task_sta", taskSta);
 			roleObj.put("task_content", task.getTask_content());
-			roleObj.put("begin_dtm", DateUtil.toY_M_D_H_M_S(task.getBegin_dtm()));
-			roleObj.put("end_dtm", DateUtil.toY_M_D_H_M_S(task.getEnd_dtm()));
+			roleObj.put("begin_dtm", DateUtil.toYMDHMS(task.getBegin_dtm()));
+			roleObj.put("end_dtm", DateUtil.toYMDHMS(task.getEnd_dtm()));
 			arr.put(roleObj);
 		}
 		obj.put("rows", arr);

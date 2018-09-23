@@ -72,8 +72,8 @@ public class ExcelUtil {
 	 *            文件名
 	 * @throws IOException
 	 */
-	public static void createExcelAndDownload(HttpServletResponse response, List<Object[]> list,
-			String fileName) throws IOException {
+	public static void createExcelAndDownload(HttpServletResponse response, List<Object[]> list, String fileName)
+			throws IOException {
 		// 调用方法创建HSSFWorkbook工作簿对象
 		HSSFWorkbook workbook = writeExcel(list);
 		// 名称需要重新编码，否则显示不正常
@@ -294,8 +294,7 @@ public class ExcelUtil {
 		if (cell.getCellTypeEnum() == CellType.NUMERIC) { // 数字
 			// 日期类型也是数字，表示当前时间与1900年1月1日相隔的天数
 			if (HSSFDateUtil.isCellDateFormatted(cell))
-				cellValue = DateUtil.toY_M_D_H_M_S(HSSFDateUtil.getJavaDate(cell
-						.getNumericCellValue()));
+				cellValue = DateUtil.toYMDHMS(HSSFDateUtil.getJavaDate(cell.getNumericCellValue()));
 			else {
 				cellValue = new DecimalFormat("#.##").format(cell.getNumericCellValue());
 			}
@@ -304,10 +303,10 @@ public class ExcelUtil {
 		} else if (cell.getCellTypeEnum() == CellType.BOOLEAN) { // Boolean
 			cellValue = String.valueOf(cell.getBooleanCellValue());
 		} else if (cell.getCellTypeEnum() == CellType.FORMULA) { // 公式
-			//cellValue = String.valueOf(cell.getCellFormula());//获取公式的内容
-			try{
+			// cellValue = String.valueOf(cell.getCellFormula());//获取公式的内容
+			try {
 				cellValue = new DecimalFormat("#.##").format(cell.getNumericCellValue());
-			} catch(Exception e){
+			} catch (Exception e) {
 				cellValue = cell.getStringCellValue();
 			}
 		} else if (cell.getCellTypeEnum() == CellType.BLANK) { // 空值

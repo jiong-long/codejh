@@ -159,7 +159,8 @@ public class Database {
 		Connection connection = null;
 		PreparedStatement prepareStatement = null;
 		ResultSet rs = null;
-		List<T> list = new ArrayList<T>(); // 实例化返回的数据集合
+		// 实例化返回的数据集合
+		List<T> list = new ArrayList<T>();
 		try {
 			connection = getconnection();
 			prepareStatement = connection.prepareStatement(sql);
@@ -174,25 +175,27 @@ public class Database {
 			rs = prepareStatement.executeQuery();
 			// 把resultSet结果集转换为List<T>
 			ResultSetMetaData mataData = rs.getMetaData();
-			int closLen = mataData.getColumnCount(); // 拿到总列数
+			// 拿到总列数
+			int closLen = mataData.getColumnCount();
 			while (rs.next()) {
 				// 通过反射机制创建一个实例
 				T resultObject = cls.newInstance();
 				for (int n = 0; n < closLen; n++) {
-					String cols_Name = mataData.getColumnName(n + 1);
-					Object cols_value = rs.getObject(cols_Name);
-					if (cols_value == null) {
-						cols_value = "";
+					String colsName = mataData.getColumnName(n + 1);
+					Object colsValue = rs.getObject(colsName);
+					if (colsValue == null) {
+						colsValue = "";
 					}
 					for (Field field : fields) {
-						if (cols_Name.equalsIgnoreCase(field.getName())) {
-							cols_Name = field.getName();
+						if (colsName.equalsIgnoreCase(field.getName())) {
+							colsName = field.getName();
 						}
 					}
 					// 该参数必须为实体类中的属性，oracle数据库中字段都是大写，所以要用字段去匹配实体类中的属性
-					Field filed = cls.getDeclaredField(cols_Name);
-					filed.setAccessible(true); // 打开javabean=model的访问权限
-					filed.set(resultObject, cols_value);
+					Field filed = cls.getDeclaredField(colsName);
+					// 打开javabean=model的访问权限
+					filed.setAccessible(true);
+					filed.set(resultObject, colsValue);
 				}
 				list.add(resultObject);
 			}
@@ -220,7 +223,8 @@ public class Database {
 		Connection connection = null;
 		PreparedStatement prepareStatement = null;
 		ResultSet rs = null;
-		List<T> list = new ArrayList<T>(); // 实例化返回的数据集合
+		// 实例化返回的数据集合
+		List<T> list = new ArrayList<T>();
 		try {
 			connection = getconnection();
 			prepareStatement = connection.prepareStatement(sql);
@@ -235,25 +239,27 @@ public class Database {
 			rs = prepareStatement.executeQuery();
 			// 把resultSet结果集转换为List<T>
 			ResultSetMetaData mataData = rs.getMetaData();
-			int closLen = mataData.getColumnCount(); // 拿到总列数
+			// 拿到总列数
+			int closLen = mataData.getColumnCount();
 			while (rs.next()) {
 				// 通过反射机制创建一个实例
 				T resultObject = cls.newInstance();
 				for (int n = 0; n < closLen; n++) {
-					String cols_Name = mataData.getColumnName(n + 1);
-					Object cols_value = rs.getObject(cols_Name);
-					if (cols_value == null) {
-						cols_value = "";
+					String colsName = mataData.getColumnName(n + 1);
+					Object colsValue = rs.getObject(colsName);
+					if (colsValue == null) {
+						colsValue = "";
 					}
 					for (Field field : fields) {
-						if (cols_Name.equalsIgnoreCase(field.getName())) {
-							cols_Name = field.getName();
+						if (colsName.equalsIgnoreCase(field.getName())) {
+							colsName = field.getName();
 						}
 					}
 					// 该参数必须为实体类中的属性，oracle数据库中字段都是大写，所以要用字段去匹配实体类中的属性
-					Field filed = cls.getDeclaredField(cols_Name);
-					filed.setAccessible(true); // 打开javabean=model的访问权限
-					filed.set(resultObject, cols_value);
+					Field filed = cls.getDeclaredField(colsName);
+					// 打开javabean=model的访问权限
+					filed.setAccessible(true);
+					filed.set(resultObject, colsValue);
 				}
 				list.add(resultObject);
 			}
@@ -297,7 +303,12 @@ public class Database {
 		return "";
 	}
 
-	// TODO 通用保存和修改方法
+	/**
+	 * TODO 通用保存和修改方法
+	 * 
+	 * @param sql
+	 * @param cls
+	 */
 	@SuppressWarnings({ "unused", "rawtypes" })
 	public static void executeSave(String sql, Class<?> cls) {
 		Connection connection = null;
