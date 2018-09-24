@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
+
+    <!-- Import Properties -->
+    <context:property-placeholder location="classpath:jdbc.properties"/>
+
+    <!-- H2 Data Source Config -->
+    <bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource" destroy-method="close">
+       	<!-- 驱动 -->
+		<property name="driverClass" value="${mysql.driver}"></property>
+		<!-- URL -->
+		<property name="jdbcUrl" value="${mysql.url}"></property>
+		<!-- 用户名 -->
+		<property name="user" value="${mysql.username}"></property>
+		<!-- 密码 -->
+		<property name="password" value="${mysql.password}"></property>
+    </bean>
+
+    <!-- MyBatis SqlSessionFactory Config -->
+    <bean id="sqlSessionFactory" class="com.baomidou.mybatisplus.extension.spring.MybatisSqlSessionFactoryBean">
+       <property name="dataSource" ref="dataSource"></property>
+    </bean>
+
+    <!-- MyBatis Mapper Scan Config  -->
+    <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+        <property name="basePackage" value="com.jianghu.dao.mybatis.plus"/>
+    </bean>
+
+</beans>
