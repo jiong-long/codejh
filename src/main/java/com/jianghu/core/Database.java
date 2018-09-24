@@ -309,7 +309,7 @@ public class Database {
 	 * @param sql
 	 * @param cls
 	 */
-	@SuppressWarnings({ "unused", "rawtypes" })
+	@SuppressWarnings({ "unused" })
 	public static void executeSave(String sql, Class<?> cls) {
 		Connection connection = null;
 		Statement statement = null;
@@ -317,7 +317,7 @@ public class Database {
 			connection = getconnection();
 			statement = connection.createStatement();
 			Method[] methods = cls.getDeclaredMethods();
-			List<?> list = new ArrayList();
+			// List<?> list = new ArrayList();
 			for (Method method : methods) {
 
 			}

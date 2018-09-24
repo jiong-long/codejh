@@ -26,7 +26,9 @@ public class Client {
 			if (ch != '+' && ch != '-') {
 				if (!map.containsKey(String.valueOf(ch))) {
 					String in = (new BufferedReader(new InputStreamReader(System.in))).readLine();
-					map.put(String.valueOf(ch), Integer.parseInt(in));
+					if (in != null) {
+						map.put(String.valueOf(ch), Integer.parseInt(in));
+					}
 				}
 			}
 		}

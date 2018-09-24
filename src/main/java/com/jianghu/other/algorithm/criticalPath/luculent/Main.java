@@ -123,7 +123,7 @@ public class Main {
 
 			// List<Object[]> list = new ArrayList<Object[]>();
 			for (Task task : taskList) {
-				if (task.getVe() + task.getHr_cnt() == task.getVl()) {
+				if (Math.abs(task.getVe() + task.getHr_cnt() - task.getVl()) == 0) {
 					System.out.println(
 							task.getTask_id() + "是关键路径:" + task.getVe() + "+" + task.getHr_cnt() + "=" + task.getVl());
 				} else {

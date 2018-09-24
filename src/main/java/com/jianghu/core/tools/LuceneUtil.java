@@ -50,7 +50,8 @@ public class LuceneUtil {
 	private static Version version = Version.LUCENE_35;
 	// lucene文件存储路径文件
 	// System.getProperty("user.dir")开发环境中可能是由于部署方式不同，所以获取的是eclipse的路径，暂时写死
-	// private static File index_file = new File(System.getProperty("user.dir") +
+	// private static File index_file = new File(System.getProperty("user.dir")
+	// +
 	// "\\" + "jiong\\lucene");
 	private static File index_file = new File("C:\\" + "jiong\\lucene");
 	// 分词器
@@ -111,7 +112,8 @@ public class LuceneUtil {
 		IndexSearcher searcher = null;
 		List<LuceneField> list = new ArrayList<LuceneField>();
 		try {
-			if (index_file.exists() && index_file.isDirectory() && index_file.listFiles().length > 1) {
+			if (index_file != null && index_file.exists() && index_file.isDirectory()
+					&& index_file.listFiles().length > 1) {
 				indexReader = IndexReader.open(FSDirectory.open(index_file));
 				searcher = new IndexSearcher(indexReader);
 				searcher.setSimilarity(new IKSimilarity());
@@ -371,7 +373,8 @@ public class LuceneUtil {
 		Field title = new Field("name", Tools.removeHtml(luceneField.getName()), Field.Store.YES, Field.Index.ANALYZED);
 		// 该字段为主要字段，计算得分的时候会比重会比较大
 		title.setBoost(10.0F);
-		Field content = new Field("content", Tools.removeHtml(luceneField.getContent()), Field.Store.YES,Field.Index.ANALYZED);
+		Field content = new Field("content", Tools.removeHtml(luceneField.getContent()), Field.Store.YES,
+				Field.Index.ANALYZED);
 		document.add(id);
 		document.add(title);
 		document.add(content);
