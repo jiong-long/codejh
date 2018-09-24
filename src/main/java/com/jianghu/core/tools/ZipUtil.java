@@ -166,8 +166,10 @@ public class ZipUtil {
 	private static long getDirectoryLength(File path) {
 		if (path.isDirectory()) {
 			File[] files = path.listFiles();
-			for (int i = 0; i < files.length; i++) {
-				getDirectoryLength(files[i]);
+			if (files != null) {
+				for (int i = 0; i < files.length; i++) {
+					getDirectoryLength(files[i]);
+				}
 			}
 		} else {
 			// path.length() 获取文件的大小
@@ -188,8 +190,10 @@ public class ZipUtil {
 		List<File> fileList = new ArrayList<File>();
 		if (sourceFile.isDirectory()) {
 			File[] files = sourceFile.listFiles();
-			for (int i = 0; i < files.length; i++) {
-				fileList.addAll(getAllFiles(files[i]));
+			if (files != null) {
+				for (int i = 0; i < files.length; i++) {
+					fileList.addAll(getAllFiles(files[i]));
+				}
 			}
 		} else {
 			fileList.add(sourceFile);

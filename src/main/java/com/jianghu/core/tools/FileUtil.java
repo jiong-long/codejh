@@ -159,19 +159,21 @@ public class FileUtil {
 		// 遍历桌面上所有的文件
 		File[] fileStr = allFile.listFiles();
 		int i = 0;// 用于判断桌面上是否存在多个项目文件夹
-		for (File file : fileStr) {
-			if (file.isDirectory()) {// 是文件夹
-				// 获取文件夹的名字
-				String fileName = file.getName();
-				if (fileName.startsWith("jianghu")) {// LiEMS
-					// 为了防止桌面上出现多个满足条件的的文件夹，取最近半个小时修改的
-					long modifiTime = file.lastModified();
-					// 使用System.currentTimeMillis()替代new Date().getTime()
-					long time = System.currentTimeMillis() - modifiTime;
-					if (time < 30 * 60 * 1000) {
-						// 满足条件的项目名称
-						returnFileName = fileName;
-						i++;
+		if (fileStr != null) {
+			for (File file : fileStr) {
+				if (file.isDirectory()) {// 是文件夹
+					// 获取文件夹的名字
+					String fileName = file.getName();
+					if (fileName.startsWith("jianghu")) {// LiEMS
+						// 为了防止桌面上出现多个满足条件的的文件夹，取最近半个小时修改的
+						long modifiTime = file.lastModified();
+						// 使用System.currentTimeMillis()替代new Date().getTime()
+						long time = System.currentTimeMillis() - modifiTime;
+						if (time < 30 * 60 * 1000) {
+							// 满足条件的项目名称
+							returnFileName = fileName;
+							i++;
+						}
 					}
 				}
 			}
@@ -224,10 +226,12 @@ public class FileUtil {
 		for (String string : workSpace) {
 			File file = new File(string);
 			File[] listFile = file.listFiles();
-			for (File file2 : listFile) {
-				System.out.println(file2.getName());
-				if (proNam.equals(file2.getName())) {
-					return string;
+			if (listFile != null) {
+				for (File file2 : listFile) {
+					System.out.println(file2.getName());
+					if (proNam.equals(file2.getName())) {
+						return string;
+					}
 				}
 			}
 		}
@@ -330,11 +334,13 @@ public class FileUtil {
 		File file = new File(filePath);
 		List<String> fileList = new ArrayList<String>();
 		File[] files = file.listFiles();// 获得该目录下所有的文件和文件夹
-		for (File f : files) {// 遍历
-			if (f.isFile()) {// 是文件
-				String fileName = f.getName();
-				if (fileName.startsWith(startName + "$")) {
-					fileList.add(f.getName());
+		if (files != null) {
+			for (File f : files) {// 遍历
+				if (f.isFile()) {// 是文件
+					String fileName = f.getName();
+					if (fileName.startsWith(startName + "$")) {
+						fileList.add(f.getName());
+					}
 				}
 			}
 		}
@@ -375,11 +381,13 @@ public class FileUtil {
 	public static void getAllFileAndDir(File dir, List<String> fileList) {
 		fileList.add(dir.toString());
 		File[] files = dir.listFiles();// 获得该目录下所有的文件和文件夹
-		for (File f : files) {// 遍历
-			if (f.isDirectory()) {// 如果是文件夹，递归
-				getAllFileAndDir(f, fileList);
-			} else {
-				fileList.add(f.toString());
+		if (files != null) {
+			for (File f : files) {// 遍历
+				if (f.isDirectory()) {// 如果是文件夹，递归
+					getAllFileAndDir(f, fileList);
+				} else {
+					fileList.add(f.toString());
+				}
 			}
 		}
 	}

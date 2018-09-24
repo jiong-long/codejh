@@ -33,7 +33,7 @@ public class WebServiceUtil {
 	 * @return
 	 */
 	public static String sendGet(String url) {
-		return sendGet(url);
+		return sendGet(url, "UTF-8");
 	}
 
 	/**
@@ -48,25 +48,25 @@ public class WebServiceUtil {
 			if ("".equals(encoding)) {
 				encoding = "UTF-8";
 			}
-			//创建默认的httpClient实例
+			// 创建默认的httpClient实例
 			HttpClient httpclient = new DefaultHttpClient();
-			//创建httpget
+			// 创建httpget
 			HttpGet httpget = new HttpGet(url);
-			//httpget.addHeader("Accept", "application/json");
-			//执行get请求
+			// httpget.addHeader("Accept", "application/json");
+			// 执行get请求
 			HttpResponse response = httpclient.execute(httpget);
-			//获取响应实体
+			// 获取响应实体
 			HttpEntity entity = response.getEntity();
-			//打印响应状态
+			// 打印响应状态
 			System.out.println(response.getStatusLine());
 			if (entity != null) {
-				//打印响应内容长度
+				// 打印响应内容长度
 				System.out.println("Response content length: " + entity.getContentLength());
-				//打印响应内容
+				// 打印响应内容
 				returnStr = EntityUtils.toString(entity, encoding);
 				System.out.println("Response content: " + returnStr);
 			}
-			//销毁
+			// 销毁
 			EntityUtils.consume(entity);
 		} catch (IOException e) {
 			e.printStackTrace();
@@ -106,33 +106,33 @@ public class WebServiceUtil {
 			if ("".equals(encoding)) {
 				encoding = "UTF-8";
 			}
-			//创建httpclient对象  
+			// 创建httpclient对象
 			HttpClient client = new DefaultHttpClient();
-			//创建post方式请求对象  
+			// 创建post方式请求对象
 			HttpPost httpPost = new HttpPost(url);
-			//装填参数  
+			// 装填参数
 			List<NameValuePair> nvps = new ArrayList<NameValuePair>();
 			if (map != null) {
 				for (Entry<String, String> entry : map.entrySet()) {
 					nvps.add(new BasicNameValuePair(entry.getKey(), entry.getValue()));
 				}
 			}
-			//设置参数到请求对象中  
+			// 设置参数到请求对象中
 			httpPost.setEntity(new UrlEncodedFormEntity(nvps, encoding));
 			System.out.println("请求地址：" + url);
 			System.out.println("请求参数：" + nvps.toString());
-			//设置header信息  
+			// 设置header信息
 			httpPost.setHeader("Content-type", "application/x-www-form-urlencoded");
 			httpPost.setHeader("User-Agent", "Mozilla/4.0 (compatible; MSIE 5.0; Windows NT; DigExt)");
-			//执行请求操作，并拿到结果（同步阻塞）  
+			// 执行请求操作，并拿到结果（同步阻塞）
 			HttpResponse response = client.execute(httpPost);
-			//获取结果实体  
+			// 获取结果实体
 			HttpEntity entity = response.getEntity();
 			if (entity != null) {
-				//按指定编码转换结果实体为String类型  
+				// 按指定编码转换结果实体为String类型
 				returnStr = EntityUtils.toString(entity, encoding);
 			}
-			//销毁
+			// 销毁
 			EntityUtils.consume(entity);
 		} catch (Exception e) {
 			e.printStackTrace();
