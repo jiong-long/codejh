@@ -2,6 +2,8 @@ package com.jianghu.dao.mybatis.plus;
 
 import java.math.BigDecimal;
 
+import com.baomidou.mybatisplus.annotation.TableName;
+
 import lombok.Data;
 
 /**
@@ -11,6 +13,8 @@ import lombok.Data;
  * @createTime 2018年9月24日 上午11:57:16
  */
 @Data
+//不配置TableName的话，表名默认为：user_plus
+@TableName("bc_user")
 public class UserPlus {
 	private BigDecimal id;
 	private String username;

@@ -15,7 +15,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
  * @createTime 2018年9月24日 上午11:56:44
  */
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(locations = { "classpath*:spring.xml" })
+@ContextConfiguration(locations = { "classpath*:mybatisPlus-config.xml" })
 public class TestFile {
 	@Autowired
 	private UserMapperPlus userMapperPlus;
