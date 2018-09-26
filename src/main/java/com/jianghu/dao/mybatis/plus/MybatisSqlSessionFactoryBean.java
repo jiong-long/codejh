@@ -92,6 +92,7 @@ import com.baomidou.mybatisplus.extension.toolkit.PackageHelper;
  * @author hubin
  * @since 2017-01-04
  */
+@SuppressWarnings("rawtypes")
 public class MybatisSqlSessionFactoryBean implements FactoryBean<SqlSessionFactory>, InitializingBean, ApplicationListener<ApplicationEvent> {
 
 	private static final Log LOGGER = LogFactory.getLog(SqlSessionFactoryBean.class);
@@ -127,7 +128,6 @@ public class MybatisSqlSessionFactoryBean implements FactoryBean<SqlSessionFacto
 
 	private String typeAliasesPackage;
 
-	// TODO 自定义枚举包
 	private String typeEnumsPackage;
 
 	private Class<?> typeAliasesSuperType;
@@ -145,7 +145,6 @@ public class MybatisSqlSessionFactoryBean implements FactoryBean<SqlSessionFacto
 
 	private GlobalConfig globalConfig;
 
-	// TODO 注入全局配置
 	public void setGlobalConfig(GlobalConfig globalConfig) {
 		this.globalConfig = globalConfig;
 	}
@@ -417,7 +416,6 @@ public class MybatisSqlSessionFactoryBean implements FactoryBean<SqlSessionFacto
 				"Property 'configuration' and 'configLocation' can not specified with together");
 
 		this.sqlSessionFactory = buildSqlSessionFactory();
-		//TODO: 3.0 注入到globalConfig
 	}
 
 	/**
@@ -436,7 +434,6 @@ public class MybatisSqlSessionFactoryBean implements FactoryBean<SqlSessionFacto
 
 		Configuration configuration;
 
-		// TODO 加载自定义 MybatisXmlConfigBuilder
 		MybatisXMLConfigBuilder xmlConfigBuilder = null;
 		if (this.configuration != null) {
 			configuration = this.configuration;
@@ -452,8 +449,6 @@ public class MybatisSqlSessionFactoryBean implements FactoryBean<SqlSessionFacto
 			if (LOGGER.isDebugEnabled()) {
 				LOGGER.debug("Property 'configuration' or 'configLocation' not specified, using default MyBatis Configuration");
 			}
-			// TODO 使用自定义配置
-
 			// 设置默认值, Addby jinlong 解决globalConfig为null，报空指针异常
 			if (null == globalConfig) {
 				globalConfig = GlobalConfigUtils.defaults();
@@ -478,7 +473,6 @@ public class MybatisSqlSessionFactoryBean implements FactoryBean<SqlSessionFacto
 		}
 
 		if (hasLength(this.typeAliasesPackage)) {
-			// TODO 支持自定义通配符
 			List<String> typeAliasPackageList = new ArrayList<>();
 			if (typeAliasesPackage.contains(StringPool.ASTERISK) && !typeAliasesPackage.contains(StringPool.COMMA) && !typeAliasesPackage.contains(StringPool.SEMICOLON)) {
 				String[] convertTypeAliasesPackages = PackageHelper.convertTypeAliasesPackage(this.typeAliasesPackage);
@@ -510,7 +504,6 @@ public class MybatisSqlSessionFactoryBean implements FactoryBean<SqlSessionFacto
 			}
 		}
 
-		// TODO 自定义枚举类扫描处理
 		if (hasLength(this.typeEnumsPackage)) {
 			Set<Class> classes;
 			if (typeEnumsPackage.contains(StringPool.STAR) && !typeEnumsPackage.contains(StringPool.COMMA) && !typeEnumsPackage.contains(StringPool.SEMICOLON)) {
@@ -624,7 +617,6 @@ public class MybatisSqlSessionFactoryBean implements FactoryBean<SqlSessionFacto
 		if (null == globalConfig) {
 			globalConfig = GlobalConfigUtils.defaults();
 		}
-		// TODO 设置元数据相关 如果用户没有配置 dbType 则自动获取
 		if (globalConfig.getDbConfig().getDbType() == DbType.OTHER) {
 			try (Connection connection = AopUtils.getTargetObject(this.dataSource).getConnection()) {
 				globalConfig.getDbConfig().setDbType(JdbcUtils.getDbType(connection.getMetaData().getURL()));
@@ -633,15 +625,11 @@ public class MybatisSqlSessionFactoryBean implements FactoryBean<SqlSessionFacto
 			}
 		}
 		SqlSessionFactory sqlSessionFactory = this.sqlSessionFactoryBuilder.build(configuration);
-		// TODO SqlRunner
 		SqlHelper.FACTORY = sqlSessionFactory;
-		// TODO 缓存 sqlSessionFactory
 		globalConfig.setSqlSessionFactory(sqlSessionFactory);
-		// TODO 设置全局参数属性
 		globalConfig.signGlobalConfig(sqlSessionFactory);
 		if (!isEmpty(this.mapperLocations)) {
 			if (globalConfig.isRefresh()) {
-				//TODO 设置自动刷新配置 减少配置
 				new MybatisMapperRefresh(this.mapperLocations, sqlSessionFactory, 2, 2, true);
 			}
 			for (Resource mapperLocation : this.mapperLocations) {
@@ -650,7 +638,6 @@ public class MybatisSqlSessionFactoryBean implements FactoryBean<SqlSessionFacto
 				}
 
 				try {
-					// TODO  这里也换了噢噢噢噢
 					XMLMapperBuilder xmlMapperBuilder = new XMLMapperBuilder(mapperLocation.getInputStream(), configuration, mapperLocation.toString(),
 							configuration.getSqlFragments());
 					xmlMapperBuilder.parse();
