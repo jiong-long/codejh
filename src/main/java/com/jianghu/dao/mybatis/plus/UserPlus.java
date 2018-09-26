@@ -15,6 +15,7 @@ import lombok.Data;
 @Data
 //不配置TableName的话，表名默认为：user_plus
 @TableName("bc_user")
+@SuppressWarnings("unused")
 public class UserPlus {
 	private BigDecimal id;
 	private String username;

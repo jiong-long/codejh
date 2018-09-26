@@ -22,7 +22,7 @@
     </bean>
 
     <!-- MyBatis SqlSessionFactory Config -->
-    <bean id="sqlSessionFactory" class="com.baomidou.mybatisplus.extension.spring.MybatisSqlSessionFactoryBean">
+    <bean id="sqlSessionFactory" class="com.jianghu.dao.mybatis.plus.MybatisSqlSessionFactoryBean">
        <property name="dataSource" ref="dataSource"></property>
     </bean>
 
