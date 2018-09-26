@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN" "http://mybatis.org/dtd/mybatis-3-config.dtd">
 <configuration>
+	<!-- *********单机版配置文件********* -->
+
 	<!-- 引入外部配置文件 -->
 	<properties resource="jdbc.properties"></properties>
 	
@@ -33,8 +35,8 @@
 	
 	<!-- 配置映射文件 -->
    	<mappers>
-        <!-- 1：一个一个的配置 -->
-        <mapper resource="com/jianghu/dao/mybatis/xml/UserMapper.xml"/> 
+        <!-- 1：一个一个的配置 
+        <mapper resource="com/jianghu/dao/mybatis/xml/UserMapper.xml"/> -->
         <!-- 2：自动扫描包内的Mapper接口与配置文件 必须在同一个文件夹下 -->
         <package name="com.jianghu.dao.mybatis.mapper"/>
     </mappers>

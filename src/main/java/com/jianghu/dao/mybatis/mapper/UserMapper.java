@@ -2,8 +2,11 @@ package com.jianghu.dao.mybatis.mapper;
 
 import java.util.List;
 
-import com.jianghu.domain.basic.User;
+import org.mybatis.spring.annotation.MapperScan;
 
+import com.jianghu.dao.mybatis.plus.UserPlus;
+
+@MapperScan
 public interface UserMapper {
 	/**
 	 * 新增用戶
@@ -12,7 +15,7 @@ public interface UserMapper {
 	 * @return
 	 * @throws Exception
 	 */
-	public int insertUser(User user) throws Exception;
+	public int insertUser(UserPlus user) throws Exception;
 
 	/**
 	 * 修改用戶
@@ -22,7 +25,7 @@ public interface UserMapper {
 	 * @return
 	 * @throws Exception
 	 */
-	public int updateUser(User user, int id) throws Exception;
+	public int updateUser(UserPlus user, int id) throws Exception;
 
 	/**
 	 * 刪除用戶
@@ -40,7 +43,7 @@ public interface UserMapper {
 	 * @return
 	 * @throws Exception
 	 */
-	public User selectUserById(int id) throws Exception;
+	public UserPlus selectUserById(int id) throws Exception;
 
 	/**
 	 * 查询所有的用户信息
@@ -48,5 +51,5 @@ public interface UserMapper {
 	 * @return
 	 * @throws Exception
 	 */
-	public List<User> selectAllUser() throws Exception;
+	public List<UserPlus> selectAllUser() throws Exception;
 }

@@ -286,6 +286,14 @@
 		    <scope>provided</scope>
 		</dependency>
 		
+		<!-- 解决Junit调试时，报websocket报No suitable default RequestUpgradeStrategy found错误 -->
+		<dependency>
+			<groupId>org.apache.tomcat.embed</groupId>
+			<artifactId>tomcat-embed-websocket</artifactId>
+			<version>7.0.52</version>
+			<scope>test</scope>
+		</dependency>
+		
 		<!-- oracle 数据库驱动 -->
 		<dependency>
 		    <groupId>com.oracle</groupId>

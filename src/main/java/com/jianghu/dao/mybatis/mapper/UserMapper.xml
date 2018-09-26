@@ -3,7 +3,7 @@
 <!-- namespace最好为全限定名+文件名称 -->
 <mapper namespace="com.jianghu.dao.mybatis.mapper.UserMapper">
 	<!-- 自定义返回结果集 -->
-	<resultMap id="userMap" type="User">
+	<resultMap id="userMap" type="com.jianghu.dao.mybatis.plus.UserPlus">
 		<id property="id" column="id" javaType="java.math.BigDecimal"></id>
 		<result property="username" column="username" javaType="java.lang.String"></result>
 		<result property="password" column="password" javaType="java.lang.String"></result>
