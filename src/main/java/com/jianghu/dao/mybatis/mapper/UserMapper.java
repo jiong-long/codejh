@@ -2,6 +2,7 @@ package com.jianghu.dao.mybatis.mapper;
 
 import java.util.List;
 
+import org.apache.ibatis.session.RowBounds;
 import org.mybatis.spring.annotation.MapperScan;
 
 import com.jianghu.dao.mybatis.plus.UserPlus;
@@ -52,4 +53,12 @@ public interface UserMapper {
 	 * @throws Exception
 	 */
 	public List<UserPlus> selectAllUser() throws Exception;
+
+	/**
+	 * 查询所有的用户信息（分页）
+	 * 
+	 * @return
+	 * @throws Exception
+	 */
+	public List<UserPlus> selectAllUser(RowBounds rowBounds) throws Exception;
 }

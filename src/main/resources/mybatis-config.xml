@@ -6,6 +6,14 @@
 	<!-- 引入外部配置文件 -->
 	<properties resource="jdbc.properties"></properties>
 	
+	<settings>
+		<!-- 使全局的映射器启用或禁用缓存。default:true -->
+		<setting name="cacheEnabled" value="true"/>
+		<!-- 允许JDBC生成主键。需要驱动器支持。default:false -->
+	    <!-- 如果设为了true，这个设置将强制使用被生成的主键，有一些驱动器不兼容不过仍然可以执行。 -->
+		<setting name="useGeneratedKeys" value="false"/>
+	</settings>
+	
 	<!-- 为JAVA Bean起类别名 -->
    	<typeAliases>
         <!-- 别名方式1：一个一个的配置 type中放置的是类的全路径，alias中放置的是类别名 
