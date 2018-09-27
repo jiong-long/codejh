@@ -26,14 +26,10 @@ public class Mail implements Cloneable {
 
 	@SuppressWarnings("unchecked")
 	@Override
-	public Mail clone() {
+	public Mail clone() throws CloneNotSupportedException {
 		Mail mail = null;
-		try {
-			mail = (Mail) super.clone();
-			mail.list = (ArrayList<String>) this.list.clone();
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
+		mail = (Mail) super.clone();
+		mail.list = (ArrayList<String>) this.list.clone();
 		return mail;
 	}
 
