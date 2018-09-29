@@ -112,8 +112,7 @@ public class LuceneUtil {
 		IndexSearcher searcher = null;
 		List<LuceneField> list = new ArrayList<LuceneField>();
 		try {
-			if (index_file != null && index_file.exists() && index_file.isDirectory()
-					&& index_file.listFiles().length > 1) {
+			if (index_file != null && index_file.exists() && index_file.isDirectory() && index_file.listFiles().length > 1) {
 				indexReader = IndexReader.open(FSDirectory.open(index_file));
 				searcher = new IndexSearcher(indexReader);
 				searcher.setSimilarity(new IKSimilarity());
@@ -221,8 +220,8 @@ public class LuceneUtil {
 	 * @author wangjinlong
 	 * @creatTime 2017年9月29日 下午10:10:21
 	 */
-	private void deleteAllFile(File index_file) {
-		File[] files = index_file.listFiles();
+	private void deleteAllFile(File indexFile) {
+		File[] files = indexFile.listFiles();
 		if (files != null) {
 			for (int i = 0; i < files.length; i++) {
 				// 不要删除锁文件
@@ -373,8 +372,7 @@ public class LuceneUtil {
 		Field title = new Field("name", Tools.removeHtml(luceneField.getName()), Field.Store.YES, Field.Index.ANALYZED);
 		// 该字段为主要字段，计算得分的时候会比重会比较大
 		title.setBoost(10.0F);
-		Field content = new Field("content", Tools.removeHtml(luceneField.getContent()), Field.Store.YES,
-				Field.Index.ANALYZED);
+		Field content = new Field("content", Tools.removeHtml(luceneField.getContent()), Field.Store.YES, Field.Index.ANALYZED);
 		document.add(id);
 		document.add(title);
 		document.add(content);

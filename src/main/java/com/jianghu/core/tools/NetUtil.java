@@ -49,8 +49,7 @@ public class NetUtil {
 		String ip = "";
 		String s1 = "ipconfig /all";
 		Process process = Runtime.getRuntime().exec(s1);
-		BufferedReader bufferedreader = new BufferedReader(
-				new InputStreamReader(process.getInputStream(), Charset.forName("GBK")));
+		BufferedReader bufferedreader = new BufferedReader(new InputStreamReader(process.getInputStream(), Charset.forName("GBK")));
 		String nextLine;
 		for (String line = bufferedreader.readLine(); line != null; line = nextLine) {
 			nextLine = bufferedreader.readLine();
@@ -237,7 +236,7 @@ public class NetUtil {
 		}
 		if (null == ip || 0 == ip.length() || "unknown".equalsIgnoreCase(ip)) {
 			ip = request.getRemoteAddr();
-			if (ip.equals("127.0.0.1") || ip.equals("0:0:0:0:0:0:0:1")) {// 如果是本机
+			if ("127.0.0.1".equals(ip) || "0:0:0:0:0:0:0:1".equals(ip)) {// 如果是本机
 				ip = REMOTE_IP;
 			}
 		}

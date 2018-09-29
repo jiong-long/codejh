@@ -37,8 +37,8 @@ import com.jianghu.core.Tools;
  */
 public class ExcelUtil {
 	private static Logger logger = Logger.getLogger(ExcelUtil.class);
-	private final static String xls = "xls";
-	private final static String xlsx = "xlsx";
+	private final static String XLS = "xls";
+	private final static String XLSX = "xlsx";
 
 	/**
 	 * demo 测试方法
@@ -72,8 +72,7 @@ public class ExcelUtil {
 	 *            文件名
 	 * @throws IOException
 	 */
-	public static void createExcelAndDownload(HttpServletResponse response, List<Object[]> list, String fileName)
-			throws IOException {
+	public static void createExcelAndDownload(HttpServletResponse response, List<Object[]> list, String fileName) throws IOException {
 		// 调用方法创建HSSFWorkbook工作簿对象
 		HSSFWorkbook workbook = writeExcel(list);
 		// 名称需要重新编码，否则显示不正常
@@ -158,7 +157,7 @@ public class ExcelUtil {
 			throw new FileNotFoundException("文件不存在！");
 		}
 		// 判断文件是否是excel文件
-		if (!filePath.toLowerCase().endsWith(xls) && !filePath.toLowerCase().endsWith(xlsx)) {
+		if (!filePath.toLowerCase().endsWith(XLS) && !filePath.toLowerCase().endsWith(XLSX)) {
 			logger.error(filePath + "不是excel文件");
 			throw new IOException(filePath + "不是excel文件");
 		}
@@ -180,12 +179,12 @@ public class ExcelUtil {
 			InputStream is = new FileInputStream(filePath);
 
 			// 根据文件后缀名不同(xls和xlsx)获得不同的Workbook实现类对象
-			if (filePath.toLowerCase().endsWith(xls)) {
+			if (filePath.toLowerCase().endsWith(XLS)) {
 				// 2003
 				workbook = new HSSFWorkbook(is);
 				// 不兼容可以试下这个方法
 				// workbook = new HSSFWorkbook(new POIFSFileSystem(is));
-			} else if (filePath.toLowerCase().endsWith(xlsx)) {
+			} else if (filePath.toLowerCase().endsWith(XLSX)) {
 				// 2007
 				workbook = new XSSFWorkbook(is);
 			}

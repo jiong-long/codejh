@@ -79,11 +79,11 @@ public class PicUtil {
 	 * @throws IOException
 	 */
 	public void resize(int w, int h) throws IOException {
-		BufferedImage _image = new BufferedImage(w, h, BufferedImage.TYPE_INT_RGB);
-		_image.getGraphics().drawImage(img, 0, 0, w, h, null); // 绘制缩小后的图
+		BufferedImage image = new BufferedImage(w, h, BufferedImage.TYPE_INT_RGB);
+		image.getGraphics().drawImage(img, 0, 0, w, h, null); // 绘制缩小后的图
 		FileOutputStream out = new FileOutputStream(destFile); // 输出到文件流
 		JPEGImageEncoder encoder = JPEGCodec.createJPEGEncoder(out);
-		encoder.encode(_image); // 近JPEG编码
+		encoder.encode(image); // 近JPEG编码
 		out.close();
 	}
 
