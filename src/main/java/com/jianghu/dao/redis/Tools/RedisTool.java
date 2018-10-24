@@ -1,7 +1,9 @@
-package com.jianghu.dao.redis;
+package com.jianghu.dao.redis.Tools;
 
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
+
+import com.jianghu.dao.redis.service.RedisService;
 
 public class RedisTool {
 
@@ -21,5 +23,4 @@ public class RedisTool {
 		}
 		return redisService;
 	}
-
 }

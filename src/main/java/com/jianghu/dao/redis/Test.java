@@ -1,14 +1,18 @@
 package com.jianghu.dao.redis;
 
-import java.util.Iterator;
 import java.util.List;
-import java.util.Set;
+
+import com.jianghu.dao.redis.Tools.RedisTool;
+import com.jianghu.dao.redis.Tools.SerializeUtil;
+import com.jianghu.dao.redis.basic.User;
+import com.jianghu.dao.redis.service.RedisService;
 
 import redis.clients.jedis.Jedis;
 
 public class Test {
 	public static void main(String[] args) {
 		remoteTest();
+		//localhostTest();
 	}
 
 	/**
@@ -16,8 +20,12 @@ public class Test {
 	 */
 	public static void remoteTest() {
 		RedisService rs = RedisTool.getRedisService();
-		String aa = rs.get("key");
-		System.out.println(aa);
+		//存储对象
+		User user = new User(200, "张安");
+		//rs.set("User:200", SerializeUtil.serialize(user));
+		User user1 = (User) SerializeUtil.unserialize((byte[]) rs.get("User:200"));
+		System.out.println(user1.getName());
+		rs.del("User:200");
 	}
 
 	/**
@@ -30,6 +38,15 @@ public class Test {
 		jedis.select(0);
 		//查看服务是否运行
 		System.out.println("服务正在运行: " + jedis.ping());
+
+		//存储对象
+		User user = new User(200, "张安");
+		jedis.set("User:200".getBytes(), SerializeUtil.serialize(user));
+
+		//获取对象
+		byte[] person = jedis.get(("User:200").getBytes());
+		User user1 = (User) SerializeUtil.unserialize(person);
+		System.out.println(user1.getName());
 
 		//设置 redis 字符串数据
 		jedis.set("runoobkey", "www.runoob.com");
@@ -46,13 +63,13 @@ public class Test {
 			System.out.println("列表项为: " + list.get(i));
 		}
 
-		// 获取数据并输出
-		Set<String> keys = jedis.keys("*");
-		Iterator<String> it = keys.iterator();
-		while (it.hasNext()) {
-			String key = it.next();
-			System.out.println(key);
-		}
+		// 获取所有键并输出
+		//Set<String> keys = jedis.keys("*");
+		//Iterator<String> it = keys.iterator();
+		//while (it.hasNext()) {
+		//	String key = it.next();
+		//	System.out.println(key);
+		//}
 
 		//必须关闭连接
 		jedis.close();
