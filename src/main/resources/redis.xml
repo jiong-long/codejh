@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>   
+<beans xmlns="http://www.springframework.org/schema/beans"   
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"   
+    xmlns:p="http://www.springframework.org/schema/p"   
+    xmlns:context="http://www.springframework.org/schema/context"   
+    xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd   
+    http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.0.xsd">  
+ 
+    <context:property-placeholder location="classpath:redis.properties"/> 
+    
+    <bean id="propertyConfigurerRedis" class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">  
+        <property name="order" value="1" />  
+        <property name="ignoreUnresolvablePlaceholders" value="true" />  
+        <property name="systemPropertiesMode" value="1" />  
+        <property name="searchSystemEnvironment" value="true" />  
+        <property name="locations">  
+        <list>  
+            <value>classpath:redis.properties</value>  
+        </list>  
+        </property>  
+    </bean>
+    
+    <bean id="jedisPoolConfig" class="redis.clients.jedis.JedisPoolConfig">  
+    	<!-- 最大空闲连接数量 -->
+        <property name="maxIdle" value="${redis.maxIdle}" />  
+        <property name="testOnBorrow" value="${redis.testOnBorrow}" />  
+    </bean>
+     
+    <bean id="jedisConnectionFactory" class="org.springframework.data.redis.connection.jedis.JedisConnectionFactory">  
+        <property name="usePool" value="true"></property>  
+        <property name="hostName" value="${redis.host}" />  
+        <property name="port" value="${redis.port}" />  
+        <property name="timeout" value="${redis.timeout}" />  
+        <!-- 指定redis数据库，默认为0，一共16个 -->
+        <property name="database" value="${redis.default.db}" />  
+        <constructor-arg index="0" ref="jedisPoolConfig" />  
+    </bean>
+    
+    <!-- org.springframework.data.redis.core.RedisTemplate主要是针对复杂类型的数据操作 -->
+    <bean id="redisTemplate" class="org.springframework.data.redis.core.RedisTemplate">  
+        <property name="connectionFactory" ref="jedisConnectionFactory"/>
+    </bean>
+    
+    <!-- org.springframework.data.redis.core.StringRedisTemplate主要是针对String类型的数据操作 -->
+    <bean id="stringRedisTemplate" class="org.springframework.data.redis.core.StringRedisTemplate">  
+        <property name="connectionFactory" ref="jedisConnectionFactory"/>
+    </bean>
+        
+    <bean id="redisBase" abstract="true">  
+        <property name="template" ref="redisTemplate"/>  
+    </bean> 
+    
+    <!-- redis扫描包 -->
+    <context:component-scan base-package="com.jianghu.dao.redis" />
+</beans>

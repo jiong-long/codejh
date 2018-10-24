@@ -8,9 +8,26 @@ import redis.clients.jedis.Jedis;
 
 public class Test {
 	public static void main(String[] args) {
+		remoteTest();
+	}
+
+	/**
+	 * 配置文件版Redis操作
+	 */
+	public static void remoteTest() {
+		RedisService rs = RedisTool.getRedisService();
+		String aa = rs.get("key");
+		System.out.println(aa);
+	}
+
+	/**
+	 * 单机版Redis操作
+	 */
+	public static void localhostTest() {
 		//连接本地的 Redis 服务
-		Jedis jedis = new Jedis("localhost");
-		System.out.println("连接成功");
+		Jedis jedis = new Jedis("localhost", 6379);
+		//选择数据库
+		jedis.select(0);
 		//查看服务是否运行
 		System.out.println("服务正在运行: " + jedis.ping());
 
@@ -37,6 +54,7 @@ public class Test {
 			System.out.println(key);
 		}
 
+		//必须关闭连接
 		jedis.close();
 	}
 }
