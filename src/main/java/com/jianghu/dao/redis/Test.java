@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.jianghu.dao.redis.Tools.RedisTool;
 import com.jianghu.dao.redis.Tools.SerializeUtil;
+import com.jianghu.dao.redis.basic.Role;
 import com.jianghu.dao.redis.basic.User;
 import com.jianghu.dao.redis.service.RedisService;
 
@@ -21,11 +22,13 @@ public class Test {
 	public static void remoteTest() {
 		RedisService rs = RedisTool.getRedisService();
 		//存储对象
-		User user = new User(200, "张安");
-		//rs.set("User:200", SerializeUtil.serialize(user));
-		User user1 = (User) SerializeUtil.unserialize((byte[]) rs.get("User:200"));
-		System.out.println(user1.getName());
-		rs.del("User:200");
+		User user = new User(100, "张安");
+		Role role = new Role(1, "管理员");
+		user.setRole(role);
+		rs.set("User:100", SerializeUtil.serialize(user));
+		User user1 = (User) SerializeUtil.unserialize((byte[]) rs.get("User:100"));
+		System.out.println(user1.getRole().getName());
+		//rs.del("User:200");
 	}
 
 	/**

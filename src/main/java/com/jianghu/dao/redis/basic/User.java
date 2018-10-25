@@ -12,14 +12,14 @@ public class User implements Serializable {
 	private static final long serialVersionUID = 8554334560393854210L;
 
 	private int id;
+	private String name;
+	private Role role;
 
 	public User(int id, String name) {
 		super();
 		this.id = id;
 		this.name = name;
 	}
-
-	private String name;
 
 	public int getId() {
 		return id;
@@ -35,5 +35,13 @@ public class User implements Serializable {
 
 	public void setName(String name) {
 		this.name = name;
+	}
+
+	public Role getRole() {
+		return role;
+	}
+
+	public void setRole(Role role) {
+		this.role = role;
 	}
 }
