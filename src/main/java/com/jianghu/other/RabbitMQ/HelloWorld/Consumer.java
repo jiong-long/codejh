@@ -29,7 +29,7 @@ public class Consumer {
 
 		//监听队列
 		//参数1：队列名称
-		//参数2：是否发送ack包，不发送ack消息会持续在服务端保存，直到收到ack。可以通过channel.basicAck手动回复ack
+		//参数2：是否发送ack包，不发送ack消息会持续在服务端保存，直到收到ack。可以通过channel.basicAck手动回复ack，见Work模式下的Consumer1.java
 		//参数3：消费者
 		channel.basicConsume(QUEUE_NAME, true, consumer);
 
