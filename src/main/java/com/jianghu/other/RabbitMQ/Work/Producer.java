@@ -5,7 +5,7 @@ import com.rabbitmq.client.Channel;
 import com.rabbitmq.client.Connection;
 
 /**
- * 生产者(多劳多得)
+ * 生产者(多劳多得，一个消费者获得，其他消费者就获取不到)
  * 
  * @creatTime 2018年10月30日 下午9:47:58
  * @author jinlong
