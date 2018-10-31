@@ -1,6 +1,6 @@
 package com.jianghu.other.RabbitMQ.pubsub;
 
-import com.jianghu.other.RabbitMQ.Tools;
+import com.jianghu.other.RabbitMQ.RabbitTools;
 import com.rabbitmq.client.Channel;
 import com.rabbitmq.client.Connection;
 
@@ -17,7 +17,7 @@ public class Producer {
 
 	public static void main(String[] argv) throws Exception {
 		// 获取到连接以及mq通道
-		Connection connection = Tools.getConnection();
+		Connection connection = RabbitTools.getConnection();
 		Channel channel = connection.createChannel();
 
 		//声明exchange(交换机)

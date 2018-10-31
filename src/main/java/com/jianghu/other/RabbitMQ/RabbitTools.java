@@ -12,7 +12,7 @@ import com.rabbitmq.client.ConnectionFactory;
  * @creatTime 2018年10月29日 下午10:19:51
  * @author jinlong
  */
-public class Tools {
+public class RabbitTools {
 
 	/**
 	 * 获取Connection

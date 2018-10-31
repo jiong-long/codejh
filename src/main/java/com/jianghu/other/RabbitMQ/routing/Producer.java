@@ -1,6 +1,6 @@
 package com.jianghu.other.RabbitMQ.routing;
 
-import com.jianghu.other.RabbitMQ.Tools;
+import com.jianghu.other.RabbitMQ.RabbitTools;
 import com.rabbitmq.client.Channel;
 import com.rabbitmq.client.Connection;
 
@@ -16,7 +16,7 @@ public class Producer {
 
 	public static void main(String[] argv) throws Exception {
 		// 获取到连接以及mq通道
-		Connection connection = Tools.getConnection();
+		Connection connection = RabbitTools.getConnection();
 		Channel channel = connection.createChannel();
 
 		// 声明exchange(direct:将消息发送到绑定了该EXCHANGE_NAME routingKey为"A"的队列中)
