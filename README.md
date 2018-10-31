@@ -4,7 +4,8 @@
 ### 技术选型
 - 框架：Struts2、SpringMVC、Spring4、Hibernate3、MyBatis
 - 前端组件：Layui、BootStrap、Ztree、Jquery EasyUI、ECharts、OrgTree
-- 工具组件：POI3、Lucene3.5、阿里大鱼短信、LayIM
+- 工具组件：POI3、Lucene3.5、阿里大鱼短信、LayIM、RabbitMQ
+- 数据库缓存：Redis2.9
 
 ### 运行环境
 Tomcat8、JDK1.8、MySql5。(支持Oracle、Sqlite切换)
