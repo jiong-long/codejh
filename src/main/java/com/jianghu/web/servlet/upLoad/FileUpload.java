@@ -1,5 +1,6 @@
 package com.jianghu.web.servlet.upLoad;
 
+import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -60,9 +61,9 @@ public class FileUpload extends BaseServlet {
 		HttpSession session = request.getSession();
 		//获取工程中文件的绝对路径
 		String realPath = session.getServletContext().getRealPath("/page/3D/images/a2.png");
-		PicUtil picUtil = new PicUtil(realPath);
-		object.put("width", picUtil.getSrcWidth());
-		object.put("height", picUtil.getSrcHeight());
+		BufferedImage image = PicUtil.asBufferedImage(realPath);
+		object.put("width", image.getWidth());
+		object.put("height", image.getHeight());
 
 		JSONArray array = new JSONArray();
 		array.put(object);

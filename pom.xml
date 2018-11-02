@@ -280,6 +280,13 @@
 		    <scope>provided</scope>
 		</dependency>
 		
+		<!-- google图片处理相关 -->
+		<dependency>
+		   <groupId>net.coobird</groupId>
+		   <artifactId>thumbnailator</artifactId>
+		   <version>0.4.8</version>
+		</dependency>
+		
 		<!-- 导出Word所需的包之一 -->
 		<dependency>
 		    <groupId>org.freemarker</groupId>

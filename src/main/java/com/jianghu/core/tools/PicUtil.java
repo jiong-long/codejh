@@ -1,15 +1,16 @@
 package com.jianghu.core.tools;
 
-import java.awt.Image;
 import java.awt.image.BufferedImage;
 import java.io.File;
-import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.InputStream;
+import java.io.OutputStream;
 
-import com.sun.image.codec.jpeg.JPEGCodec;
-import com.sun.image.codec.jpeg.JPEGImageEncoder;
+import javax.imageio.ImageIO;
+
+import net.coobird.thumbnailator.Thumbnails;
+import net.coobird.thumbnailator.geometry.Position;
+import net.coobird.thumbnailator.geometry.Positions;
 
 /**
  * 图片相关工具类
@@ -18,160 +19,171 @@ import com.sun.image.codec.jpeg.JPEGImageEncoder;
  * 
  */
 public class PicUtil {
-	private String srcFile;
-	private String destFile;
-	private int width;
-	private int height;
-	private Image img;
-
 	/**
-	 * 构造函数
 	 * 
-	 * @param filePath
-	 *            String
+	 * @param args
 	 * @throws IOException
 	 */
-	public PicUtil(String filePath) throws IOException {
-		// 读入文件
-		File file = new File(filePath);
-		this.srcFile = filePath;
-		// 查找最后一个.
-		int index = this.srcFile.lastIndexOf(".");
-		String ext = this.srcFile.substring(index);
-		this.destFile = this.srcFile.substring(0, index) + "_s" + ext;
-
-		InputStream fileInputStream = new FileInputStream(file);
-		// 构造Image对象
-		img = javax.imageio.ImageIO.read(fileInputStream);
-		// 得到源图宽
-		width = img.getWidth(null);
-		// 得到源图长
-		height = img.getHeight(null);
+	public static void main(String[] args) throws IOException {
+		// changeSize("F:/123.jpg", "F:/111.jpg", 300, 300, true);
+		// changeSize("F:/123.jpg", "F:/111.jpg", 0.5f);
+		// rotateImg("F:/123.jpg", "F:/111.jpg", 190);
+		// watermark("F:/123.jpg", "F:/111.jpg", "F:/222.jpg", Positions.BOTTOM_RIGHT, 0.5f);
+		// sourceRegion("F:/123.jpg", "F:/111.jpg", Positions.BOTTOM_RIGHT, 1000, 1000);
+		// sourceRegion("F:/123.jpg", "F:/111.jpg", 1000, 1000, 1000, 1000);
+		// outputFormat("F:/123.jpg", "F:/111.png", "png");
+		BufferedImage image = asBufferedImage("F:/123.jpg");
+		System.out.println(image.getWidth());
+		System.out.println(image.getHeight());
 	}
 
 	/**
-	 * 构造函数
 	 * 
-	 * @param filePath
-	 *            String
+	 * 指定大小进行缩放
+	 * 
+	 * @param oldFilePath
+	 *            原图片地址（项目中的图片可以用相对路径 images/test.jpg）
+	 * @param newFilePath
+	 *            新图片地址
+	 * @param width
+	 *            改变后的宽度（keepAspect为true时类似于css的max-width）
+	 * @param height
+	 *            改变后的高度（keepAspect为true时类似于css的max-height）
+	 * @param keepAspect
+	 *            是否保持原有图片比例
 	 * @throws IOException
 	 */
-	public PicUtil(File file) throws IOException {
-		this.srcFile = file.getAbsolutePath();
-		// 查找最后一个.
-		int index = this.srcFile.lastIndexOf(".");
-		String ext = this.srcFile.substring(index);
-		this.destFile = this.srcFile.substring(0, index) + "_s" + ext;
-
-		InputStream fileInputStream = new FileInputStream(file);
-		img = javax.imageio.ImageIO.read(fileInputStream); // 构造Image对象
-		width = img.getWidth(null); // 得到源图宽
-		height = img.getHeight(null); // 得到源图长
+	public static void changeSize(String oldFilePath, String newFilePath, int width, int height, boolean keepAspect) throws IOException {
+		Thumbnails.of(oldFilePath).size(width, height).keepAspectRatio(keepAspect).toFile(newFilePath);
 	}
 
 	/**
-	 * 强制压缩/放大图片到固定的大小
+	 * 按照比例进行缩放
 	 * 
-	 * @param w
-	 *            int 新宽度
-	 * @param h
-	 *            int 新高度
+	 * @param oldFilePath
+	 *            原图片地址（项目中的图片可以用相对路径 images/test.jpg）
+	 * @param newFilePath
+	 *            新图片地址
+	 * @param size
+	 *            0-1之间，按照比例缩小
 	 * @throws IOException
 	 */
-	public void resize(int w, int h) throws IOException {
-		BufferedImage image = new BufferedImage(w, h, BufferedImage.TYPE_INT_RGB);
-		image.getGraphics().drawImage(img, 0, 0, w, h, null); // 绘制缩小后的图
-		FileOutputStream out = new FileOutputStream(destFile); // 输出到文件流
-		JPEGImageEncoder encoder = JPEGCodec.createJPEGEncoder(out);
-		encoder.encode(image); // 近JPEG编码
-		out.close();
+	public static void changeSize(String oldFilePath, String newFilePath, float size) throws IOException {
+		Thumbnails.of(oldFilePath).scale(size).toFile(newFilePath);
 	}
 
 	/**
-	 * 按照固定的比例缩放图片
+	 * 旋转
 	 * 
-	 * @param t
-	 *            double 比例
+	 * @param oldFilePath
+	 *            原图片地址（项目中的图片可以用相对路径 images/test.jpg）
+	 * @param newFilePath
+	 *            新图片地址
+	 * @param angle
+	 *            旋转角度,正数：顺时针; 负数：逆时针
 	 * @throws IOException
 	 */
-	public void resize(double t) throws IOException {
-		int w = (int) (width * t);
-		int h = (int) (height * t);
-		resize(w, h);
+	public static void rotateImg(String oldFilePath, String newFilePath, double angle) throws IOException {
+		Thumbnails.of(oldFilePath).scale(1).rotate(angle).toFile(newFilePath);
 	}
 
 	/**
-	 * 以宽度为基准，等比例放缩图片
+	 * 水印
 	 * 
-	 * @param w
-	 *            int 新宽度
+	 * @param oldFilePath
+	 *            原图片地址（项目中的图片可以用相对路径 images/test.jpg）
+	 * @param newFilePath
+	 *            新图片地址
+	 * @param markFilePath
+	 *            水印图片地址
+	 * @param positions
+	 *            水印位置
+	 * @param opacity
+	 *            透明度
 	 * @throws IOException
 	 */
-	public void resizeByWidth(int w) throws IOException {
-		int h = (int) (height * w / width);
-		resize(w, h);
+	public static void watermark(String oldFilePath, String newFilePath, String markFilePath, Positions positions, float opacity) throws IOException {
+		Thumbnails.of(oldFilePath).scale(1).watermark(positions, ImageIO.read(new File(markFilePath)), opacity).outputQuality(0.8f).toFile(newFilePath);
 	}
 
 	/**
-	 * 以高度为基准，等比例缩放图片
+	 * 裁剪
 	 * 
-	 * @param h
-	 *            int 新高度
+	 * @param oldFilePath
+	 *            原图片地址（项目中的图片可以用相对路径 images/test.jpg）
+	 * @param newFilePath
+	 *            新图片地址
+	 * @param position
+	 *            裁剪位置
+	 * @param width
+	 *            裁剪宽度
+	 * @param height
+	 *            裁剪高度
 	 * @throws IOException
 	 */
-	public void resizeByHeight(int h) throws IOException {
-		int w = (int) (width * h / height);
-		resize(w, h);
+	public static void sourceRegion(String oldFilePath, String newFilePath, Position position, int width, int height) throws IOException {
+		Thumbnails.of(oldFilePath).sourceRegion(position, width, height).scale(1).toFile(newFilePath);
 	}
 
 	/**
-	 * 按照最大高度限制，生成最大的等比例缩略图
+	 * 裁剪（自定义裁剪坐标）
 	 * 
-	 * @param w
-	 *            int 最大宽度
-	 * @param h
-	 *            int 最大高度
+	 * @param oldFilePath
+	 *            原图片地址（项目中的图片可以用相对路径 images/test.jpg）
+	 * @param newFilePath
+	 *            新图片地址
+	 * @param localWidth
+	 *            裁剪开始宽度
+	 * @param localHeight
+	 *            裁剪开始高度
+	 * @param width
+	 *            裁剪宽度
+	 * @param height
+	 *            裁剪高度
 	 * @throws IOException
 	 */
-	public void resizeFix(int w, int h) throws IOException {
-		if (width / height > w / h) {
-			resizeByWidth(w);
-		} else {
-			resizeByHeight(h);
-		}
+	public static void sourceRegion(String oldFilePath, String newFilePath, int localWidth, int localHeight, int width, int height) throws IOException {
+		Thumbnails.of(oldFilePath).sourceRegion(localWidth, localHeight, width, height).scale(1).toFile(newFilePath);
 	}
 
 	/**
-	 * 设置目标文件名 setDestFile
+	 * 转化图像格式
 	 * 
-	 * @param fileName
-	 *            String 文件名字符串
+	 * @param oldFilePath
+	 *            原图片地址（项目中的图片可以用相对路径 images/test.jpg）
+	 * @param newFilePath
+	 *            新图片地址
+	 * @param format
+	 *            新图片格式
+	 * @throws IOException
 	 */
-	public void setDestFile(String fileName) throws Exception {
-		if (!fileName.endsWith(".jpg")) {
-			throw new Exception("Dest File Must end with \".jpg\".");
-		}
-		destFile = fileName;
+	public static void outputFormat(String oldFilePath, String newFilePath, String format) throws IOException {
+		Thumbnails.of(oldFilePath).scale(1).outputFormat(format).toFile(newFilePath);
 	}
 
 	/**
-	 * 获取目标文件名 getDestFile
+	 * 返回BufferedImage对象，可以获取图片相关信息
+	 * 
+	 * @param oldFilePath
+	 *            原图片地址（项目中的图片可以用相对路径 images/test.jpg）
+	 * @return
+	 * @throws IOException
 	 */
-	public String getDestFile() {
-		return destFile;
+	public static BufferedImage asBufferedImage(String oldFilePath) throws IOException {
+		BufferedImage thumbnail = Thumbnails.of(oldFilePath).scale(1).asBufferedImage();
+		return thumbnail;
 	}
 
 	/**
-	 * 获取图片原始宽度 getSrcWidth
+	 * 获取图片的OutputStream对象
+	 * 
+	 * @param oldFilePath
+	 *            原图片地址（项目中的图片可以用相对路径 images/test.jpg）
+	 * @return
+	 * @throws IOException
 	 */
-	public int getSrcWidth() {
-		return width;
-	}
-
-	/**
-	 * 获取图片原始高度 getSrcHeight
-	 */
-	public int getSrcHeight() {
-		return height;
+	public static OutputStream toOutputStream(String oldFilePath) throws IOException {
+		OutputStream os = new FileOutputStream(oldFilePath);
+		return os;
 	}
 }
