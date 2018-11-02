@@ -21,6 +21,7 @@ import org.apache.poi.xwpf.extractor.XWPFWordExtractor;
 import freemarker.template.Configuration;
 import freemarker.template.Template;
 import freemarker.template.TemplateException;
+import sun.misc.BASE64Encoder;
 
 /**
  * Word相关工具类
@@ -40,6 +41,8 @@ public class WordUtil {
 		Map<String, Object> dataMap = new HashMap<String, Object>();
 		dataMap.put("username", "张三");
 		dataMap.put("password", "123");
+		// 先在word中插入一张图片，生成xml后，图片变为BASE64编码后的一大段字符串，将该字符串变为${image}
+		dataMap.put("image", getImageStr("C:\\Users\\jinlong\\Desktop\\pic.img"));
 
 		String fileName = "C:\\Users\\jinlong\\Desktop\\导出Word.doc";
 		try {
@@ -52,9 +55,9 @@ public class WordUtil {
 	/**
 	 * 导出Word
 	 * 
-	 * 1.创建带有格式的word文档，将该需要动态展示的数据使用变量符替换。
+	 * 1.创建带有格式的word文档，将该需要动态展示的数据使用变量符${username}替换。
 	 * 
-	 * 2. 将刚刚创建的word文档另存为xml格式。
+	 * 2.将刚刚创建的word文档另存为xml格式。
 	 * 
 	 * 3．编辑这个XMl文档去掉多余的xml标记,用文本编辑器打开,把里面需要替换的变量使用${username}【${username}中间可能有其他字符】全部删除.
 	 * 
@@ -63,10 +66,10 @@ public class WordUtil {
 	 * @throws Exception
 	 */
 	public static void createDoc(Map<String, Object> dataMap, String fileName) throws Exception {
-		//指定路径的第一种方式(根据某个类的相对路径指定)  
-		//configuration.setClassForTemplateLoading(this.getClass(),"");  
+		// 指定路径的第一种方式(根据某个类的相对路径指定)
+		// configuration.setClassForTemplateLoading(this.getClass(),"");
 
-		//指定路径的第二种方式,我的路径是C:/
+		// 指定路径的第二种方式,我的路径是C:/
 		configuration.setDirectoryForTemplateLoading(new File("C:\\Users\\jinlong\\Desktop\\"));
 
 		Template template = null;
@@ -130,5 +133,31 @@ public class WordUtil {
 		}
 
 		return buffer;
+	}
+
+	/**
+	 * 获取图片BASE64编码后的字符串
+	 * 
+	 * @param imgFile
+	 * @return
+	 */
+	private static String getImageStr(String imgFile) {
+		InputStream in = null;
+		byte[] data = null;
+		try {
+			in = new FileInputStream(imgFile);
+			data = new byte[in.available()];
+			in.read(data);
+		} catch (IOException e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				in.close();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}
+		BASE64Encoder encoder = new BASE64Encoder();
+		return encoder.encode(data);
 	}
 }
