@@ -18,7 +18,7 @@ import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
 import com.jianghu.core.Tools;
-import com.jianghu.core.func.Location;
+import com.jianghu.core.func.single.Location;
 import com.opensymphony.xwork2.ActionSupport;
 
 /**

@@ -1,4 +1,4 @@
-package com.jianghu.core.func;
+package com.jianghu.core.func.single;
 
 import com.jianghu.web.action.basic.ItemAction;
 

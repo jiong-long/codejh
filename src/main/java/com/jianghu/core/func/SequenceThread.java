@@ -9,7 +9,7 @@ import com.jianghu.core.Database;
 import com.jianghu.core.Tools;
 
 /**
- * 序列生成器
+ * 序列生成器(多线程编程)
  * 
  * @author jinlong
  *

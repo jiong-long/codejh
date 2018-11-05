@@ -1,4 +1,4 @@
-package com.jianghu.core.func;
+package com.jianghu.core.func.single;
 
 import java.io.BufferedReader;
 import java.io.IOException;
