@@ -24,11 +24,12 @@ import javax.servlet.http.HttpServletRequest;
  * 
  */
 public class NetUtil {
+	//静态成员变量按照顺序加载
+	private static Pattern URL_PATTERN = Pattern.compile("\\<dd class\\=\"fz24\">(.*?)\\<\\/dd>");
+	private static Pattern IP_PATTERN = Pattern.compile("(\\d{1,3})[.](\\d{1,3})[.](\\d{1,3})[.](\\d{1,3})");
 	public static String urlString = "http://2018.ip138.com/ic.asp";// 获取IP的网站
 	public static String LOCAL_IP = getIpFromLocation();// 内网IP
 	public static String REMOTE_IP = getIpFromUrl();// 外网IP
-	private static Pattern URL_PATTERN = Pattern.compile("\\<dd class\\=\"fz24\">(.*?)\\<\\/dd>");
-	private static Pattern IP_PATTERN = null;
 
 	public static void main(String[] args) throws Exception {
 		System.out.println(REMOTE_IP);
@@ -183,9 +184,6 @@ public class NetUtil {
 	 * @param html
 	 */
 	private static String parse(String html) {
-		if (IP_PATTERN == null) {
-			IP_PATTERN = Pattern.compile("(\\d{1,3})[.](\\d{1,3})[.](\\d{1,3})[.](\\d{1,3})", Pattern.CASE_INSENSITIVE);
-		}
 		Matcher matcher = IP_PATTERN.matcher(html);
 		String ip = "";
 		while (matcher.find()) {
