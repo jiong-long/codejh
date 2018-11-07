@@ -23,12 +23,23 @@ import cn.edu.hfut.dmic.webcollector.plugin.nextfilter.HashSetNextFilter;
 
 /**
  * 本教程为微信公众号文章抓取示例 示例中抓取的公众号标题（用于去重）存放于文件中，仅供参考 线上系统请老老实实用数据库
+ * 
+ * 还未运行成功过，由于页面标签变化，以及过多的访问，被微信拦截的原因
  *
  * @author hu
  */
 public class WxAccountCrawler extends BreadthCrawler {
 	protected String historyKeysPath;
 	protected BufferedWriter historyKeysWriter;
+
+	public static void main(String[] args) throws Exception {
+		WxAccountCrawler crawler = new WxAccountCrawler("crawl_weixin", "wx_history.txt");
+		//搜索出ZEALER订阅号查询出的结构
+		crawler.addAccount("ZEALER订阅号");
+		//启动五个线程
+		crawler.setThreads(5);
+		crawler.start(10);
+	}
 
 	public WxAccountCrawler(String crawlPath, String historyKeysPath) throws Exception {
 		super(crawlPath, false);
@@ -82,6 +93,12 @@ public class WxAccountCrawler extends BreadthCrawler {
 			} else if (page.matchType("article")) {
 				//对于文章页
 				//抽取标题、内容等信息，此处仅print少数信息作为参考
+				boolean flag = true;
+				if (flag) {
+					flag = false;
+					System.out.println(page.html());
+				}
+
 				String title = page.select("h2.rich_media_title").first().text().trim();
 				String date = page.select("em#post-date").first().text().trim();
 				String content = page.select("div.rich_media_content").first().text().trim();
@@ -113,7 +130,7 @@ public class WxAccountCrawler extends BreadthCrawler {
 	}
 
 	public void addAccount(String account) throws UnsupportedEncodingException {
-		String seedUrl = "http://weixin.sogou.com/weixin?type=1&" + "s_from=input&ie=utf8&query=" + URLEncoder.encode(account, "utf-8");
+		String seedUrl = "http://weixin.sogou.com/weixin?type=1&s_from=input&ie=utf8&query=" + URLEncoder.encode(account, "utf-8");
 		CrawlDatum seed = new CrawlDatum(seedUrl, "account_search").meta("account", account);
 		addSeed(seed);
 	}
@@ -137,12 +154,4 @@ public class WxAccountCrawler extends BreadthCrawler {
 			}
 		}
 	}
-
-	public static void main(String[] args) throws Exception {
-		WxAccountCrawler crawler = new WxAccountCrawler("crawl_weixin", "wx_history.txt");
-		crawler.addAccount("ZEALER订阅号");
-		crawler.setThreads(5);
-		crawler.start(10);
-	}
-
 }
