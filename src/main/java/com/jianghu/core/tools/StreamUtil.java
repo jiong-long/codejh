@@ -55,7 +55,7 @@ public class StreamUtil {
 	 * @return
 	 * @throws Exception
 	 */
-	public String parse_String(InputStream inputStream) throws Exception {
+	public String parseString(InputStream inputStream) throws Exception {
 		ByteArrayOutputStream swapStream = new ByteArrayOutputStream();
 		int ch;
 		while ((ch = inputStream.read()) != -1) {
@@ -73,7 +73,7 @@ public class StreamUtil {
 	 * @return
 	 * @throws Exception
 	 */
-	public String parse_String(OutputStream out) throws Exception {
+	public String parseString(OutputStream out) throws Exception {
 		ByteArrayOutputStream baos = new ByteArrayOutputStream();
 		baos = (ByteArrayOutputStream) out;
 		ByteArrayInputStream swapStream = new ByteArrayInputStream(baos.toByteArray());
@@ -89,7 +89,7 @@ public class StreamUtil {
 	 * @return
 	 * @throws Exception
 	 */
-	public ByteArrayInputStream parse_inputStream(String in) throws Exception {
+	public ByteArrayInputStream parseInputStream(String in) throws Exception {
 		ByteArrayInputStream input = new ByteArrayInputStream(in.getBytes());
 		return input;
 	}
@@ -103,7 +103,7 @@ public class StreamUtil {
 	 * @return
 	 * @throws Exception
 	 */
-	public ByteArrayOutputStream parse_outputStream(String in) throws Exception {
-		return parse(parse_inputStream(in));
+	public ByteArrayOutputStream parseOutputStream(String in) throws Exception {
+		return parse(parseInputStream(in));
 	}
 }
