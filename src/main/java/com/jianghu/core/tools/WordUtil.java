@@ -9,7 +9,9 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStreamWriter;
 import java.io.Writer;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.apache.poi.POIXMLDocument;
@@ -17,6 +19,8 @@ import org.apache.poi.POIXMLTextExtractor;
 import org.apache.poi.hwpf.extractor.WordExtractor;
 import org.apache.poi.openxml4j.opc.OPCPackage;
 import org.apache.poi.xwpf.extractor.XWPFWordExtractor;
+
+import com.jianghu.core.tools.wordFile.WordUser;
 
 import freemarker.template.Configuration;
 import freemarker.template.Template;
@@ -39,12 +43,23 @@ public class WordUtil {
 
 	public static void main(String[] args) throws IOException, TemplateException {
 		Map<String, Object> dataMap = new HashMap<String, Object>();
-		dataMap.put("username", "张三");
-		dataMap.put("password", "123");
-		// 先在word中插入一张图片，生成xml后，图片变为BASE64编码后的一大段字符串，将该字符串变为${image}
-		dataMap.put("image", getImageStr("C:\\Users\\jinlong\\Desktop\\pic.img"));
+		List<WordUser> userList = new ArrayList<WordUser>();
+		userList.add(new WordUser("姓名", "密码"));
+		userList.add(new WordUser("张三", "1234"));
+		userList.add(new WordUser("李四", "1111"));
+		dataMap.put("userList", userList);
 
-		String fileName = "C:\\Users\\jinlong\\Desktop\\导出Word.doc";
+		List<String> listList = new ArrayList<String>();
+		listList.add("列表第一条记录");
+		listList.add("列表第二条记录");
+		listList.add("列表第三条记录");
+		dataMap.put("listList", listList);
+
+		// 先在word中插入一张图片，生成xml后，图片变为BASE64编码后的一大段字符串，将该字符串变为${img}
+		String imgPath = FileUtil.getProjectPath() + "\\src\\main\\java\\com\\jianghu\\core\\tools\\wordFile\\img.jpg";
+		dataMap.put("img", getImageStr(imgPath));
+
+		String fileName = FileUtil.getDeskPath() + "\\导出的Word.doc";
 		try {
 			createDoc(dataMap, fileName);
 		} catch (Exception e) {
@@ -67,10 +82,10 @@ public class WordUtil {
 	 */
 	public static void createDoc(Map<String, Object> dataMap, String fileName) throws Exception {
 		// 指定路径的第一种方式(根据某个类的相对路径指定)
-		// configuration.setClassForTemplateLoading(this.getClass(),"");
+		configuration.setClassForTemplateLoading(WordUtil.class, "");
 
 		// 指定路径的第二种方式,我的路径是C:/
-		configuration.setDirectoryForTemplateLoading(new File("C:\\Users\\jinlong\\Desktop\\"));
+		// configuration.setDirectoryForTemplateLoading(new File("C:\\Users\\jinlong\\Desktop\\"));
 
 		Template template = null;
 
@@ -79,7 +94,7 @@ public class WordUtil {
 		Writer out = null;
 		FileOutputStream fos = null;
 		try {
-			template = configuration.getTemplate("导出Word.xml");
+			template = configuration.getTemplate("wordFile/template.xml");
 			fos = new FileOutputStream(outFile);
 			OutputStreamWriter oWriter = new OutputStreamWriter(fos, "UTF-8");
 			out = new BufferedWriter(oWriter);
@@ -137,6 +152,8 @@ public class WordUtil {
 
 	/**
 	 * 获取图片BASE64编码后的字符串
+	 * 
+	 * 如果有多张图片需要遍历，注意替换w:binData和v:imagedata标签中的图片源，不能一致，否则导出的图片一样
 	 * 
 	 * @param imgFile
 	 * @return

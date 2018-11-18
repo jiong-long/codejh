@@ -47,8 +47,7 @@ public class FileUtil {
 				String[] str = string.split("src");
 				// 获取java文件对应的class文件位置
 				String fromPath = getClassPath + str[1].substring(1).replaceAll(".java", ".class");
-				String toPath = deskPath + "\\" + proName + fromPath.split(proName)[1] + proName
-						+ fromPath.split(proName)[2];
+				String toPath = deskPath + "\\" + proName + fromPath.split(proName)[1] + proName + fromPath.split(proName)[2];
 				// 判断该java有没有内部类
 				// No.1 去掉结尾的class
 				int lastSplit = fromPath.lastIndexOf(".");
@@ -210,6 +209,22 @@ public class FileUtil {
 			trueWorkSpace = getWorkSpaceFromPro(trueWorkSpace, proNam);
 		}
 		return trueWorkSpace + "\\" + proNam + "\\jiong\\WEB-INF\\classes\\";
+	}
+
+	/**
+	 * 获取项目路径
+	 * 
+	 * @return
+	 */
+	public static String getProjectPath() {
+		try {
+			File file = new File("");// 参数为空
+			//与getAbsolutePath()区别，该方法会把..\ or .\符号解析掉
+			return file.getCanonicalPath();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		return "";
 	}
 
 	/**
