@@ -13,6 +13,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 
+import org.apache.commons.beanutils.BeanUtils;
+
 /**
  * Database类
  * 
@@ -186,16 +188,22 @@ public class Database {
 					if (colsValue == null) {
 						colsValue = "";
 					}
+
+					// 该参数必须为实体类中的属性，oracle数据库中字段都是大写，所以要用字段去匹配实体类中的属性
 					for (Field field : fields) {
 						if (colsName.equalsIgnoreCase(field.getName())) {
 							colsName = field.getName();
 						}
 					}
-					// 该参数必须为实体类中的属性，oracle数据库中字段都是大写，所以要用字段去匹配实体类中的属性
-					Field filed = cls.getDeclaredField(colsName);
+
+					//Method1.使用beanUtile封装对象
+					BeanUtils.setProperty(resultObject, colsName, colsValue);
+
+					//Method2.自己封装对象
+					//Field filed = cls.getDeclaredField(colsName);
 					// 打开javabean=model的访问权限
-					filed.setAccessible(true);
-					filed.set(resultObject, colsValue);
+					//filed.setAccessible(true);
+					//filed.set(resultObject, colsValue);
 				}
 				list.add(resultObject);
 			}

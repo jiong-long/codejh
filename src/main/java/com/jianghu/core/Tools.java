@@ -23,8 +23,6 @@ import org.apache.commons.fileupload.FileItem;
 import org.apache.commons.fileupload.disk.DiskFileItemFactory;
 import org.apache.commons.fileupload.servlet.ServletFileUpload;
 import org.apache.struts2.ServletActionContext;
-import org.jsoup.Jsoup;
-import org.jsoup.safety.Whitelist;
 
 import flexjson.JSONSerializer;
 import net.sourceforge.pinyin4j.PinyinHelper;
@@ -168,18 +166,6 @@ public class Tools {
 			}
 		}
 		return returnFileUrl;
-	}
-
-	/**
-	 * 使用Whitelist对输入的Html文档过滤，只允许特定的标签或者属性，防止恶意代码。
-	 * 
-	 * @author wangjinlong
-	 * @creatTime 2017年9月28日 下午2:50:57
-	 * @param str
-	 * @return
-	 */
-	public static String removeHtml(String str) {
-		return Jsoup.clean(str, Whitelist.none());
 	}
 
 	/**
