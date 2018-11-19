@@ -1,4 +1,4 @@
-package com.jianghu.core.tools;
+package com.jianghu.core.func.exportWord;
 
 import java.io.BufferedWriter;
 import java.io.File;
@@ -20,7 +20,7 @@ import org.apache.poi.hwpf.extractor.WordExtractor;
 import org.apache.poi.openxml4j.opc.OPCPackage;
 import org.apache.poi.xwpf.extractor.XWPFWordExtractor;
 
-import com.jianghu.core.tools.wordFile.WordUser;
+import com.jianghu.core.tools.FileUtil;
 
 import freemarker.template.Configuration;
 import freemarker.template.Template;
@@ -56,7 +56,7 @@ public class WordUtil {
 		dataMap.put("listList", listList);
 
 		// 先在word中插入一张图片，生成xml后，图片变为BASE64编码后的一大段字符串，将该字符串变为${img}
-		String imgPath = FileUtil.getProjectPath() + "\\src\\main\\java\\com\\jianghu\\core\\tools\\wordFile\\img.jpg";
+		String imgPath = FileUtil.getProjectPath() + "\\src\\main\\java\\com\\jianghu\\core\\func\\exportWord\\img.jpg";
 		dataMap.put("img", getImageStr(imgPath));
 
 		String fileName = FileUtil.getDeskPath() + "\\导出的Word.doc";
@@ -94,7 +94,7 @@ public class WordUtil {
 		Writer out = null;
 		FileOutputStream fos = null;
 		try {
-			template = configuration.getTemplate("wordFile/template.xml");
+			template = configuration.getTemplate("template.xml");
 			fos = new FileOutputStream(outFile);
 			OutputStreamWriter oWriter = new OutputStreamWriter(fos, "UTF-8");
 			out = new BufferedWriter(oWriter);

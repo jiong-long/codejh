@@ -1,4 +1,4 @@
-package com.jianghu.core.tools.wordFile;
+package com.jianghu.core.func.exportWord;
 
 /**
  * word中表格已对象形式返回
