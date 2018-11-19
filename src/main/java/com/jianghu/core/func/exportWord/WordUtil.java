@@ -43,12 +43,14 @@ public class WordUtil {
 
 	public static void main(String[] args) throws IOException, TemplateException {
 		Map<String, Object> dataMap = new HashMap<String, Object>();
+		// 导出表格
 		List<WordUser> userList = new ArrayList<WordUser>();
 		userList.add(new WordUser("姓名", "密码"));
 		userList.add(new WordUser("张三", "1234"));
 		userList.add(new WordUser("李四", "1111"));
 		dataMap.put("userList", userList);
 
+		// 导出列表
 		List<String> listList = new ArrayList<String>();
 		listList.add("列表第一条记录");
 		listList.add("列表第二条记录");
@@ -94,6 +96,7 @@ public class WordUtil {
 		Writer out = null;
 		FileOutputStream fos = null;
 		try {
+			// 模板位置
 			template = configuration.getTemplate("template.xml");
 			fos = new FileOutputStream(outFile);
 			OutputStreamWriter oWriter = new OutputStreamWriter(fos, "UTF-8");
