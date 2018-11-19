@@ -1,4 +1,4 @@
-<%@page import="com.jianghu.core.func.Location"%>
+<%@page import="com.jianghu.core.func.single.Location"%>
 <%@page import="com.jianghu.domain.lucene.LuceneField"%>
 <%@page import="com.jianghu.core.tools.LuceneUtil"%>
 <%@page import="org.json.JSONArray"%>

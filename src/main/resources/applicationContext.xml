@@ -24,7 +24,7 @@
 	<!-- 定时器相关配置 -->
 	<!-- 报错Line: 230 - com/opensymphony/xwork2/spring/SpringObjectFactory.java:230:-1 -->
 	<!-- spring与quartz的版本不一致，需要更换版本 -->
-    <bean id="SpringQtzJob" class="com.jianghu.core.func.SpringQuartz"/>
+    <bean id="SpringQtzJob" class="com.jianghu.core.func.single.SpringQuartz"/>
     
     <bean id="SpringQtzJobMethod" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">  
 	    <property name="targetObject" ref="SpringQtzJob"/>  

@@ -22,6 +22,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.jianghu.core.Tools;
+import com.jianghu.core.func.beanUtils.MyBeanUtils;
 import com.jianghu.core.tools.DateUtil;
 import com.jianghu.domain.basic.Task;
 import com.jianghu.service.basic.TaskServices;
@@ -48,14 +49,9 @@ public class TaskAction {
 	 */
 	@RequestMapping("taskAction/save.htm")
 	public String save(HttpServletRequest request, HttpServletResponse response) throws ParseException {
-		Task task = new Task();
-
-		// TODO 前台自动注入bean
+		Task task = MyBeanUtils.requestToBean(request, Task.class);
 		String task_id = request.getParameter("task_id");
-		String task_content = request.getParameter("task_content");
-		String task_sta = request.getParameter("task_sta");
-		String task_res = request.getParameter("task_res");
-		String task_url = request.getParameter("task_url");
+
 		String begin_dtm_str = Tools.null2Empty(request.getParameter("begin_dtm"));
 		String end_dtm_str = Tools.null2Empty(request.getParameter("end_dtm"));
 		DateFormat df = new SimpleDateFormat("YYYY-MM-dd HH:mm:ss");
@@ -67,6 +63,7 @@ public class TaskAction {
 		}
 
 		if ("".equals(end_dtm_str)) {
+			String task_sta = Tools.null2Empty(request.getParameter("task_sta"));
 			if ("on".equals(task_sta)) {// 完成
 				task.setEnd_dtm(new Date());
 			} else {
@@ -75,11 +72,6 @@ public class TaskAction {
 		} else {
 			task.setEnd_dtm(df.parse(end_dtm_str));
 		}
-
-		task.setTask_content(task_content);
-		task.setTask_sta(task_sta);
-		task.setTask_res(task_res);
-		task.setTask_url(task_url);
 
 		if ("".equals(task_id)) {// 新建
 			task_id = taskServices.save(task);

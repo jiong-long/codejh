@@ -369,10 +369,10 @@ public class LuceneUtil {
 
 		Document document = new Document();
 		Field id = new Field("no", String.valueOf(luceneField.getNo()), Field.Store.YES, Field.Index.NOT_ANALYZED);
-		Field title = new Field("name", Tools.removeHtml(luceneField.getName()), Field.Store.YES, Field.Index.ANALYZED);
+		Field title = new Field("name", HtmlUtil.removeHtml(luceneField.getName()), Field.Store.YES, Field.Index.ANALYZED);
 		// 该字段为主要字段，计算得分的时候会比重会比较大
 		title.setBoost(10.0F);
-		Field content = new Field("content", Tools.removeHtml(luceneField.getContent()), Field.Store.YES, Field.Index.ANALYZED);
+		Field content = new Field("content", HtmlUtil.removeHtml(luceneField.getContent()), Field.Store.YES, Field.Index.ANALYZED);
 		document.add(id);
 		document.add(title);
 		document.add(content);
