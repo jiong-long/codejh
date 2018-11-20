@@ -238,6 +238,13 @@
 		    <scope>provided</scope>
 		</dependency>
 		
+		<!-- postgresql数据库驱动 -->
+		<dependency>
+		    <groupId>org.postgresql</groupId>
+		    <artifactId>postgresql</artifactId>
+		    <version>42.2.5</version>
+		</dependency>
+		
 		<!-- Http请求相关 begin -->
 		<dependency>
 		    <groupId>org.apache.httpcomponents</groupId>
