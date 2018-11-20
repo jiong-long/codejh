@@ -59,7 +59,7 @@ public class PicUtil {
 	}
 
 	/**
-	 * 按照比例进行压缩
+	 * 按照比例进行压缩(路径方式)
 	 * 
 	 * @param oldFilePath
 	 *            原图片地址（项目中的图片可以用相对路径 images/test.jpg）
@@ -71,6 +71,37 @@ public class PicUtil {
 	 */
 	public static void changeSize(String oldFilePath, String newFilePath, float size) throws IOException {
 		Thumbnails.of(oldFilePath).scale(size).toFile(newFilePath);
+	}
+
+	/**
+	 * 按照比例进行压缩(直接传文件方式)
+	 * 
+	 * @param oldFilePath
+	 *            原图片文件
+	 * @param newFilePath
+	 *            新图片文件
+	 * @param size
+	 *            0-1之间，按照比例缩小
+	 * @throws IOException
+	 */
+	public static void changeSize(File oldFile, String newFilePath, float size) throws IOException {
+		Thumbnails.of(oldFile).scale(size).toFile(newFilePath);
+	}
+
+	/**
+	 * 按照比例进行压缩(直接传文件方式)
+	 * 
+	 * @param oldFilePath
+	 *            原图片文件
+	 * @param newFilePath
+	 *            新图片文件
+	 * @param size
+	 *            0-1之间，按照比例缩小
+	 * @throws IOException
+	 */
+	public static void changeSize(File oldFile, File newFile, float size)
+			throws IOException {
+		Thumbnails.of(oldFile).scale(size).toFile(newFile);
 	}
 
 	/**
