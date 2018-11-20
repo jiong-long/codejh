@@ -26,20 +26,21 @@ public class PicUtil {
 	 */
 	public static void main(String[] args) throws IOException {
 		// changeSize("F:/123.jpg", "F:/111.jpg", 300, 300, true);
-		// changeSize("F:/123.jpg", "F:/111.jpg", 0.5f);
+		changeSize("F:/A77660F71FD746AD8D3A2DE51257E92A.png",
+				"F:/A77660F71FD746AD8D3A2DE51257E92A.png", 0.5f);
 		// rotateImg("F:/123.jpg", "F:/111.jpg", 190);
 		// watermark("F:/123.jpg", "F:/111.jpg", "F:/222.jpg", Positions.BOTTOM_RIGHT, 0.5f);
 		// sourceRegion("F:/123.jpg", "F:/111.jpg", Positions.BOTTOM_RIGHT, 1000, 1000);
 		// sourceRegion("F:/123.jpg", "F:/111.jpg", 1000, 1000, 1000, 1000);
 		// outputFormat("F:/123.jpg", "F:/111.png", "png");
-		BufferedImage image = asBufferedImage("F:/123.jpg");
-		System.out.println(image.getWidth());
-		System.out.println(image.getHeight());
+		// BufferedImage image = asBufferedImage("F:/123.jpg");
+		// System.out.println(image.getWidth());
+		// System.out.println(image.getHeight());
 	}
 
 	/**
 	 * 
-	 * 指定大小进行缩放
+	 * 指定大小进行压缩
 	 * 
 	 * @param oldFilePath
 	 *            原图片地址（项目中的图片可以用相对路径 images/test.jpg）
@@ -58,7 +59,7 @@ public class PicUtil {
 	}
 
 	/**
-	 * 按照比例进行缩放
+	 * 按照比例进行压缩
 	 * 
 	 * @param oldFilePath
 	 *            原图片地址（项目中的图片可以用相对路径 images/test.jpg）
