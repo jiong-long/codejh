@@ -52,9 +52,9 @@ public class WordUtil {
 
 		// 导出列表
 		List<String> listList = new ArrayList<String>();
-		listList.add("列表第一条记录");
-		listList.add("列表第二条记录");
-		listList.add("列表第三条记录");
+		listList.add(replaceIllegal("列表第一条记录&其他"));
+		listList.add(replaceIllegal("列表第二条记录"));
+		listList.add(replaceIllegal("列表第三条记录"));
 		dataMap.put("listList", listList);
 
 		// 先在word中插入一张图片，生成xml后，图片变为BASE64编码后的一大段字符串，将该字符串变为${img}
@@ -67,6 +67,19 @@ public class WordUtil {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+	}
+
+	/**
+	 * 去掉非法字符
+	 * 
+	 * @param str
+	 * @return
+	 */
+	private static String replaceIllegal(String str) {
+		if (str != null) {
+			return str.replaceAll("&", "&amp;");
+		}
+		return str;
 	}
 
 	/**
