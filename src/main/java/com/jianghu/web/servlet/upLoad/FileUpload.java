@@ -5,8 +5,10 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.OutputStream;
+import java.net.URLEncoder;
 
 import javax.servlet.ServletException;
+import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -121,4 +123,44 @@ public class FileUpload extends BaseServlet {
 	}
 
 	// TODO 多文件上传与显示与下载，包括数据库
+
+	/**
+	 * 文件下载
+	 * 
+	 * @param request
+	 * @param response
+	 * @throws ServletException
+	 * @throws IOException
+	 */
+	public void downloadFile(HttpServletRequest request, HttpServletResponse response) {
+		//处理请求  
+		//读取要下载的文件  
+		File f = new File("E:/好久不见.mp3");
+		if (f.exists()) {
+			FileInputStream fis = null;
+			ServletOutputStream out = null;
+			try {
+				fis = new FileInputStream(f);
+				String filename = URLEncoder.encode(f.getName(), "utf-8"); //解决中文文件名下载后乱码的问题  
+				byte[] b = new byte[fis.available()];
+				fis.read(b);
+				response.setCharacterEncoding("utf-8");
+				response.setHeader("Content-Disposition", "attachment; filename=" + filename + "");
+				//获取响应报文输出流对象  
+				out = response.getOutputStream();
+				out.write(b);
+				out.flush();
+			} catch (Exception e) {
+				e.printStackTrace();
+			} finally {
+				try {
+					fis.close();
+					out.close();
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+			}
+		}
+
+	}
 }
