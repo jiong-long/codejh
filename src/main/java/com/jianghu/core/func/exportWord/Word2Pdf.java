@@ -39,6 +39,8 @@ public class Word2Pdf {
 			}
 			// Dispatch.call(doc, "SaveAs", destFile, 17);
 			// Variant(8)其中8表示word转html;7表示word转txt;44表示Excel转html;17表示word转成pdf。。
+			// 如果报Invoke of : SaveAs,为服务器系统缺少软件Microsoft Save as PDF或 XPS，下载安装即可
+			// http://www.microsoft.com/downloads/zh-cn/details.aspx?FamilyID=4D951911-3E7E-4AE6-B059-A2E79ED87041
 			Dispatch.invoke(doc, "SaveAs", Dispatch.Method,
 					new Object[] { pdfFile, new Variant(17) }, new int[1]);
 		} catch (Exception e) {
