@@ -10,10 +10,10 @@ import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Enumeration;
 import java.util.List;
-import java.util.zip.ZipOutputStream;
 
 import org.apache.tools.zip.ZipEntry;
 import org.apache.tools.zip.ZipFile;
+import org.apache.tools.zip.ZipOutputStream;
 
 public class ZipUtil {
 	// 流操作缓冲区大小
@@ -102,6 +102,7 @@ public class ZipUtil {
 			BufferedInputStream bis = null;
 			BufferedOutputStream bos = new BufferedOutputStream(new FileOutputStream(zipName));
 			ZipOutputStream zipos = new ZipOutputStream(bos);
+			zipos.setEncoding("gbk");
 			byte data[] = new byte[BUFFER];
 			for (int i = 0; i < listFile.size(); i++) {
 				File file = listFile.get(i);
