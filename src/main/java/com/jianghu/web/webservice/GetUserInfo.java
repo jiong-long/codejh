@@ -30,8 +30,8 @@ public class GetUserInfo {
 			//对中文参数进行编码
 			String decode = Tools.getEncoding(username);
 			username = URLDecoder.decode(username, decode);
-			String sql = "select * from bc_user where infactname = ?";
-			ResultSet rs = Database.executeQuery(sql, username);
+			String sql = "select * from bc_user where infactname = ? or username = ?";
+			ResultSet rs = Database.executeQuery(sql, username, username);
 			while (rs.next()) {
 				jsonObject.put("id", rs.getString("id"));
 				jsonObject.put("username", rs.getString("username"));

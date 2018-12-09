@@ -14,7 +14,7 @@ import org.apache.http.client.HttpClient;
 import org.apache.http.client.entity.UrlEncodedFormEntity;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpPost;
-import org.apache.http.impl.client.DefaultHttpClient;
+import org.apache.http.impl.client.HttpClientBuilder;
 import org.apache.http.message.BasicNameValuePair;
 import org.apache.http.util.EntityUtils;
 
@@ -49,7 +49,8 @@ public class WebServiceUtil {
 				encoding = "UTF-8";
 			}
 			// 创建默认的httpClient实例
-			HttpClient httpclient = new DefaultHttpClient();
+			//HttpClient httpclient = new DefaultHttpClient();
+			HttpClient httpclient = HttpClientBuilder.create().build();
 			// 创建httpget
 			HttpGet httpget = new HttpGet(url);
 			// httpget.addHeader("Accept", "application/json");
@@ -107,7 +108,8 @@ public class WebServiceUtil {
 				encoding = "UTF-8";
 			}
 			// 创建httpclient对象
-			HttpClient client = new DefaultHttpClient();
+			//HttpClient client = new DefaultHttpClient();
+			HttpClient client = HttpClientBuilder.create().build();
 			// 创建post方式请求对象
 			HttpPost httpPost = new HttpPost(url);
 			// 装填参数
