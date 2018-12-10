@@ -12,6 +12,7 @@ import org.json.JSONObject;
 
 import com.jianghu.core.Database;
 import com.jianghu.core.Tools;
+import com.jianghu.core.tools.WebServiceUtil;
 
 @Produces("application/json")
 public class GetUserInfo {
@@ -37,8 +38,8 @@ public class GetUserInfo {
 				jsonObject.put("username", rs.getString("username"));
 				jsonObject.put("infactname", rs.getString("infactname"));
 			}
-			//对返回值进行编码
-			return URLDecoder.decode(jsonObject.toString(), decode);
+			//对返回值进行编码,加密
+			return WebServiceUtil.encrypt(URLDecoder.decode(jsonObject.toString(), decode));
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
