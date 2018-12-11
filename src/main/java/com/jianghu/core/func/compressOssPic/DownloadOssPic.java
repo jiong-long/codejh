@@ -26,9 +26,9 @@ public class DownloadOssPic {
 		// Setp1:下载文件
 		downLoadMaxFile(tableName, outPutPath);
 		// Step2:删除小文件
-		// deleteSmallFile(tableName, outPutPath, maxSize);
+		deleteSmallFile(tableName, outPutPath, maxSize);
 		// Step3:压缩文件
-		// comPressPic(tableName, outPutPath, maxSize);
+		comPressPic(tableName, outPutPath, maxSize);
 		// Step4:删除原始文件，去掉压缩后文件后缀名
 		deleteAndUpdate(tableName, outPutPath);
 	}
