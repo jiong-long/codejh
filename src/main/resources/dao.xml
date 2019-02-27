@@ -16,12 +16,12 @@
 	<bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource" destroy-method="close">
 		<!-- 驱动 -->
 		<property name="driverClass" value="${mysql.driver}"></property>
-		<!-- URL -->
-		<property name="jdbcUrl" value="${mysql.url}"></property>
-		<!-- 用户名 -->
-		<property name="user" value="${mysql.username}"></property>
-		<!-- 密码 -->
-		<property name="password" value="${mysql.password}"></property>
+		<!-- URL 
+		<property name="jdbcUrl" value="${mysql.url}"></property> -->
+		<!-- 用户名 
+		<property name="user" value="${mysql.username}"></property> -->
+		<!-- 密码 
+		<property name="password" value="${mysql.password}"></property> -->
 		<!-- 解决sqlite日期转换错误的问题 
 		<property name="properties">
 	    	<map value-type="java.lang.String" key-type="java.lang.String">
@@ -36,7 +36,20 @@
 		<property name="initialPoolSize" value="${mysql.initPoolSize}"></property> -->
 		<!-- 最大空闲时间 
 		<property name="maxIdleTime" value="${mysql.maxIdleTime}"></property> -->
+		
+		<property name="properties" ref="dataSourceProperties"/> 
 	</bean>
+	
+	<!-- 数据库连接信息需要加密处理 -->
+	<bean id="dataSourceProperties" class="com.jianghu.dao.hibernate.PropertiesEncryptFactoryBean">  
+        <property name="properties">  
+            <props>  
+                <prop key="user">${mysql.username}</prop>  
+                <prop key="password">${mysql.password}</prop>  
+                <prop key="jdbcUrl">${mysql.url}</prop>  
+            </props>  
+        </property>  
+    </bean>  
 	
 	<bean id="sessionFactory" class="org.springframework.orm.hibernate3.annotation.AnnotationSessionFactoryBean">
 		<property name="dataSource" ref="dataSource"></property>

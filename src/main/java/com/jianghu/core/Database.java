@@ -15,6 +15,8 @@ import java.util.ResourceBundle;
 
 import org.apache.commons.beanutils.BeanUtils;
 
+import com.jianghu.core.tools.EncryptUtil;
+
 /**
  * Database类
  * 
@@ -30,9 +32,9 @@ public class Database {
 	static {
 		ResourceBundle bundle = ResourceBundle.getBundle("jdbc");
 		DRIVERCLASS = bundle.getString("mysql.driver");
-		URL = bundle.getString("mysql.url");
-		USERNAME = bundle.getString("mysql.username");
-		PSW = bundle.getString("mysql.password");
+		URL = EncryptUtil.decrypt(bundle.getString("mysql.url"));
+		USERNAME = EncryptUtil.decrypt(bundle.getString("mysql.username"));
+		PSW = EncryptUtil.decrypt(bundle.getString("mysql.password"));
 	}
 
 	public static void main(String[] args) throws Exception {
