@@ -114,6 +114,7 @@ public class WxAccountCrawler extends BreadthCrawler {
 
 			}
 		} catch (Exception e) {
+			e.printStackTrace();
 		}
 	}
 
