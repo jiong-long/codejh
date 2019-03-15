@@ -26,9 +26,7 @@
   	<link rel="stylesheet" href="/jiong/js/JqueryUI/style.css">
   	<script src="/jiong/js/JqueryUI/jquery-ui.js"></script>
   	
-  	<link rel="stylesheet" href="/jiong/page/3D/css/public.css" />
 	<link rel="stylesheet" href="/jiong/page/3D/css/index.css" />
-	<script src="/jiong/page/3D/js/zturn.js"></script>
 
 	<script src="/jiong/js/core/jianghu.js"></script>
   	
@@ -107,9 +105,8 @@
 	</div>
 	
 	<%
-		//TODO 首页图形只有1个2个的时候，显示不正常
 		StringBuffer buffer = new StringBuffer();
-		buffer.append("<div class='lb_gl'><ul id='zturn' class='poster-list'>");
+		buffer.append("<div class='lb_gl'><ul id='zturn' class='poster-list1'>");
 		String idStr = "";
 		if(!"".equals(params)){//有条件使用lucene搜索
 			LuceneUtil luceneUtil = LuceneUtil.instance();
@@ -138,30 +135,18 @@
 			}else{
 				img_path = "/jiong/images/item/" + img_path;
 			}
-			buffer.append("<li class='poster-item zturn-item'><p class='xxgy' onclick='gotoItem("+id+")'>"+itemname+
-					"</p><div class='for_btn'>"+
-				"<img src='"+img_path+"' width='100%'></div><div class='students_star'><p class='cell_list'>"+
+			buffer.append("<li class='poster-item1 zturn-item'><p class='xxgy' onclick='gotoItem("+id+")'>"+itemname+
+					"</p><div class='for_btn1'>"+
+				"<img src='"+img_path+"' width='100%'></div><div class='students_star'><p class='cell_list1'>"+
 				"<span class='lf'>更新日期：<span class='darks'>"+updatetime+"</span></span></p><p "+
-				"class='cell_list'><span class=''>查看次数 ：<span class='darks'>"+seecount+
+				"class='cell_list1'><span class=''>查看次数：<span class='darks'>"+seecount+
 				"</span></span></p><div class='zwjs'>"+itemdsc+"</div></div></li>");
 		}
 		Database.closeresouce(rs);
 		buffer.append("</ul></div>");
 		out.println(buffer.toString());
-		
 	%>
-	<!-- 右侧开始 -->
-	<div class="izl-rmenu">
-	    <a class="consult" target="_blank">
-	    	<span class="phone" style="display:none;">180 6166 9891</span>
-	    </a>    
-	    <a class="cart">
-	    	<span class="pic"></span>
-	    </a>   
-	    <a href="javascript:void(0)" class="btn_top" style="display: block;"></a>
-	</div>
-	<a target="_blank" href="http://wpa.qq.com/msgrd?v=3&uin=903023764&site=qq&menu=yes" id="udesk-feedback-tab" class="udesk-feedback-tab-left" style="display: block; background-color: black;"></a>
-	<!-- 右侧结束 -->
+	
 	<script type="text/javascript" src="/jiong/index.js"></script>
 </body>
 </html>

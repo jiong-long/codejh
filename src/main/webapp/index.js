@@ -1,18 +1,3 @@
-var aa = new zturn({
-	id : "zturn",
-	opacity : 0.9,
-	width : 382,
-	Awidth : 1024,
-	scale : 0.9
-});
-var ab = new zturn({
-	id : "zturn2",
-	opacity : 0.8,
-	width : 382,
-	Awidth : 1024,
-	scale : 0.6
-});
-
 //返回首页
 function toIndexPage() {
 	window.location.href = "/jiong/index.html";
