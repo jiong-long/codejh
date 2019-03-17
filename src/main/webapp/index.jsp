@@ -117,11 +117,10 @@
 		}
 		//sqlite 日期装换 strftime('%Y-%m-%d', updatetime,'localtime') updatetime
 		String getAllSql = "select id, itemname, itemdsc, seecount, date_format(updatetime,'%Y-%m-%d') updatetime, img_path from bc_item ";
-		if("".equals(idStr)){
-			getAllSql += " order by updateTime desc";
-		}else{
-			getAllSql += " where id in("+idStr.substring(1)+") order by updateTime desc";
+		if(!"".equals(idStr)){
+			getAllSql += " where id in("+idStr.substring(1)+")";
 		}
+		getAllSql += " order by updateTime desc";
 		ResultSet rs = Database.executeQuery(getAllSql);
 		while(rs.next()){
 			String id = rs.getString("id");
