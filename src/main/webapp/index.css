@@ -1,6 +1,6 @@
 .jumbotron1{
 	padding-top: 35px;
-	padding-bottom: 25px;
+	padding-bottom: 40px;
 	margin-bottom: 0px;
 }
 
@@ -17,9 +17,7 @@
 }
 
 .input-group{
-	width: 40%;
 	margin: 0 auto; 
-	margin-top: 60px;
 }
 
 .pageTop{
@@ -38,7 +36,7 @@
 	float: right;
 	margin-right: 60px;
 	margin-top: 25px;
-	margin-bottom: 25px;
+	margin-bottom: 10px;
 	color: white;
 	cursor: pointer;
 }

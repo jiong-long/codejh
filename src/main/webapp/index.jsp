@@ -67,6 +67,13 @@
 			</div>
 			<div class="topToolBar">
 				<ul class="nav navbar-nav navbar-right">
+					<li class="liClass" style="width: 300px;">
+						<div class="input-group">
+							<!-- 触发键盘enter点击事件 -->
+					   		<input type="text" class="form-control input-lg" style="height: 30px;" id="titleContent" value="<%=params %>" onkeydown="javascript:if(event.keyCode==13) searchClick();"/>
+					   		<span class="input-group-addon btn btn-primary" onclick="searchClick()">搜索</span>
+						</div>
+					</li>
 					<li class="liClass" id="add">增加</li>
 					<%
 						//获取session中的用户
@@ -97,14 +104,13 @@
 				</ul>
 			</div>
 		</div>
-		<div class="input-group">
-			<!-- 触发键盘enter点击事件 -->
-	   		<input type="text" class="form-control input-lg" id="titleContent" value="<%=params %>" onkeydown="javascript:if(event.keyCode==13) searchClick();"/>
-	   		<span class="input-group-addon btn btn-primary" onclick="searchClick()">搜索</span>
-		</div>
 	</div>
 	
 	<%
+		//取查看次数最多的5条记录,获取第五条记录的查看次数
+		String getMinSql = "select min(seecount) from (select seecount from bc_item order by seecount desc limit 0,5) t";
+		int minCount = Integer.parseInt(Database.getUniqueStringValue(getMinSql));
+	
 		StringBuffer buffer = new StringBuffer();
 		buffer.append("<div class='lb_gl'><ul id='zturn' class='poster-list1'>");
 		String idStr = "";
@@ -126,7 +132,7 @@
 			String id = rs.getString("id");
 			String itemname = rs.getString("itemname");
 			String itemdsc = Tools.null2Empty(rs.getString("itemdsc"));
-			String seecount = rs.getString("seecount");
+			int seecount = rs.getInt("seecount");
 			String updatetime = rs.getString("updatetime");
 			String img_path = Tools.null2Empty(rs.getString("img_path"));
 			if("".equals(img_path)){
@@ -134,9 +140,12 @@
 			}else{
 				img_path = "/jiong/images/item/" + img_path;
 			}
-			buffer.append("<li class='poster-item1 zturn-item'><p class='xxgy' onclick='gotoItem("+id+")'>"+itemname+
-					"</p><div class='for_btn1'>"+
-				"<img src='"+img_path+"' width='100%'></div><div class='students_star'><p class='cell_list1'>"+
+			buffer.append("<li class='poster-item1 zturn-item'><p class='xxgy' onclick='gotoItem("+id+")'>"+itemname);
+			if(seecount >= minCount){//超过第五条的记录增加标识
+				buffer.append("<img src='/jiong/images/hot.gif'/>");
+			}
+			buffer.append("</p><div class='for_btn1'><img src='"+img_path+"' width='100%'>"+
+				"</div><div class='students_star'><p class='cell_list1'>"+
 				"<span class='lf'>更新日期：<span class='darks'>"+updatetime+"</span></span></p><p "+
 				"class='cell_list1'><span class=''>查看次数：<span class='darks'>"+seecount+
 				"</span></span></p><div class='zwjs'>"+itemdsc+"</div></div></li>");
