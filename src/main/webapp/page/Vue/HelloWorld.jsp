@@ -8,7 +8,8 @@
 <script src="/jiong/js/Vue/vue.js"></script>
 </head>
 <body>
-	<div id="app">
+	<!-- v-once 只允许赋值一次，后续不允许改变 -->
+	<div id="app" v-once>
         {{ message }}
     </div>
     
