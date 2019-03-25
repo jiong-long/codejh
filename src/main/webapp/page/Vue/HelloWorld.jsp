@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Vue</title>
+<title>基础</title>
 <script src="/jiong/js/Vue/vue.js"></script>
 </head>
 <body>
