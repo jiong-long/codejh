@@ -8,6 +8,7 @@
 <script src="/jiong/js/Vue/vue.js"></script>
 </head>
 <body>
+	<!-- 计算属性 -->
 	<div id="example">
 	  	<p>Original message: "{{ message }}"</p>
 	  	<p>Computed reversed message: "{{ reversedMessage }}"</p>
@@ -21,9 +22,44 @@
   		<p>{{ answer }}</p>
 	</div>
 	
+	<!-- if语句 -->
+	<div id="app">
+	    <div v-if="Math.random() > 0.5">
+	      Sorry
+	    </div>
+	    <div v-else>
+	      Not sorry
+	    </div>
+	</div>
+	
+	<!-- 循环语句 -->
+	<div id="app1">
+	  <ol>
+	    <li v-for="site in sites">
+	      {{ site.name }}
+	    </li>
+	  </ol>
+	</div>
+	
 	<script src="https://cdn.jsdelivr.net/npm/axios@0.12.0/dist/axios.min.js"></script>
 	<script src="https://cdn.jsdelivr.net/npm/lodash@4.13.1/lodash.min.js"></script>
 	<script type="text/javascript">
+		new Vue({
+			el: '#app'
+		})
+		
+		new Vue({
+		  el: '#app1',
+		  data: {
+		    sites: [
+		      { name: 'Runoob' },
+		      { name: 'Google' },
+		      { name: 'Taobao' }
+		    ]
+		  }
+		})
+		
+		
 		var watchExampleVM = new Vue({
 		  el: '#watch-example',
 		  data: {
