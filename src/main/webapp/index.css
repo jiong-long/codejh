@@ -108,7 +108,7 @@ a.list-group-item{
 	margin-left: 0.5%;
 	margin-right: 0.5%;
 	margin-top: 15px;
-	width: 19%;
+	max-width: 240px;
 	background: #fff;
 	height: 325px;
 	border-radius: 10px;
