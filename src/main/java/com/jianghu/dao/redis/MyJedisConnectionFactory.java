@@ -461,7 +461,7 @@ public class MyJedisConnectionFactory implements InitializingBean, DisposableBea
 
 	private Jedis getActiveSentinel() {
 
-		Assert.notNull(this.sentinelConfig);
+		Assert.notNull(this.sentinelConfig, "this argument is required; it must not be null");
 		for (RedisNode node : this.sentinelConfig.getSentinels()) {
 			Jedis jedis = new Jedis(node.getHost(), node.getPort());
 			if (jedis.ping().equalsIgnoreCase("pong")) {

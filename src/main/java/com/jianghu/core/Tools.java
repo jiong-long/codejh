@@ -119,7 +119,6 @@ public class Tools {
 			// 解决中文附件名乱码的问题
 			fileUpload.setHeaderEncoding("utf-8");
 			try {
-				@SuppressWarnings("unchecked")
 				List<FileItem> list = fileUpload.parseRequest(request);
 				if (list == null) {
 					return "1没有上传文件";
