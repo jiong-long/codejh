@@ -35,6 +35,7 @@ public class Consumer {
                                        AMQP.BasicProperties properties, byte[] body) throws IOException {
                 String message = new String(body, "UTF-8");
                 System.out.println(" [消费者2] Received '" + message + "'");
+                channel.basicAck(envelope.getDeliveryTag(), false);
             }
         };
 

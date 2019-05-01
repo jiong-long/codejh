@@ -1,9 +1,14 @@
 package com.jianghu.other.RabbitMQ.Work;
 
+import java.io.IOException;
+
 import com.jianghu.other.RabbitMQ.RabbitTools;
+import com.rabbitmq.client.AMQP;
 import com.rabbitmq.client.Channel;
 import com.rabbitmq.client.Connection;
-import com.rabbitmq.client.QueueingConsumer;
+import com.rabbitmq.client.Consumer;
+import com.rabbitmq.client.DefaultConsumer;
+import com.rabbitmq.client.Envelope;
 
 /**
  * 消费者1
@@ -26,23 +31,23 @@ public class Consumer1 {
 		// 同一时刻服务器只会发一条消息给该消费者(能者多劳模式)
 		// 该消费者在接收到队列里的消息但没有返回确认结果之前,服务器不会将新的消息分发给它。
 		channel.basicQos(1);
-
+		
+		
 		// 定义队列的消费者
-		QueueingConsumer consumer = new QueueingConsumer(channel);
-		//监听队列，false:不自动返回ack包,下面手动返回。 如果不回复，消息不会在服务器删除
-		channel.basicConsume(QUEUE_NAME, false, consumer);
+		Consumer consumer = new DefaultConsumer(channel) {
+            @Override
+            public void handleDelivery(String consumerTag, Envelope envelope,
+                                       AMQP.BasicProperties properties, byte[] body) throws IOException {
+                String message = new String(body, "UTF-8");
+                System.out.println(" [消费者1] Received '" + message + "'");
+                channel.basicAck(envelope.getDeliveryTag(), false);
+            }
+        };
 
-		// 获取消息
-		while (true) {
-			QueueingConsumer.Delivery delivery = consumer.nextDelivery();
-			String message = new String(delivery.getBody());
-			System.out.println(" [消费者1] Received '" + message + "'");
-			//休眠
-			Thread.sleep(10);
-			// 手动返回ack包确认状态
-			channel.basicAck(delivery.getEnvelope().getDeliveryTag(), false);
-			//可以通过这两个函数拒绝消息，可以指定消息在服务器删除还是继续投递给其他消费者
-			//channel.basicReject(); channel.basicNack(); 
-		}
+		//监听队列
+		//参数1：队列名称
+		//参数2：是否发送ack包，不发送ack消息会持续在服务端保存，直到收到ack。可以通过channel.basicAck手动回复ack，见Work模式下的Consumer1.java
+		//参数3：消费者
+		channel.basicConsume(QUEUE_NAME, false, consumer);
 	}
 }

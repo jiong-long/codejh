@@ -1,9 +1,15 @@
 package com.jianghu.other.RabbitMQ.topic;
 
+import java.io.IOException;
+
+import com.jianghu.core.tools.Log;
 import com.jianghu.other.RabbitMQ.RabbitTools;
+import com.rabbitmq.client.AMQP;
 import com.rabbitmq.client.Channel;
 import com.rabbitmq.client.Connection;
-import com.rabbitmq.client.QueueingConsumer;
+import com.rabbitmq.client.Consumer;
+import com.rabbitmq.client.DefaultConsumer;
+import com.rabbitmq.client.Envelope;
 
 public class Consumer2 {
 
@@ -27,17 +33,25 @@ public class Consumer2 {
 		channel.basicQos(1);
 
 		// 定义队列的消费者
-		QueueingConsumer consumer = new QueueingConsumer(channel);
-		// 监听队列，手动返回完成
-		channel.basicConsume(QUEUE_NAME, false, consumer);
+		Consumer consumer = new DefaultConsumer(channel) {
+            @Override
+            public void handleDelivery(String consumerTag, Envelope envelope,
+                                       AMQP.BasicProperties properties, byte[] body) throws IOException {
+                String message = new String(body, "UTF-8");
+                System.out.println(" [物流系统] Received '" + message + "'");
+                channel.basicAck(envelope.getDeliveryTag(), false);
+                try {
+					Thread.sleep(10);
+				} catch (InterruptedException e) {
+					Log.error(e);
+				}
+            }
+        };
 
-		// 获取消息
-		while (true) {
-			QueueingConsumer.Delivery delivery = consumer.nextDelivery();
-			String message = new String(delivery.getBody());
-			System.out.println(" [物流系统] Received '" + message + "'");
-			Thread.sleep(10);
-			channel.basicAck(delivery.getEnvelope().getDeliveryTag(), false);
-		}
+		//监听队列
+		//参数1：队列名称
+		//参数2：是否发送ack包，不发送ack消息会持续在服务端保存，直到收到ack。可以通过channel.basicAck手动回复ack，见Work模式下的Consumer1.java
+		//参数3：消费者
+		channel.basicConsume(QUEUE_NAME, true, consumer);
 	}
 }
