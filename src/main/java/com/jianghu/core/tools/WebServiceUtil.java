@@ -14,20 +14,37 @@ import org.apache.http.client.HttpClient;
 import org.apache.http.client.entity.UrlEncodedFormEntity;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpPost;
+import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.HttpClientBuilder;
 import org.apache.http.message.BasicNameValuePair;
 import org.apache.http.util.EntityUtils;
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 public class WebServiceUtil {
 	//编码方式
 	private static final String CODE_TYPE = "UTF-8";
 
-	public static void main(String[] args) throws IOException {
+	public static void main(String[] args) throws IOException, JSONException {
 		String url = "http://localhost:8080/jiong/webservice/getUserInfo";
+		
+		//Params方式
 		Map<String, String> map = new HashMap<String, String>();
 		map.put("username", "王五");
-		//解密
 		System.out.println(sendPost(url, map));
+		
+		//Raw方式，就是拼接成普通的字符串传递
+		JSONArray array = new JSONArray();
+		array.put("cpmoid_txt");
+		array.put("cpmoid");
+		JSONObject object = new JSONObject();
+		object.put("userKey", "96a5edd5-401c-4c74-be68-3bd0513d701b");
+		object.put("dataSource", "ennshare_hr");
+		object.put("dataTable", "hr_employee_delta_h");
+		object.put("queryType", "query");
+		object.put("returnFields", array);
+		System.out.println(sendPost(url, object.toString()));
 	}
 
 	/**
@@ -91,6 +108,48 @@ public class WebServiceUtil {
 	 */
 	public static String sendPost(String url, Map<String, String> map) {
 		return sendPost(url, map, "");
+	}
+	
+	/**
+	 * POST请求webservice
+	 * 
+	 * @param url
+	 *            地址
+	 * @param map
+	 *            参数
+	 * @param encoding
+	 *            编码（为空就是UTF-8）
+	 * @return
+	 * @throws IOException
+	 */
+	public static String sendPost(String url, String params) {
+		String returnStr = "";
+		try {
+			// 创建httpclient对象
+			HttpClient client = HttpClientBuilder.create().build();
+			// 创建post方式请求对象
+			HttpPost httpPost = new HttpPost(url);
+			// 设置参数到请求对象中
+			StringEntity stringEntity = new StringEntity(params, "UTF-8");  
+			httpPost.setEntity(stringEntity);
+			System.out.println("请求地址：" + url);
+			System.out.println("请求参数：" + params);
+			// 设置header信息
+			httpPost.setHeader("Content-type", "application/json");
+			// 执行请求操作，并拿到结果（同步阻塞）
+			HttpResponse response = client.execute(httpPost);
+			// 获取结果实体
+			HttpEntity entity = response.getEntity();
+			if (entity != null) {
+				// 按指定编码转换结果实体为String类型
+				returnStr = EntityUtils.toString(entity, "UTF-8");
+			}
+			// 销毁
+			EntityUtils.consume(entity);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return returnStr;
 	}
 
 	/**
