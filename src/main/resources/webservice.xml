@@ -17,10 +17,17 @@
 		<import resource="classpath:META-INF/cxf/cxf-servlet.xml"/>
 	-->
 	
+	<!-- =========================================Rest satrt============================================= -->	
 	<bean id="getUserInfo" class="com.jianghu.web.webservice.GetUserInfo" />  
     <jaxrs:server id="getUserInfoServer" address="/getUserInfo">  
         <jaxrs:serviceBeans>  
             <ref bean="getUserInfo" />  
         </jaxrs:serviceBeans>  
     </jaxrs:server>
+    
+    <!-- =========================================SOAP satrt============================================= -->	
+	<!-- 客户创建接口 -->
+	<jaxws:endpoint id="customerImpl" implementor="com.jianghu.web.webservice.soap.CustomerImpl"
+		address="/customerImpl">
+	</jaxws:endpoint>
 </beans>  
