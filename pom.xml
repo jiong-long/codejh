@@ -362,7 +362,6 @@
 			<groupId>org.apache.tomcat.embed</groupId>
 			<artifactId>tomcat-embed-websocket</artifactId>
 			<version>7.0.52</version>
-			<scope>test</scope>
 		</dependency>
 		
 		<!-- oracle 数据库驱动 -->
@@ -370,7 +369,6 @@
 		    <groupId>com.oracle</groupId>
 		    <artifactId>ojdbc6</artifactId>
 		    <version>12.1.0.1-atlassian-hosted</version>
-		    <scope>test</scope>
 		</dependency>
 		
 		<!-- 定时任务 -->
@@ -539,7 +537,6 @@
 		    <groupId>org.springframework</groupId>
 		    <artifactId>spring-test</artifactId>
 		    <version>4.1.9.RELEASE</version>
-		    <scope>test</scope>
 		</dependency>
 		<!-- Spring end -->
 	
@@ -712,7 +709,6 @@
 			<groupId>junit</groupId>
 			<artifactId>junit</artifactId>
 			<version>4.12</version>
-			<scope>test</scope>
 		</dependency>
 	</dependencies>
 	<build>
