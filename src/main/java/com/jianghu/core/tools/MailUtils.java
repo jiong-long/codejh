@@ -39,22 +39,24 @@ public class MailUtils {
 		prop.load(MailUtils.class.getClassLoader().getResourceAsStream("email.properties"));
 
 		String host = prop.getProperty("host");
-		String username = prop.getProperty("username");
-		String password = prop.getProperty("password");
+		String username = EncryptUtil.decrypt(prop.getProperty("username"));
+		String password = EncryptUtil.decrypt(prop.getProperty("password"));
 		Session session = MailUtils.createSession(host, username, password);
-		String from = prop.getProperty("from");
+		String from = EncryptUtil.decrypt(prop.getProperty("from"));
 
 		// 主题
 		String subject = "会议通知";
 		// 内容
-		String content = "召开会议通知    大家好，明天下午（1月9日.周六）3点，请有时间的协会管理和新老志愿者到市政协一楼开会， 会议内容：一、关于协会申请天使助学金入选的情况通报，二、关于协会入选河南省温暖2009先进集体候选人的通报，三、协会近期主要工作。    本次会议暂定1-1.5小时结束，不延长时间。 注意事项：在规定时间内超过十分钟未到的志愿者拒绝参加。大家可以发表意见和建议。";
+		String content = "召开会议通知    大家好，明天下午（1月9日.周六）3点，请有时间的协会管理和新老志愿者到市政协一楼开会， " +
+                "会议内容：一、关于协会申请天使助学金入选的情况通报，二、关于协会入选河南省温暖2009先进集体候选人的通报，三、协会近期主要工作。    " +
+                "本次会议暂定1-1.5小时结束，不延长时间。 注意事项：在规定时间内超过十分钟未到的志愿者拒绝参加。大家可以发表意见和建议。";
 		// 收件人
-		String to = "wangjinlong@luculent.net";
+		String to = "jiong_long@163.com";
 
 		Mail mail = new Mail(from, to, subject, content);
 
 		// 附件,fileName必须有后缀名，否则文件没有后缀
-		AttachBean attachBean = new AttachBean("F:\\BIM\\bimserverwar-1.5.76.war", "bimserverwar-1.5.76.war");
+		AttachBean attachBean = new AttachBean("/Users/wangjinlong/default-soapui-workspace.xml", "default-soapui-workspace.xml");
 		mail.addAttach(attachBean);
 		// AttachBean attachBean2 = new AttachBean(new
 		// File("F:\\反编译插件\\安装过程.docx"), "安装过程.docx");

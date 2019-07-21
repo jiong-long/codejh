@@ -690,12 +690,12 @@
 		</dependency>
 		<!-- webservice end-->
 	
-		<!-- c3p0数据库连接池 -->
+		<!-- c3p0数据库连接池
 		<dependency>
 		    <groupId>c3p0</groupId>
 		    <artifactId>c3p0</artifactId>
 		    <version>0.9.1.2</version>
-		</dependency>
+		</dependency> -->
 	
 		<!-- log4j日志管理 -->
 		<dependency>
@@ -709,6 +709,12 @@
 			<groupId>junit</groupId>
 			<artifactId>junit</artifactId>
 			<version>4.12</version>
+		</dependency>
+		<dependency>
+			<groupId>org.jetbrains</groupId>
+			<artifactId>annotations</artifactId>
+			<version>RELEASE</version>
+			<scope>compile</scope>
 		</dependency>
 	</dependencies>
 	<build>

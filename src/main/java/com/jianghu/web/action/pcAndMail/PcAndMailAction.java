@@ -18,6 +18,7 @@ import javax.mail.MessagingException;
 import javax.mail.Session;
 import javax.servlet.http.HttpServletRequest;
 
+import com.jianghu.core.tools.EncryptUtil;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.struts2.ServletActionContext;
 
@@ -181,9 +182,9 @@ public class PcAndMailAction extends ActionSupport implements ModelDriven<Pagina
 					// 利用类加载器获取src下配置文件的方法
 					prop.load(this.getClass().getClassLoader().getResourceAsStream("email.properties"));
 
-					String host = prop.getProperty("host");
-					String username = prop.getProperty("username");
-					String password = prop.getProperty("password");
+					String host =  prop.getProperty("host");
+					String username = EncryptUtil.decrypt(prop.getProperty("username"));
+					String password = EncryptUtil.decrypt(prop.getProperty("password"));
 					Session session = MailUtils.createSession(host, username, password);
 
 					// 主题
@@ -191,7 +192,7 @@ public class PcAndMailAction extends ActionSupport implements ModelDriven<Pagina
 					// 内容
 					String content = "有人的地方就有江湖";
 					// 发件人
-					String from = prop.getProperty("from");
+					String from = EncryptUtil.decrypt(prop.getProperty("from"));
 					// 收件人
 					String to = mailsStr[i];
 					Mail mail = new Mail(from, to, subject, content);

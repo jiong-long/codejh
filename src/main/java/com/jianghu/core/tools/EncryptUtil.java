@@ -22,11 +22,11 @@ public class EncryptUtil {
 	private static final String AES_TYPE = "AES/ECB/PKCS5Padding";
 
 	//私钥
-	private static final String AES_KEY = "QWERTYUIOPASDFGH";//16位
+	private static final String AES_KEY = "1111111111111111";//16位
 	//AES固定格式为128/192/256 bits 即：16/24/32 Bytes. DES固定格式为128bits 即8Bytes
 
 	public static void main(String[] args) throws IOException {
-		System.out.println(encrypt("jdbc:mysql://localhost:3306/jianghu"));
+		System.out.println(encrypt("903023764"));
 	}
 
 	/**
@@ -43,7 +43,7 @@ public class EncryptUtil {
 			//实例化加密类，参数为加密方式
 			Cipher cipher = Cipher.getInstance(AES_TYPE);
 			//初始化，此方法可以采用三种方式，按加密算法要求来添加。
-			//1、无第三个参数
+			//1、无第三个参数encrypt
 			//2、第三个参数为SecureRandom random = new SecureRandom();中random对象，随机数（AES不可采用这种方式）
 			//3、采用此代码中的IvParameterSpec
 			//加密时使用ENCRYPT_MODE，解密时使用DECRYPT_MODE
