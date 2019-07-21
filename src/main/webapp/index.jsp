@@ -154,7 +154,7 @@
 		buffer.append("</ul></div>");
 		out.println(buffer.toString());
 	%>
-	
+
 	<script type="text/javascript" src="/jiong/index.js"></script>
 </body>
 </html>
