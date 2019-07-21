@@ -26,7 +26,7 @@ public class EncryptUtil {
 	//AES固定格式为128/192/256 bits 即：16/24/32 Bytes. DES固定格式为128bits 即8Bytes
 
 	public static void main(String[] args) throws IOException {
-		System.out.println(encrypt("jdbc:mysql://localhost:3306/jianghu"));
+		System.out.println(encrypt("903023764"));
 	}
 
 	/**
