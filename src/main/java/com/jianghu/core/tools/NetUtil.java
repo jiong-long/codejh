@@ -138,6 +138,7 @@ public class NetUtil {
 		InputStream in = null;
 		// 到外网提供者的Http连接
 		HttpURLConnection httpConn = null;
+		StringBuffer sb = new StringBuffer();
 		try {
 			// 打开连接
 			URL url = new URL(urlString);
@@ -147,20 +148,12 @@ public class NetUtil {
 			httpConn.setRequestMethod("GET");
 			httpConn.setRequestProperty("User-Agent", "Mozilla/4.0 (compatible; MSIE 6.0; Windows 2000)");
 			// 获取连接的输入流
-			in = httpConn.getInputStream();
-			byte[] bytes = new byte[in.available()];// 此大小可根据实际情况调整
-			// 读取到数组中
-			int offset = 0;
-			int numRead = 0;
-			while (offset < bytes.length && (numRead = in.read(bytes, offset, bytes.length - offset)) >= 0) {
-				offset += numRead;
+			BufferedReader br = new BufferedReader(new InputStreamReader(httpConn.getInputStream(),"UTF-8"));
+			String strContent = null;
+			while((strContent = br.readLine()) != null){
+				sb.append(strContent);
 			}
-			// 将字节转化为为UTF-8的字符串
-			String receivedString = new String(bytes, "UTF-8");
-			// 返回
-			return receivedString;
-		} catch (MalformedURLException e) {
-			e.printStackTrace();
+			return sb.toString();
 		} catch (IOException e) {
 			e.printStackTrace();
 		} finally {
