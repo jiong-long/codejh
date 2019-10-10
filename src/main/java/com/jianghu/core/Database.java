@@ -375,7 +375,7 @@ public class Database {
 	 *            可变参数
 	 * @throws Exception
 	 */
-	public static void executeUpdate(String sql, Object... params) throws Exception {
+	public static int executeUpdate(String sql, Object... params) throws Exception {
 		Connection connection = null;
 		PreparedStatement statement = null;
 		try {
@@ -387,12 +387,13 @@ public class Database {
 					statement.setObject(i + 1, params[i]);
 				}
 			}
-			statement.executeUpdate();
+			return statement.executeUpdate();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
 			closeresouce(statement, connection);
 		}
+		return 0;
 	}
 
 	/**

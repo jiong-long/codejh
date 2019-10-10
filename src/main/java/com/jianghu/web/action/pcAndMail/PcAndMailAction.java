@@ -145,10 +145,10 @@ public class PcAndMailAction extends ActionSupport implements ModelDriven<Pagina
 		int end = start + number - 1;
 
 		// 分页查询
-		String sql = "select distinct * from MAILS where id between ? and ? order by id";
+		String sql = "select distinct * from mails where id between ? and ? order by id";
 		List<Mails> list = Database.executeQuery(sql, Mails.class, start, end);
 
-		String countSql = "select count(distinct mails) from MAILS";
+		String countSql = "select count(distinct mails) from mails";
 		String count = Database.getUniqueStringValue(countSql);
 
 		// 将结果封装到分页类中
@@ -217,7 +217,7 @@ public class PcAndMailAction extends ActionSupport implements ModelDriven<Pagina
 	 */
 	public String excelExport() throws IOException {
 		// 查询所有的数据
-		String sql = "select distinct * from MAILS order by id";
+		String sql = "select distinct * from mails order by id";
 		List<Mails> list = Database.executeQuery(sql, Mails.class);
 
 		// 将List<Mails>换为List<Object[]>,并将表头加上

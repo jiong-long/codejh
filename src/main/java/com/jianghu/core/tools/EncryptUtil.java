@@ -22,11 +22,11 @@ public class EncryptUtil {
 	private static final String AES_TYPE = "AES/ECB/PKCS5Padding";
 
 	//私钥
-	private static final String AES_KEY = "QWERTYUIOPASDFGH";//16位
+	private static final String AES_KEY = "1111111111111111";//16位
 	//AES固定格式为128/192/256 bits 即：16/24/32 Bytes. DES固定格式为128bits 即8Bytes
 
 	public static void main(String[] args) throws IOException {
-		System.out.println(encrypt("903023764"));
+		System.out.println(decrypt("80WAhKEzAd65dYGQVO9gbmZZhASnsVndaxTkFeKAHTIVtMENqN5vtZCs7Rzk8VySzQpG7yl1HfhXgslFXxtXaQ=="));
 	}
 
 	/**
