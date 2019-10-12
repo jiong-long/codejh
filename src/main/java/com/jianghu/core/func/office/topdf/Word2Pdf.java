@@ -13,6 +13,7 @@ import com.artofsolving.jodconverter.openoffice.connection.SocketOpenOfficeConne
 import com.artofsolving.jodconverter.openoffice.converter.StreamOpenOfficeDocumentConverter;
 import com.aspose.words.Document;
 import com.aspose.words.License;
+import com.aspose.words.SaveFormat;
 import com.jacob.activeX.ActiveXComponent;
 import com.jacob.com.ComThread;
 import com.jacob.com.Dispatch;
@@ -44,7 +45,7 @@ public class Word2Pdf {
 		try {
 			Document document = new Document(wordFile);
 			fileOutputStream = new FileOutputStream(new File(pdfFile));
-			document.save(fileOutputStream, 40);
+			document.save(fileOutputStream, SaveFormat.PDF);
 		} catch (Exception exception) {
 			Log.error(exception);
 		} finally {
@@ -63,6 +64,7 @@ public class Word2Pdf {
 	    try {
 	    	String str = "<License><Data><Products><Product>Aspose.Total for Java</Product><Product>Aspose.Words for Java</Product></Products><EditionType>Enterprise</EditionType><SubscriptionExpiry>20991231</SubscriptionExpiry><LicenseExpiry>20991231</LicenseExpiry><SerialNumber>8bfe198c-7f0c-4ef8-8ff0-acc3237bf0d7</SerialNumber></Data><Signature>sNLLKGMUdF0r8O1kKilWAGdgfs2BvJb/2Xp8p5iuDVfZXmhppo+d0Ran1P9TKdjV4ABwAgKXxJ3jcQTqE/2IRfqwnPf8itN8aFZlV3TJPYeD3yWE7IT55Gz6EijUpC7aKeoohTb4w2fpox58wWoF3SNp6sK6jDfiAUGEHYJ9pjU=</Signature></License>";
 	    	ByteArrayInputStream byteArrayInputStream = new ByteArrayInputStream(str.getBytes("UTF-8"));
+	    	
 	    	License license = new License();
 	    	license.setLicense(byteArrayInputStream);
 	    	bool = true;

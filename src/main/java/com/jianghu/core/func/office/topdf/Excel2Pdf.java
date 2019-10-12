@@ -4,6 +4,7 @@ import java.io.ByteArrayInputStream;
 
 import com.aspose.cells.HtmlSaveOptions;
 import com.aspose.cells.License;
+import com.aspose.cells.SaveFormat;
 import com.aspose.cells.Workbook;
 import com.jianghu.core.tools.Log;
 
@@ -23,7 +24,7 @@ public class Excel2Pdf {
 			return;
 		}
 		try {
-			HtmlSaveOptions htmlSaveOptions = new HtmlSaveOptions(12);
+			HtmlSaveOptions htmlSaveOptions = new HtmlSaveOptions(SaveFormat.HTML);
 			Workbook workbook = new Workbook(excelFile);
 			workbook.save(pdfFile, htmlSaveOptions);
 		} catch (Exception exception) {

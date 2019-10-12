@@ -238,6 +238,46 @@
 		    <version>2.2.11</version>
 		</dependency>
 		
+		
+		<dependency>
+		    <groupId>org.openoffice</groupId>
+		    <artifactId>jurt</artifactId>
+		    <version>3.0.1</version>
+		</dependency>
+		<dependency>
+		    <groupId>org.openoffice</groupId>
+		    <artifactId>ridl</artifactId>
+		    <version>3.0.1</version>
+		</dependency>
+		<dependency>
+		    <groupId>org.openoffice</groupId>
+		    <artifactId>juh</artifactId>
+		    <version>3.0.1</version>
+		</dependency>
+		<dependency>
+		    <groupId>org.openoffice</groupId>
+		    <artifactId>unoil</artifactId>
+		    <version>3.0.1</version>
+		</dependency>
+		<dependency>
+		    <groupId>org.slf4j</groupId>
+		    <artifactId>slf4j-jdk14</artifactId>
+		    <version>1.6.1</version>
+		</dependency>
+		
+		<!-- iText 操作PDF相关的 -->
+		<dependency>
+			<groupId> com.itextpdf</groupId >
+		    <artifactId>itextpdf</artifactId >
+		    <version> 5.5.9</version>
+		</dependency>
+		 
+		<dependency>
+		     <groupId> com.itextpdf</groupId >
+		     <artifactId>itext-asian</artifactId>
+		     <version> 5.2.0</version>
+		</dependency>
+		
 		<!-- 阿里云OSS -->
 		<dependency>
 		    <groupId>com.aliyun.oss</groupId>

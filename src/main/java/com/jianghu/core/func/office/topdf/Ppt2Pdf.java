@@ -7,6 +7,7 @@ import java.io.IOException;
 
 import com.aspose.slides.License;
 import com.aspose.slides.Presentation;
+import com.aspose.slides.SaveFormat;
 import com.jianghu.core.tools.Log;
 
 public class Ppt2Pdf {
@@ -37,7 +38,7 @@ public class Ppt2Pdf {
 		try {
 			Presentation presentation = new Presentation(paramString1);
 			fileOutputStream = new FileOutputStream(new File(paramString2));
-			presentation.save(fileOutputStream, 1);
+			presentation.save(fileOutputStream, SaveFormat.Pdf);
 		} catch (Exception exception) {
 			exception.printStackTrace();
 		} finally {
