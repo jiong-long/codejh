@@ -28,7 +28,7 @@ import com.jianghu.core.tools.Log;
  */
 public class Word2Pdf {
 	public static void main(String[] args) throws Exception {
-		word2Pdf("/Users/wangjinlong/Documents/项目资料/新地/合同历史数据/data/EA37441635A1284848257D72000B9108/工程施工安全管理协议书.doc", "/Users/wangjinlong/Desktop/111.pdf");
+		word2Pdf("/Users/wangjinlong/Desktop/原件.doc", "/Users/wangjinlong/Desktop/19加粗.pdf");
 	}
 	
 	/**
@@ -39,6 +39,7 @@ public class Word2Pdf {
 	public static void word2Pdf(String wordFile, String pdfFile) {
 		FileOutputStream fileOutputStream = null;
 		if (!getLicense()) {
+			System.out.println("获取License失败");
 			Log.error("获取License失败");
 			return;
 		}
@@ -47,6 +48,7 @@ public class Word2Pdf {
 			fileOutputStream = new FileOutputStream(new File(pdfFile));
 			document.save(fileOutputStream, SaveFormat.PDF);
 		} catch (Exception exception) {
+			System.out.println(exception.getMessage());
 			Log.error(exception);
 		} finally {
 			try {
