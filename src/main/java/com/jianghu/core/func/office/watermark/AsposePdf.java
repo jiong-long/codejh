@@ -1,13 +1,9 @@
 package com.jianghu.core.func.office.watermark;
 
-import java.io.ByteArrayInputStream;
-
 import com.aspose.pdf.Document;
 import com.aspose.pdf.ImageStamp;
-import com.aspose.pdf.License;
 import com.aspose.pdf.HorizontalAlignment;
 import com.aspose.pdf.VerticalAlignment;
-import com.jianghu.core.tools.Log;
 
 /**
  * Aspose 增加水印

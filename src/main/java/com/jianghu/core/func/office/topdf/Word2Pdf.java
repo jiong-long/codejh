@@ -28,7 +28,7 @@ import com.jianghu.core.tools.Log;
  */
 public class Word2Pdf {
 	public static void main(String[] args) throws Exception {
-		word2Pdf("/Users/wangjinlong/Desktop/原件.doc", "/Users/wangjinlong/Desktop/19加粗.pdf");
+		word2Pdf("/Users/wangjinlong/Desktop/新地能源技术有限公司合同管理系统详细设计报告.doc", "/Users/wangjinlong/Desktop/19加粗.pdf");
 	}
 	
 	/**
