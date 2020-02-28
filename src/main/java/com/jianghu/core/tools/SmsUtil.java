@@ -28,8 +28,8 @@ public class SmsUtil {
 	static final String DOMAIN = "dysmsapi.aliyuncs.com";
 
 	//此处需要替换成开发者自己的AK(在阿里云访问控制台寻找)
-	static final String ACCESSKEYID = "LTAIUjA2nbYUvg2s";
-	static final String ACCESSKEYSECRET = "Oue8SBH2WBUQXionzrprLfNSLkAj2e";
+	static final String ACCESSKEYID = "1234";
+	static final String ACCESSKEYSECRET = "12345";
 	//短信模板
 	static final String TEMPLATECODE = "SMS_103385053";
 	//短信签名
