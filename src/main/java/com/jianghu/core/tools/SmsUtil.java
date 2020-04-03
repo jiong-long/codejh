@@ -29,7 +29,7 @@ public class SmsUtil {
 
 	//此处需要替换成开发者自己的AK(在阿里云访问控制台寻找)
 	static final String ACCESSKEYID = "1234";
-	static final String ACCESSKEYSECRET = "12345";
+	static final String ACCESSKEYSECRET = "123451";
 	//短信模板
 	static final String TEMPLATECODE = "SMS_103385053";
 	//短信签名
