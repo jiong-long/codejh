@@ -1,16 +1,21 @@
 package com.jianghu.core.tools;
 
 import java.io.IOException;
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+
 import java.util.Map.Entry;
 
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
 import org.apache.http.NameValuePair;
+import org.apache.http.auth.AuthScope;
+import org.apache.http.auth.UsernamePasswordCredentials;
+import org.apache.http.client.CredentialsProvider;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.config.RequestConfig;
 import org.apache.http.client.entity.UrlEncodedFormEntity;
@@ -18,10 +23,12 @@ import org.apache.http.client.methods.CloseableHttpResponse;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.entity.StringEntity;
+import org.apache.http.impl.client.BasicCredentialsProvider;
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClientBuilder;
 import org.apache.http.message.BasicNameValuePair;
 import org.apache.http.util.EntityUtils;
+import org.apache.tomcat.util.codec.binary.Base64;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -229,6 +236,16 @@ public class WebServiceUtil {
 					httpPost.setHeader(key, headMap.get(key));
 				}
 			}	
+			
+			/*****************增加用户名，密码验证******************/
+			// 手动构建验证信息
+		    String auth = "username:password";
+		    byte[] encodedAuth = Base64.encodeBase64(auth.getBytes(StandardCharsets.UTF_8));
+		    String authHeader = "Basic " + new String(encodedAuth);
+		    // 将验证信息放入到 Header
+		    httpPost.setHeader("Authorization", authHeader);
+		    
+			
 			// 执行请求操作，并拿到结果（同步阻塞）
 			response = client.execute(httpPost);
 			// 获取结果实体
