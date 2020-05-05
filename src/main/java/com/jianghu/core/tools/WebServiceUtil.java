@@ -5,16 +5,20 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 import java.util.Map.Entry;
 
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
 import org.apache.http.NameValuePair;
 import org.apache.http.client.HttpClient;
+import org.apache.http.client.config.RequestConfig;
 import org.apache.http.client.entity.UrlEncodedFormEntity;
+import org.apache.http.client.methods.CloseableHttpResponse;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.entity.StringEntity;
+import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClientBuilder;
 import org.apache.http.message.BasicNameValuePair;
 import org.apache.http.util.EntityUtils;
@@ -23,8 +27,6 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 public class WebServiceUtil {
-	//编码方式
-	private static final String CODE_TYPE = "UTF-8";
 
 	public static void main(String[] args) throws IOException, JSONException {
 		String url = "http://localhost:8080/jiong/webservice/getUserInfo";
@@ -44,7 +46,7 @@ public class WebServiceUtil {
 		object.put("dataTable", "hr_employee_delta_h");
 		object.put("queryType", "query");
 		object.put("returnFields", array);
-		System.out.println(sendPost(url, object.toString()));
+		System.out.println(sendPost(url, object.toString(), null));
 	}
 
 	/**
@@ -54,44 +56,51 @@ public class WebServiceUtil {
 	 * @return
 	 */
 	public static String sendGet(String url) {
-		return sendGet(url, CODE_TYPE);
+		return sendGet(url, null);
 	}
 
 	/**
-	 * GET请求webservice(传入编码，为空为UTF-8)
+	 * GET请求webservice
 	 * 
-	 * @param url
+	* @param url
+	 *            地址
+	 * @param headMap
+	 *            请求头信息
 	 * @return
 	 */
-	public static String sendGet(String url, String encoding) {
+	public static String sendGet(String url, Map<String,String> headMap) {
 		String returnStr = "";
+		HttpEntity entity = null;
 		try {
-			if ("".equals(encoding)) {
-				encoding = CODE_TYPE;
-			}
 			// 创建默认的httpClient实例
-			//HttpClient httpclient = new DefaultHttpClient();
 			HttpClient httpclient = HttpClientBuilder.create().build();
 			// 创建httpget
 			HttpGet httpget = new HttpGet(url);
-			// httpget.addHeader("Accept", "application/json");
+			// 设置header信息
+			if(headMap != null && !headMap.isEmpty()) {
+				Set<String> keySet = headMap.keySet();
+				for (String key : keySet) {
+					httpget.addHeader(key, headMap.get(key));
+				}
+			}	
 			// 执行get请求
 			HttpResponse response = httpclient.execute(httpget);
 			// 获取响应实体
-			HttpEntity entity = response.getEntity();
-			// 打印响应状态
-			System.out.println(response.getStatusLine());
+			entity = response.getEntity();
 			if (entity != null) {
-				// 打印响应内容长度
-				System.out.println("Response content length: " + entity.getContentLength());
 				// 打印响应内容
-				returnStr = EntityUtils.toString(entity, encoding);
-				System.out.println("Response content: " + returnStr);
+				returnStr = EntityUtils.toString(entity, "UTF-8");
 			}
-			// 销毁
-			EntityUtils.consume(entity);
 		} catch (IOException e) {
 			e.printStackTrace();
+		} finally {
+			if(entity != null) {
+				try {
+					EntityUtils.consume(entity);
+				} catch (IOException e) {
+					Log.error(e);
+				}
+			}
 		}
 		return returnStr;
 	}
@@ -107,101 +116,152 @@ public class WebServiceUtil {
 	 * @throws IOException
 	 */
 	public static String sendPost(String url, Map<String, String> map) {
-		return sendPost(url, map, "");
+		return sendPost(url, map, null);
 	}
 	
 	/**
-	 * POST请求webservice
-	 * 
-	 * @param url
-	 *            地址
-	 * @param map
-	 *            参数
-	 * @param encoding
-	 *            编码（为空就是UTF-8）
+	 * POST请求webservice，raw方式 带自定义head信息的
+	 * @param url 请求地址
+	 * @param params 参数
+	 * @param headMap 请求头信息
 	 * @return
-	 * @throws IOException
 	 */
-	public static String sendPost(String url, String params) {
+	public static String sendPost(String url, String params, Map<String,String> headMap) {
 		String returnStr = "";
+		HttpEntity entity = null;
+		CloseableHttpClient client = null;
+		CloseableHttpResponse response = null;
 		try {
+			//设置请求的状态参数 单位毫秒
+		    RequestConfig requestConfig = RequestConfig.custom()
+		    		.setConnectionRequestTimeout(10000)
+		    		.setConnectTimeout(10000)
+		    		.setSocketTimeout(10000)
+		    		.build();
 			// 创建httpclient对象
-			HttpClient client = HttpClientBuilder.create().build();
+			client = HttpClientBuilder.create().build();
 			// 创建post方式请求对象
 			HttpPost httpPost = new HttpPost(url);
 			// 设置参数到请求对象中
 			StringEntity stringEntity = new StringEntity(params, "UTF-8");  
 			httpPost.setEntity(stringEntity);
-			System.out.println("请求地址：" + url);
-			System.out.println("请求参数：" + params);
+			httpPost.setConfig(requestConfig);
+			//System.out.println("请求地址：" + url);
+			//System.out.println("请求参数：" + params);
 			// 设置header信息
-			httpPost.setHeader("Content-type", "application/json");
+			if(headMap != null && !headMap.isEmpty()) {
+				Set<String> keySet = headMap.keySet();
+				for (String key : keySet) {
+					httpPost.setHeader(key, headMap.get(key));
+				}
+			}	
 			// 执行请求操作，并拿到结果（同步阻塞）
-			HttpResponse response = client.execute(httpPost);
+			response = client.execute(httpPost);
 			// 获取结果实体
-			HttpEntity entity = response.getEntity();
+			entity = response.getEntity();
 			if (entity != null) {
 				// 按指定编码转换结果实体为String类型
 				returnStr = EntityUtils.toString(entity, "UTF-8");
 			}
-			// 销毁
-			EntityUtils.consume(entity);
 		} catch (Exception e) {
 			e.printStackTrace();
+		} finally {
+			if(entity != null) {
+				try {
+					EntityUtils.consume(entity);
+				} catch (IOException e) {
+					Log.error(e);
+				}
+			}
+			if(client != null) {
+				try {
+					client.close();
+				} catch (IOException e) {
+					Log.error(e);
+				}
+			}
+			if(response != null) {
+				try {
+					response.close();
+				} catch (IOException e) {
+					Log.error(e);
+				}
+			}
 		}
 		return returnStr;
 	}
 
 	/**
-	 * POST请求webservice
-	 * 
+	 * 调用POST接口，params方式
 	 * @param url
-	 *            地址
-	 * @param map
-	 *            参数
-	 * @param encoding
-	 *            编码（为空就是UTF-8）
+	 * @param paramsMap
+	 * @param headMap
 	 * @return
-	 * @throws IOException
 	 */
-	public static String sendPost(String url, Map<String, String> map, String encoding) {
+	public static String sendPost(String url, Map<String, String> paramsMap, Map<String,String> headMap) {
 		String returnStr = "";
+		HttpEntity entity = null;
+		CloseableHttpClient client = null;
+		CloseableHttpResponse response = null;
 		try {
-			if ("".equals(encoding)) {
-				encoding = CODE_TYPE;
-			}
-			// 创建httpclient对象
-			//HttpClient client = new DefaultHttpClient();
-			HttpClient client = HttpClientBuilder.create().build();
-			// 创建post方式请求对象
+			//设置请求的状态参数 单位毫秒
+		    RequestConfig requestConfig = RequestConfig.custom()
+		    		.setConnectionRequestTimeout(10000)
+		    		.setConnectTimeout(10000)
+		    		.setSocketTimeout(10000)
+		    		.build();
+			client = HttpClientBuilder.create().build();
+			// 创建HttpPost对象
 			HttpPost httpPost = new HttpPost(url);
 			// 装填参数
 			List<NameValuePair> nvps = new ArrayList<NameValuePair>();
-			if (map != null) {
-				for (Entry<String, String> entry : map.entrySet()) {
+			if (paramsMap != null) {
+				for (Entry<String, String> entry : paramsMap.entrySet()) {
 					nvps.add(new BasicNameValuePair(entry.getKey(), entry.getValue()));
 				}
 			}
-			// 设置参数到请求对象中
-			httpPost.setEntity(new UrlEncodedFormEntity(nvps, encoding));
-			System.out.println("请求地址：" + url);
-			System.out.println("请求参数：" + nvps.toString());
+			httpPost.setEntity(new UrlEncodedFormEntity(nvps, "UTF-8"));
+			httpPost.setConfig(requestConfig);
 			// 设置header信息
-			httpPost.setHeader("Content-type", "application/x-www-form-urlencoded");
-			httpPost.setHeader("User-Agent", "Mozilla/4.0 (compatible; MSIE 5.0; Windows NT; DigExt)");
+			if(headMap != null && !headMap.isEmpty()) {
+				Set<String> keySet = headMap.keySet();
+				for (String key : keySet) {
+					httpPost.setHeader(key, headMap.get(key));
+				}
+			}	
 			// 执行请求操作，并拿到结果（同步阻塞）
-			HttpResponse response = client.execute(httpPost);
+			response = client.execute(httpPost);
 			// 获取结果实体
-			HttpEntity entity = response.getEntity();
+			entity = response.getEntity();
 			if (entity != null) {
 				// 按指定编码转换结果实体为String类型
-				returnStr = EntityUtils.toString(entity, encoding);
+				returnStr = EntityUtils.toString(entity, "UTF-8");
 			}
-			// 销毁
-			EntityUtils.consume(entity);
 		} catch (Exception e) {
 			e.printStackTrace();
+		} finally {
+			if(entity != null) {
+				try {
+					EntityUtils.consume(entity);
+				} catch (IOException e) {
+					Log.error(e);
+				}
+			}
+			if(client != null) {
+				try {
+					client.close();
+				} catch (IOException e) {
+					Log.error(e);
+				}
+			}
+			if(response != null) {
+				try {
+					response.close();
+				} catch (IOException e) {
+					Log.error(e);
+				}
+			}
 		}
-		return EncryptUtil.decrypt(returnStr);
+		return returnStr;
 	}
 }
