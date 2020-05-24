@@ -1,4 +1,4 @@
-package com.jianghu.other.jvm;
+package com.jianghu.other.jvm.demo1;
 
 /**
  * 修改class文件，暂时只提供修改常量池常量的功能

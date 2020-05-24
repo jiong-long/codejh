@@ -1,4 +1,4 @@
-package com.jianghu.other.jvm;
+package com.jianghu.other.jvm.demo1;
 
 import java.io.ByteArrayOutputStream;
 import java.io.InputStream;

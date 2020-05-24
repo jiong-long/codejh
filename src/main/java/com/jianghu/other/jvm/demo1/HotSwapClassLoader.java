@@ -1,4 +1,4 @@
-package com.jianghu.other.jvm;
+package com.jianghu.other.jvm.demo1;
 
 /**
  * 为了多次载入执行类而加入的加载器

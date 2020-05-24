@@ -1,4 +1,4 @@
-package com.jianghu.other.jvm;
+package com.jianghu.other.jvm.demo1;
 
 /**
  * Bytes 数组处理工具
