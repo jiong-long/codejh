@@ -1,6 +1,8 @@
 package com.jianghu.core.tools;
 
+import java.io.ByteArrayOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -192,6 +194,32 @@ public class WebServiceUtil {
 			}
 		}
 		return returnStr;
+	}
+	
+	/**
+	 * java获取raw
+	 * 
+	 * @param inputStream
+	 * @return
+	 */
+	public static String readRaw(InputStream inputStream) {
+	    String result = "";
+	    ByteArrayOutputStream outSteam = null;
+	    try {
+	        outSteam = new ByteArrayOutputStream();
+	        byte[] buffer = new byte[1024];
+	        int len;
+	        while ((len = inputStream.read(buffer)) != -1) {
+	            outSteam.write(buffer, 0, len);
+	        }
+	        outSteam.close();
+	        inputStream.close();
+	        result = new String(outSteam.toByteArray(), "UTF-8");
+	    } catch (IOException e) {
+	        e.printStackTrace();
+	    }
+	 
+	    return result;
 	}
 
 	/**

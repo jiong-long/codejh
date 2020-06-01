@@ -15,7 +15,7 @@ import com.jianghu.core.Tools;
 import com.jianghu.core.tools.EncryptUtil;
 
 /**
- * result 风格 params参数接口
+ * restful 风格 params参数接口
  * 使用 WebServiceUtil.sendPost(String url, Map<String, String> paramsMap, Map<String,String> headMap)调用
  * 
  * @author wangjinlong

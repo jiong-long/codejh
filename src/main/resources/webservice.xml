@@ -25,6 +25,13 @@
         </jaxrs:serviceBeans>  
     </jaxrs:server>
     
+	<bean id="getAllUser" class="com.jianghu.web.webservice.GetAllUser" />  
+    <jaxrs:server id="getAllUserServer" address="/getAllUser">  
+        <jaxrs:serviceBeans>  
+            <ref bean="getAllUser" />  
+        </jaxrs:serviceBeans>  
+    </jaxrs:server>
+    
     <!-- =========================================SOAP satrt============================================= -->	
 	<!-- 客户创建接口 -->
 	<jaxws:endpoint id="customerImpl" implementor="com.jianghu.web.webservice.soap.CustomerImpl"
