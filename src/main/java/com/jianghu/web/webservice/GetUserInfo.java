@@ -14,6 +14,14 @@ import com.jianghu.core.Database;
 import com.jianghu.core.Tools;
 import com.jianghu.core.tools.EncryptUtil;
 
+/**
+ * result 风格 params参数接口
+ * 使用 WebServiceUtil.sendPost(String url, Map<String, String> paramsMap, Map<String,String> headMap)调用
+ * 
+ * @author wangjinlong
+ * @datetime Jun 1, 2020 11:23:22 AM
+ *
+ */
 @Produces("application/json")
 public class GetUserInfo {
 	@GET
