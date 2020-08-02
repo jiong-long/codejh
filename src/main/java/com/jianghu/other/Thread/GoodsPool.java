@@ -23,8 +23,8 @@ public class GoodsPool {
     	
     	// 唤醒在当前对象等待池中等待的第一个线程。
         // notifyAll叫醒所有在当前对象等待池中等待的所有线程。
-    	this.notify();
     	goodPool[currId++] = goods;
+    	this.notify();
     }
     
     public synchronized Goods pop() {
