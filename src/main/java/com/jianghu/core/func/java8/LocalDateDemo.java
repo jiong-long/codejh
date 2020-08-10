@@ -190,7 +190,7 @@ public class LocalDateDemo {
     }
 
     public static void main(String[] args) {
-        LocalDateDemo dt = new LocalDateDemo();
-        dt.formateDate();
+    	LocalDate today = LocalDate.now();
+        System.out.println("Today's Local date : " + today);
     }
 }

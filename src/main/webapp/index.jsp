@@ -11,7 +11,7 @@
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
 <head>
-	<title>江湖111</title>
+	<title>江湖</title>
 	<script type="text/javascript" src="/jiong/js/BootStrap/jquery.min.js"></script>
 	
 	<link rel="stylesheet" href="/jiong/js/BootStrap/css/bootstrap.min.css"/>
