@@ -1,0 +1,15 @@
+@charset "utf-8";
+/* CSS Document */
+html,body{overflow:hidden;}
+div.zoom{position:relative;background-image:url("../images/transparent.png");}
+div.zoombtn{height:80px; position:absolute; top:50%; margin-top:-40px;}
+div.zoombtn div.btn{width:40px; height:80px;  background:url(../images/btn.png) no-repeat; cursor:pointer;}
+div.zoombtn div.prev{ background-position:-40px 0;}
+div.zoombtn div.next{ background-position:0 0;}
+div.zoombtn div.prev:hover{ background-position:-40px -80px;}
+div.zoombtn div.next:hover{ background-position:0 -80px;}
+div.zoomlist{margin:0 auto;}
+div.zoombd{position:relative;}
+div.zoomableContainer{}
+
+
