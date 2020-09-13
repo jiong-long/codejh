@@ -1,6 +1,12 @@
 package com.jianghu.core.tools;
 
 import java.io.IOException;
+import java.security.GeneralSecurityException;
+import java.security.MessageDigest;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+import java.util.Map;
 
 import javax.crypto.Cipher;
 import javax.crypto.spec.SecretKeySpec;
@@ -22,7 +28,7 @@ public class EncryptUtil {
 	private static final String AES_TYPE = "AES/ECB/PKCS5Padding";
 
 	//私钥
-	private static final String AES_KEY = "KEY";//16位
+	private static final String AES_KEY = "123456789";//16位
 	//AES固定格式为128/192/256 bits 即：16/24/32 Bytes. DES固定格式为128bits 即8Bytes
 
 	public static void main(String[] args) throws IOException {
@@ -77,5 +83,75 @@ public class EncryptUtil {
 		}
 		return "";
 	}
+	
+	/**
+	 * 
+	 * 为了防止API调用过程中被黑客恶意篡改,调用任何一个API都需要携带数字签名,服务端会对签名进行校验,签名不合法的请求将会被拒绝,目前支持的签名算法为SHA1,签名的大致过程如下:
 
+		1.对所有API请求参数（除去sign参数本身），根据参数名称的ASCII码表的顺序排序。如:bad=2,bac=1,cba=3,排序后的顺序是bac=1,bad=2,cba=3。
+		2.将排序好的参数排在一起,根据上面的示例得到的排序后的结果:bac1bad2cba3。
+		3.把拼装好的字符串用uft-8编码,需要在拼装后的字符串前后都加上应用的appSecret在进行SHA1摘要,例如应用的appSecret为secret,进行签名计算:SHA1(secretbac1bad2cba3secret)
+		4.将摘要得到的字节流转化成16进制,例如将上面的签名摘要转换后的结果为:5F7DEFBFD29BDB0CEF0FBD200AB780084CE86ADC
+
+		说明:SHA1为安全哈希算法,主要用于数字签名标准(DSS)中的签名算法(DSA),SHA1会产生一个160位的消息摘要,用16进制表示,一个16进制的字符能表示4个位,所以签名后的长度固定为40个16进制字符.
+	 * 
+     * 对paramValues进行签名，其中ignoreParamNames这些参数不参与签名
+     * @param paramValues
+     * @param ignoreParamNames
+     * @param secret
+     * @return
+	 * @throws IOException 
+     */
+    public static String sign(Map<String, String> paramValues, List<String> ignoreParamNames, String secret) throws IOException {
+        try {
+            StringBuilder sb = new StringBuilder();
+            List<String> paramNames = new ArrayList<String>(paramValues.size());
+            paramNames.addAll(paramValues.keySet());
+            if(ignoreParamNames != null && ignoreParamNames.size() > 0){
+                for (String ignoreParamName : ignoreParamNames) {
+                    paramNames.remove(ignoreParamName);
+                }
+            }
+            Collections.sort(paramNames);
+
+            sb.append(secret);
+            for (String paramName : paramNames) {
+                sb.append(paramName).append(paramValues.get(paramName));
+            }
+            sb.append(secret);
+            byte[] sha1Digest = getSHA1Digest(sb.toString());
+            return byte2hex(sha1Digest);
+        } catch (IOException e) {
+            throw new IOException(e);
+        }
+    }
+    
+    private static byte[] getSHA1Digest(String data) throws IOException {
+        byte[] bytes = null;
+        try {
+            MessageDigest md = MessageDigest.getInstance("SHA-1");
+            bytes = md.digest(data.getBytes("UTF-8"));
+        } catch (GeneralSecurityException gse) {
+            throw new IOException(gse);
+        }
+        return bytes;
+    }
+    
+    /**
+     * 二进制转十六进制字符串
+     *
+     * @param bytes
+     * @return
+     */
+    private static String byte2hex(byte[] bytes) {
+        StringBuilder sign = new StringBuilder();
+        for (int i = 0; i < bytes.length; i++) {
+            String hex = Integer.toHexString(bytes[i] & 0xFF);
+            if (hex.length() == 1) {
+                sign.append("0");
+            }
+            sign.append(hex.toUpperCase());
+        }
+        return sign.toString();
+    }
 }
