@@ -6,6 +6,8 @@ import java.sql.Clob;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -36,6 +38,9 @@ public class ItemAction extends ActionSupport implements ModelDriven<Item> {
 	private static final long serialVersionUID = 1L;
 
 	private Item item = new Item();
+	
+	//线程池
+	private static ExecutorService luceneExecutor = Executors.newFixedThreadPool(3);
 
 	@Override
 	public Item getModel() {
@@ -210,9 +215,10 @@ public class ItemAction extends ActionSupport implements ModelDriven<Item> {
 				list.add(luceneField);
 			}
 			// 通过线程来更新索引
-			LuceneThread luceneThread = new LuceneThread(list);
-			Thread thread = new Thread(luceneThread);
-			thread.start();// 不要使用luceneThread.run();（这个是普通的方法，没有启动线程）
+			// LuceneThread luceneThread = new LuceneThread(list);
+			// Thread thread = new Thread(luceneThread);
+			// thread.start();// 不要使用luceneThread.run();（这个是普通的方法，没有启动线程）
+			luceneExecutor.submit(new LuceneThread(list));
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

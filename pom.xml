@@ -238,7 +238,6 @@
 		    <version>2.2.11</version>
 		</dependency>
 		
-		
 		<dependency>
 		    <groupId>org.openoffice</groupId>
 		    <artifactId>jurt</artifactId>
@@ -265,6 +264,12 @@
 		    <version>1.6.1</version>
 		</dependency>
 		
+		<dependency>
+		    <groupId>com.alibaba</groupId>
+		    <artifactId>fastjson</artifactId>
+		    <version>1.2.73</version>
+		</dependency>
+		
 		<!-- iText 操作PDF相关的 -->
 		<dependency>
 			<groupId> com.itextpdf</groupId >
@@ -273,7 +278,7 @@
 		</dependency>
 		 
 		<dependency>
-		     <groupId> com.itextpdf</groupId >
+		     <groupId>com.itextpdf</groupId >
 		     <artifactId>itext-asian</artifactId>
 		     <version> 5.2.0</version>
 		</dependency>

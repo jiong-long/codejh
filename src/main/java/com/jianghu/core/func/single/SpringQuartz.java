@@ -1,5 +1,7 @@
 package com.jianghu.core.func.single;
 
+import org.springframework.util.StopWatch;
+
 import com.jianghu.web.action.basic.ItemAction;
 
 /**
@@ -11,11 +13,12 @@ import com.jianghu.web.action.basic.ItemAction;
  */
 public class SpringQuartz {
 	protected void execute() {
-		long begin = System.currentTimeMillis();
-		System.out.println("===============开始更新Lucene===============");
+		StopWatch stopWatch = new StopWatch("Lucene更新");
+		stopWatch.start();
+		
 		ItemAction.updateLucenePublic();
-		System.out.println("===============更新Lucene结束===============");
-		long end = System.currentTimeMillis();
-		System.out.println("===============更新时间:" + (end - begin) + "===============");
+		
+		stopWatch.stop();
+		System.out.println(stopWatch.prettyPrint());
 	}
 }
