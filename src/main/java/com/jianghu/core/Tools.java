@@ -24,6 +24,11 @@ import org.apache.commons.fileupload.disk.DiskFileItemFactory;
 import org.apache.commons.fileupload.servlet.ServletFileUpload;
 import org.apache.struts2.ServletActionContext;
 
+import com.fasterxml.jackson.annotation.JsonInclude.Include;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.PropertyNamingStrategy;
+
 import flexjson.JSONSerializer;
 import net.sourceforge.pinyin4j.PinyinHelper;
 import net.sourceforge.pinyin4j.format.HanyuPinyinCaseType;
@@ -436,5 +441,54 @@ public class Tools {
 			obj = "0";
 		}
 		return Long.parseLong((String) obj);
+	}
+	
+	private static Pattern humpPattern = Pattern.compile("[A-Z]");
+	
+	/**
+	 * 驼峰转下划线
+	 * @param str
+	 * @return
+	 */
+	public static String humpToLine(String str) {
+		Matcher matcher = humpPattern.matcher(str);
+		StringBuffer sb = new StringBuffer();
+		while (matcher.find()) {
+			matcher.appendReplacement(sb, "_" + matcher.group(0).toLowerCase());
+		}
+		matcher.appendTail(sb);
+		return sb.toString();
+	}
+	
+	private static Pattern linePattern = Pattern.compile("_(\\w)");
+	 
+	/**
+	 * 下划线转驼峰
+	 * @param str
+	 * @return
+	 */
+	public static String lineToHump(String str) {
+		str = str.toLowerCase();
+		Matcher matcher = linePattern.matcher(str);
+		StringBuffer sb = new StringBuffer();
+		while (matcher.find()) {
+			matcher.appendReplacement(sb, matcher.group(1).toUpperCase());
+		}
+		matcher.appendTail(sb);
+		return sb.toString();
+	}
+	
+	/**
+	 * 将对象中属性名称由驼峰变为下划线，属性值不变
+	 * @param object
+	 * @return
+	 * @throws JsonProcessingException
+	 */
+	public static String toUnderlineJSONString(Object object) throws JsonProcessingException{
+		ObjectMapper mapper = new ObjectMapper();
+		mapper.setPropertyNamingStrategy(PropertyNamingStrategy.SNAKE_CASE);
+		mapper.setSerializationInclusion(Include.NON_NULL);      
+		String reqJson = mapper.writeValueAsString(object);
+		return reqJson;
 	}
 }
