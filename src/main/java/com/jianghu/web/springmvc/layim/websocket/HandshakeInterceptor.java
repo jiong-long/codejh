@@ -13,6 +13,7 @@ import org.springframework.web.socket.server.support.HttpSessionHandshakeInterce
 import com.jianghu.domain.basic.User;
 import com.jianghu.domain.web.SessionConstants;
 
+
 /**
  * 在websocket连接成功前和成功后增加一些额外的功能
  * 

@@ -10,8 +10,8 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import com.jianghu.core.Database;
-import com.jianghu.core.Tools;
+import com.common.Tools;
+import com.jianghu.dao.Database;
 import com.jianghu.domain.zTree.Ztree;
 import com.jianghu.service.zTree.ZtreeServices;
 import com.opensymphony.xwork2.ActionSupport;

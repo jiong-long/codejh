@@ -3,7 +3,7 @@ package com.jianghu.dao.redis;
 import java.util.List;
 import java.util.ResourceBundle;
 
-import com.jianghu.core.tools.EncryptUtil;
+import com.common.EncryptUtil;
 import com.jianghu.dao.redis.Tools.RedisTool;
 import com.jianghu.dao.redis.Tools.SerializeUtil;
 import com.jianghu.dao.redis.basic.Role;

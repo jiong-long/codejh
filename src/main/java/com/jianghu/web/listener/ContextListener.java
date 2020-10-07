@@ -10,6 +10,7 @@ import javax.servlet.http.HttpSession;
 
 import com.jianghu.domain.basic.User;
 
+
 /**
  * 监听用户创建于销毁，判断用户是否在线
  * 

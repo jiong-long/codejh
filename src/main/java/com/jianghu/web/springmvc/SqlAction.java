@@ -15,8 +15,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.jianghu.core.Database;
-import com.jianghu.core.tools.Log;
+import com.common.Log;
+import com.jianghu.dao.Database;
 
 /**
  * sql相关Action

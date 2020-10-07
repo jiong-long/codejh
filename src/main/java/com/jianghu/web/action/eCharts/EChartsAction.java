@@ -8,8 +8,8 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.apache.struts2.ServletActionContext;
 
-import com.jianghu.core.Database;
-import com.jianghu.core.Tools;
+import com.common.Tools;
+import com.jianghu.dao.Database;
 import com.jianghu.domain.eCharts.ECharts;
 import com.opensymphony.xwork2.ActionSupport;
 

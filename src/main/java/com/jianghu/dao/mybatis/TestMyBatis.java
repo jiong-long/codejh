@@ -11,7 +11,7 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import com.github.pagehelper.PageHelper;
-import com.jianghu.core.MyBatisDB;
+import com.jianghu.dao.MyBatisDB;
 import com.jianghu.dao.mybatis.mapper.UserMapper;
 import com.jianghu.dao.mybatis.plus.UserPlus;
 import com.jianghu.service.mybatis.UserService;

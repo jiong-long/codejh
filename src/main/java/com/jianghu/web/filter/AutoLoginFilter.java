@@ -13,8 +13,8 @@ import javax.servlet.ServletResponse;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 
-import com.jianghu.core.Database;
-import com.jianghu.core.Tools;
+import com.common.Tools;
+import com.jianghu.dao.Database;
 import com.jianghu.domain.basic.User;
 import com.jianghu.domain.web.SessionConstants;
 

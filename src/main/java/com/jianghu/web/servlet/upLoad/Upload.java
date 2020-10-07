@@ -5,7 +5,7 @@ import java.io.IOException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.jianghu.core.Tools;
+import com.common.Tools;
 import com.jianghu.web.servlet.BaseServlet;
 
 /**

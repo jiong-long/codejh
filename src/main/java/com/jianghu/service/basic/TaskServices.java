@@ -6,6 +6,7 @@ import org.hibernate.criterion.DetachedCriteria;
 
 import com.jianghu.domain.basic.Task;
 
+
 /**
  * 任务services接口
  * 

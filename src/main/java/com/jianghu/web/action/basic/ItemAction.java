@@ -15,11 +15,11 @@ import org.apache.struts2.ServletActionContext;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import com.jianghu.core.Database;
-import com.jianghu.core.Tools;
-import com.jianghu.core.func.SequenceThread;
-import com.jianghu.core.tools.FileUtil;
-import com.jianghu.core.tools.LuceneUtil;
+import com.common.FileUtil;
+import com.common.LuceneUtil;
+import com.common.SequenceThread;
+import com.common.Tools;
+import com.jianghu.dao.Database;
 import com.jianghu.domain.basic.Item;
 import com.jianghu.domain.lucene.LuceneField;
 import com.jianghu.domain.lucene.LuceneThread;

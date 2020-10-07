@@ -4,7 +4,7 @@ import java.util.Properties;
 
 import org.springframework.beans.factory.FactoryBean;
 
-import com.jianghu.core.tools.EncryptUtil;
+import com.common.EncryptUtil;
 
 /**
  * 对dao.xml加密的信息进行解密

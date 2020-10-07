@@ -3,7 +3,7 @@ package com.jianghu.domain.lucene;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.jianghu.core.tools.LuceneUtil;
+import com.common.LuceneUtil;
 
 public class LuceneThread implements Runnable {
 	private List<LuceneField> field_list = new ArrayList<LuceneField>();

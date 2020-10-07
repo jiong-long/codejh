@@ -15,7 +15,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.jianghu.core.Tools;
+import com.common.Tools;
 import com.jianghu.domain.basic.User;
 import com.jianghu.domain.layim.Friend;
 import com.jianghu.domain.layim.Group;

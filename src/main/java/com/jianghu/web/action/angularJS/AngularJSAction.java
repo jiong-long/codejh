@@ -2,7 +2,7 @@ package com.jianghu.web.action.angularJS;
 
 import java.io.IOException;
 
-import com.jianghu.core.Tools;
+import com.common.Tools;
 import com.opensymphony.xwork2.ActionSupport;
 
 /**

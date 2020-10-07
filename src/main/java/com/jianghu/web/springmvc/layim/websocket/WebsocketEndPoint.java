@@ -14,8 +14,8 @@ import org.springframework.web.socket.TextMessage;
 import org.springframework.web.socket.WebSocketSession;
 import org.springframework.web.socket.handler.TextWebSocketHandler;
 
-import com.jianghu.core.Database;
-import com.jianghu.core.func.SequenceThread;
+import com.common.SequenceThread;
+import com.jianghu.dao.Database;
 import com.jianghu.domain.layim.FriendMessage;
 import com.jianghu.domain.web.SessionConstants;
 import com.jianghu.web.springmvc.SpringUtil;

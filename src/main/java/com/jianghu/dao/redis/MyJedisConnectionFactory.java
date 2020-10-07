@@ -28,7 +28,7 @@ import org.springframework.util.CollectionUtils;
 import org.springframework.util.ReflectionUtils;
 import org.springframework.util.StringUtils;
 
-import com.jianghu.core.tools.EncryptUtil;
+import com.common.EncryptUtil;
 
 import redis.clients.jedis.Jedis;
 import redis.clients.jedis.JedisPool;

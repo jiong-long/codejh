@@ -16,6 +16,7 @@ import javax.persistence.Table;
 
 import com.jianghu.domain.basic.User;
 
+
 /**
  * 人员基本信息
  * 

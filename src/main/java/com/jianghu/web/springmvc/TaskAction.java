@@ -21,9 +21,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.jianghu.core.Tools;
-import com.jianghu.core.func.beanUtils.MyBeanUtils;
-import com.jianghu.core.tools.DateUtil;
+import com.cases.beanUtils.MyBeanUtils;
+import com.common.DateUtil;
+import com.common.Tools;
 import com.jianghu.domain.basic.Task;
 import com.jianghu.service.basic.TaskServices;
 

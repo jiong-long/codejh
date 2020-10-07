@@ -18,16 +18,16 @@ import javax.mail.MessagingException;
 import javax.mail.Session;
 import javax.servlet.http.HttpServletRequest;
 
-import com.jianghu.core.tools.EncryptUtil;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.struts2.ServletActionContext;
 
-import com.jianghu.core.Database;
-import com.jianghu.core.Tools;
-import com.jianghu.core.func.SequenceThread;
-import com.jianghu.core.tools.ExcelUtil;
-import com.jianghu.core.tools.FileUtil;
-import com.jianghu.core.tools.MailUtils;
+import com.common.EncryptUtil;
+import com.common.ExcelUtil;
+import com.common.FileUtil;
+import com.common.MailUtils;
+import com.common.SequenceThread;
+import com.common.Tools;
+import com.jianghu.dao.Database;
 import com.jianghu.domain.general.PaginationRequest;
 import com.jianghu.domain.general.PaginationResponse;
 import com.jianghu.domain.pcAndMail.Mail;

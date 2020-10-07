@@ -10,9 +10,9 @@ import javax.ws.rs.Produces;
 
 import org.json.JSONObject;
 
-import com.jianghu.core.Database;
-import com.jianghu.core.Tools;
-import com.jianghu.core.tools.EncryptUtil;
+import com.common.EncryptUtil;
+import com.common.Tools;
+import com.jianghu.dao.Database;
 
 /**
  * restful 风格 params参数接口

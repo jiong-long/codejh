@@ -7,7 +7,8 @@ import javax.ws.rs.core.Context;
 
 import org.json.JSONObject;
 
-import com.jianghu.core.tools.WebServiceUtil;
+import com.common.WebServiceUtil;
+
 
 /**
  * restful 风格 raw参数接口

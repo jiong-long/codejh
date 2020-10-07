@@ -6,7 +6,7 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 
-import com.jianghu.core.tools.Log;
+import com.common.Log;
 
 /**
  * 对象序列化与反序列化工具

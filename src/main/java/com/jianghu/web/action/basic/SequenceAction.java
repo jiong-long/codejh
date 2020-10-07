@@ -3,8 +3,8 @@ package com.jianghu.web.action.basic;
 import java.io.IOException;
 import java.util.List;
 
-import com.jianghu.core.Database;
-import com.jianghu.core.Tools;
+import com.common.Tools;
+import com.jianghu.dao.Database;
 import com.jianghu.domain.basic.Sequence;
 import com.opensymphony.xwork2.ActionSupport;
 

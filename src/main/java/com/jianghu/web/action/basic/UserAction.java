@@ -15,10 +15,10 @@ import org.apache.struts2.ServletActionContext;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import com.jianghu.core.Database;
-import com.jianghu.core.Tools;
-import com.jianghu.core.func.SequenceThread;
-import com.jianghu.core.tools.SmsUtil;
+import com.common.SequenceThread;
+import com.common.SmsUtil;
+import com.common.Tools;
+import com.jianghu.dao.Database;
 import com.jianghu.domain.basic.User;
 import com.jianghu.domain.web.SessionConstants;
 import com.jianghu.service.basic.UserServices;

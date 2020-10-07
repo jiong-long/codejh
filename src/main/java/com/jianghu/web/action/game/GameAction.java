@@ -4,13 +4,13 @@ import java.awt.BorderLayout;
 
 import javax.swing.JFrame;
 
-import com.jianghu.domain.snakeEat.controllor.Controller;
-import com.jianghu.domain.snakeEat.domain.Food;
-import com.jianghu.domain.snakeEat.domain.Ground;
-import com.jianghu.domain.snakeEat.domain.Snake;
-import com.jianghu.domain.snakeEat.panel.GamePanel;
-import com.jianghu.domain.snakeEat.util.Global;
-import com.jianghu.domain.tetris.model.ShapeFactory;
+import com.cases.snakeEat.controllor.Controller;
+import com.cases.snakeEat.domain.Food;
+import com.cases.snakeEat.domain.Ground;
+import com.cases.snakeEat.domain.Snake;
+import com.cases.snakeEat.panel.GamePanel;
+import com.cases.snakeEat.util.Global;
+import com.cases.tetris.model.ShapeFactory;
 import com.opensymphony.xwork2.ActionSupport;
 
 /**
@@ -66,10 +66,10 @@ public class GameAction extends ActionSupport {
 	 */
 	public String tetris() {
 		ShapeFactory factory = new ShapeFactory();
-		com.jianghu.domain.tetris.model.Ground ground = new com.jianghu.domain.tetris.model.Ground();
-		com.jianghu.domain.tetris.view.GamePanel panel = new com.jianghu.domain.tetris.view.GamePanel();
+		com.cases.tetris.model.Ground ground = new com.cases.tetris.model.Ground();
+		com.cases.tetris.view.GamePanel panel = new com.cases.tetris.view.GamePanel();
 
-		com.jianghu.domain.tetris.control.Controller controller = new com.jianghu.domain.tetris.control.Controller(
+		com.cases.tetris.control.Controller controller = new com.cases.tetris.control.Controller(
 				factory, ground, panel);
 
 		JFrame frame = new JFrame();

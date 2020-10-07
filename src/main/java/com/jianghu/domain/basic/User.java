@@ -18,6 +18,7 @@ import javax.servlet.http.HttpSessionBindingListener;
 
 import com.jianghu.domain.layim.Mine;
 
+
 /**
  * 用户
  * 

@@ -1,11 +1,11 @@
-<%@page import="com.jianghu.core.func.single.Location"%>
+<%@page import="com.common.LuceneUtil"%>
+<%@page import="com.common.Location"%>
+<%@page import="com.common.Tools"%>
+<%@page import="com.jianghu.dao.Database"%>
 <%@page import="com.jianghu.domain.lucene.LuceneField"%>
-<%@page import="com.jianghu.core.tools.LuceneUtil"%>
 <%@page import="org.json.JSONArray"%>
-<%@page import="com.jianghu.core.Tools"%>
 <%@page import="java.net.URLDecoder"%>
 <%@page import="com.jianghu.domain.basic.User"%>
-<%@page import="com.jianghu.core.Database"%>
 <%@page import="java.sql.ResultSet"%>
 <%@page language="java" import="java.util.*" pageEncoding="UTF-8"%>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
