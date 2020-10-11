@@ -15,10 +15,11 @@ import org.springframework.web.socket.WebSocketSession;
 import org.springframework.web.socket.handler.TextWebSocketHandler;
 
 import com.common.SequenceThread;
+import com.common.SpringUtil;
 import com.jianghu.dao.Database;
 import com.jianghu.domain.layim.FriendMessage;
 import com.jianghu.domain.web.SessionConstants;
-import com.jianghu.web.springmvc.SpringUtil;
+import com.jianghu.service.layim.FriendMessageServices;
 
 /**
  * websocket处理类
@@ -111,7 +112,11 @@ public class WebsocketEndPoint extends TextWebSocketHandler {
 		long timestamp = System.currentTimeMillis();
 		FriendMessage friendMessage = new FriendMessage(cid, username, avatar, id, toid, type, content, mine, fromid,
 				timestamp);
-		SpringUtil.saveFriendMessage(friendMessage);
+		
+		//com.jianghu.web.springmvc.SpringUtil.saveFriendMessage(friendMessage);
+		//可以使用这样的方法拿到Bean，避免了每次都要新建类来处理
+		FriendMessageServices friendMessageServices = SpringUtil.getBean(FriendMessageServices.class);
+		friendMessageServices.save(friendMessage);
 		return friendMessage;
 	}
 
