@@ -1,11 +1,11 @@
-package com.cases.tetris;
+package com.cases.game.tetris;
 
 import javax.swing.JFrame;
 
-import com.cases.tetris.control.Controller;
-import com.cases.tetris.model.Ground;
-import com.cases.tetris.model.ShapeFactory;
-import com.cases.tetris.view.GamePanel;
+import com.cases.game.tetris.control.Controller;
+import com.cases.game.tetris.model.Ground;
+import com.cases.game.tetris.model.ShapeFactory;
+import com.cases.game.tetris.view.GamePanel;
 
 public class game {
 

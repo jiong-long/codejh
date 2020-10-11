@@ -1,10 +1,10 @@
-package com.cases.snakeEat.domain;
+package com.cases.game.snakeEat.domain;
 
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Point;
 
-import com.cases.snakeEat.util.Global;
+import com.cases.game.snakeEat.util.Global;
 
 public class Food extends Point {
 	private static final long serialVersionUID = -545532043981820040L;

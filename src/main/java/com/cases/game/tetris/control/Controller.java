@@ -1,13 +1,13 @@
-package com.cases.tetris.control;
+package com.cases.game.tetris.control;
 
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 
-import com.cases.tetris.listener.ShapeListener;
-import com.cases.tetris.model.Ground;
-import com.cases.tetris.model.Shape;
-import com.cases.tetris.model.ShapeFactory;
-import com.cases.tetris.view.GamePanel;
+import com.cases.game.tetris.listener.ShapeListener;
+import com.cases.game.tetris.model.Ground;
+import com.cases.game.tetris.model.Shape;
+import com.cases.game.tetris.model.ShapeFactory;
+import com.cases.game.tetris.view.GamePanel;
 
 /**
  * 控制器 控制各种键盘事件的发生

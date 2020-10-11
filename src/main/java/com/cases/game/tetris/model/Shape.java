@@ -1,10 +1,10 @@
-package com.cases.tetris.model;
+package com.cases.game.tetris.model;
 
 import java.awt.Color;
 import java.awt.Graphics;
 
-import com.cases.tetris.listener.ShapeListener;
-import com.cases.tetris.util.Global;
+import com.cases.game.tetris.listener.ShapeListener;
+import com.cases.game.tetris.util.Global;
 
 /**
  * 图形相关方法

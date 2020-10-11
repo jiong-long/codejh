@@ -1,4 +1,4 @@
-package com.cases.snakeEat;
+package com.cases.game.snakeEat;
 
 import java.awt.BorderLayout;
 
@@ -6,12 +6,12 @@ import javax.swing.JFrame;
 
 import org.apache.ibatis.type.Alias;
 
-import com.cases.snakeEat.controllor.Controller;
-import com.cases.snakeEat.domain.Food;
-import com.cases.snakeEat.domain.Ground;
-import com.cases.snakeEat.domain.Snake;
-import com.cases.snakeEat.panel.GamePanel;
-import com.cases.snakeEat.util.Global;
+import com.cases.game.snakeEat.controllor.Controller;
+import com.cases.game.snakeEat.domain.Food;
+import com.cases.game.snakeEat.domain.Ground;
+import com.cases.game.snakeEat.domain.Snake;
+import com.cases.game.snakeEat.panel.GamePanel;
+import com.cases.game.snakeEat.util.Global;
 
 @Alias("Game2")
 public class Game {

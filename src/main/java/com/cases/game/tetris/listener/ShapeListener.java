@@ -1,6 +1,6 @@
-package com.cases.tetris.listener;
+package com.cases.game.tetris.listener;
 
-import com.cases.tetris.model.Shape;
+import com.cases.game.tetris.model.Shape;
 
 /**
  * 监听图形已经到达底部

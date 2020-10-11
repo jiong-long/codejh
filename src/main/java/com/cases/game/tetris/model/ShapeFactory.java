@@ -1,8 +1,8 @@
-package com.cases.tetris.model;
+package com.cases.game.tetris.model;
 
 import java.util.Random;
 
-import com.cases.tetris.listener.ShapeListener;
+import com.cases.game.tetris.listener.ShapeListener;
 
 /**
  * 生产各种图形

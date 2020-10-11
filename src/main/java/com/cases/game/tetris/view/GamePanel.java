@@ -1,12 +1,12 @@
-package com.cases.tetris.view;
+package com.cases.game.tetris.view;
 
 import java.awt.Graphics;
 
 import javax.swing.JPanel;
 
-import com.cases.tetris.model.Ground;
-import com.cases.tetris.model.Shape;
-import com.cases.tetris.util.Global;
+import com.cases.game.tetris.model.Ground;
+import com.cases.game.tetris.model.Shape;
+import com.cases.game.tetris.util.Global;
 
 /**
  * 显示主界面的面板

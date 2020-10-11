@@ -1,4 +1,4 @@
-package com.cases.snakeEat.domain;
+package com.cases.game.snakeEat.domain;
 
 import java.awt.Color;
 import java.awt.Graphics;
@@ -7,7 +7,7 @@ import java.util.Random;
 
 import org.apache.ibatis.type.Alias;
 
-import com.cases.snakeEat.util.Global;
+import com.cases.game.snakeEat.util.Global;
 
 @Alias("Ground2")
 public class Ground {

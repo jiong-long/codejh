@@ -1,15 +1,15 @@
-package com.cases.snakeEat.controllor;
+package com.cases.game.snakeEat.controllor;
 
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 
 import org.apache.ibatis.type.Alias;
 
-import com.cases.snakeEat.domain.Food;
-import com.cases.snakeEat.domain.Ground;
-import com.cases.snakeEat.domain.Snake;
-import com.cases.snakeEat.listener.SnakeListener;
-import com.cases.snakeEat.panel.GamePanel;
+import com.cases.game.snakeEat.domain.Food;
+import com.cases.game.snakeEat.domain.Ground;
+import com.cases.game.snakeEat.domain.Snake;
+import com.cases.game.snakeEat.listener.SnakeListener;
+import com.cases.game.snakeEat.panel.GamePanel;
 
 @Alias("Controller2")
 public class Controller extends KeyAdapter implements SnakeListener {

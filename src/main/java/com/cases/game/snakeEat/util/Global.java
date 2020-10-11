@@ -1,4 +1,4 @@
-package com.cases.snakeEat.util;
+package com.cases.game.snakeEat.util;
 
 import org.apache.ibatis.type.Alias;
 

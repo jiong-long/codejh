@@ -1,4 +1,4 @@
-package com.cases.snakeEat.panel;
+package com.cases.game.snakeEat.panel;
 
 import java.awt.Color;
 import java.awt.Graphics;
@@ -7,10 +7,10 @@ import javax.swing.JPanel;
 
 import org.apache.ibatis.type.Alias;
 
-import com.cases.snakeEat.domain.Food;
-import com.cases.snakeEat.domain.Ground;
-import com.cases.snakeEat.domain.Snake;
-import com.cases.snakeEat.util.Global;
+import com.cases.game.snakeEat.domain.Food;
+import com.cases.game.snakeEat.domain.Ground;
+import com.cases.game.snakeEat.domain.Snake;
+import com.cases.game.snakeEat.util.Global;
 
 @Alias("GamePanel2")
 public class GamePanel extends JPanel {

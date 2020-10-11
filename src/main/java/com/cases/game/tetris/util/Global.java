@@ -1,4 +1,4 @@
-package com.cases.tetris.util;
+package com.cases.game.tetris.util;
 
 public class Global {
 	// 图形为正方形格子，每个格子的大小

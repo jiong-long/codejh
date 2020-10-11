@@ -1,4 +1,4 @@
-package com.cases.snakeEat.domain;
+package com.cases.game.snakeEat.domain;
 
 import java.awt.Color;
 import java.awt.Graphics;
@@ -7,8 +7,8 @@ import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.Set;
 
-import com.cases.snakeEat.listener.SnakeListener;
-import com.cases.snakeEat.util.Global;
+import com.cases.game.snakeEat.listener.SnakeListener;
+import com.cases.game.snakeEat.util.Global;
 
 public class Snake {
 
