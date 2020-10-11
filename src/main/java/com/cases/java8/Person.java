@@ -1,6 +1,8 @@
 package com.cases.java8;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 import lombok.ToString;
 import lombok.experimental.Accessors;
 
@@ -13,6 +15,8 @@ import lombok.experimental.Accessors;
 @Data
 @ToString
 @Accessors(chain = true)
+@NoArgsConstructor
+@AllArgsConstructor
 public class Person {
     private String name;
     private int age;

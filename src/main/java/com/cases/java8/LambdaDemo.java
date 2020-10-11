@@ -1,9 +1,41 @@
 package com.cases.java8;
 
+import java.util.function.Consumer;
+import java.util.function.Function;
+import java.util.function.Supplier;
+
 public class LambdaDemo {
 	
 	public static void main(String args[]) {
+		//demo1();
+		//functionDemo();
+		//consumerDemo();
+		supplierDemo();
+	}
+	
+	public static void supplierDemo() {
+        Supplier<Person> supplierPerson = Person::new;
 
+        Person person = supplierPerson.get();
+        person.setName("dd");
+        System.out.println(person.getName());
+	}
+	
+	public static void consumerDemo() {
+		Consumer<Integer> consumer = x -> {
+            int a = x + 2;
+            System.out.println(a);
+            System.out.println(a + "_");
+        };
+        consumer.accept(4);
+	}
+
+	public static void functionDemo() {
+		Function<Integer, String> function2 = x -> x * 2 + "dd";
+        System.out.println(function2.apply(4));
+
+        Function<String, Person> objFunction2 = str -> new Person().setName(str);
+        System.out.println(objFunction2.apply("dd").getName());
 	}
 	
 	public void demo2() {
@@ -18,7 +50,10 @@ public class LambdaDemo {
         new Thread(() -> System.out.println("lambda写法")).start();  
 	}
 	
-	public void demo1() {
+	/**
+	 * 自定义接口
+	 */
+	public static void demo1() {
 		LambdaDemo tester = new LambdaDemo();
 
 		// 类型声明

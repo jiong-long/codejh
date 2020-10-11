@@ -18,7 +18,7 @@ public class OptionalDemo {
 		// Optional.isPresent - 判断值是否存在
 		System.out.println("第一个参数值存在: " + a.isPresent());
 		System.out.println("第二个参数值存在: " + b.isPresent());
-
+		
 		// Optional.orElse - 如果值存在，返回它，否则返回默认值
 		Integer value1 = a.orElse(new Integer(0));
 
