@@ -20,6 +20,7 @@
 	
 	<!-- 把标记了@Controller等注解的类转换为bean -->
 	<context:component-scan base-package="com.jianghu" />
+	<context:component-scan base-package="com.cases" />
 	
 	<!-- 定时器相关配置 -->
 	<!-- 报错Line: 230 - com/opensymphony/xwork2/spring/SpringObjectFactory.java:230:-1 -->
