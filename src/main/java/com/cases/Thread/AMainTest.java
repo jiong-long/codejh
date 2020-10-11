@@ -1,6 +1,6 @@
 package com.cases.Thread;
 
-public class MainTest {
+public class AMainTest {
 	
 	public static void main(String[] args) {
 		//缓冲区
