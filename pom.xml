@@ -273,6 +273,13 @@
 		    <artifactId>fastjson</artifactId>
 		    <version>1.2.73</version>
 		</dependency>
+
+		<!--hutool工具类-->
+		<dependency>
+			<groupId>cn.hutool</groupId>
+			<artifactId>hutool-all</artifactId>
+			<version>5.4.5</version>
+		</dependency>
 		
 		<!-- iText 操作PDF相关的 -->
 		<dependency>
