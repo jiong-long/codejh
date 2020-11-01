@@ -1,10 +1,10 @@
 package com.cases.RabbitMQ;
 
-import java.io.IOException;
-import java.util.concurrent.TimeoutException;
-
 import com.rabbitmq.client.Connection;
 import com.rabbitmq.client.ConnectionFactory;
+
+import java.io.IOException;
+import java.util.concurrent.TimeoutException;
 
 /**
  * MQ相关工具类
@@ -26,9 +26,11 @@ public class RabbitTools {
 		ConnectionFactory factory = new ConnectionFactory();
 		//设置RabbitMQ相关信息
 		factory.setHost("localhost");
-		//factory.setUsername("");
-		//factory.setPassword("");
-		//factory.setPort(2088);
+		factory.setUsername("guest");
+		factory.setPassword("guest");
+		factory.setPort(5672);
+		// RABBITMQ_DEFAULT_VHOST
+		factory.setVirtualHost("my_vhost");
 		//创建一个新的连接
 		return factory.newConnection();
 	}

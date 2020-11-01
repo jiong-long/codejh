@@ -11,7 +11,7 @@
  Target Server Version : 80021
  File Encoding         : 65001
 
- Date: 14/08/2020 11:12:40
+ Date: 30/10/2020 17:58:12
 */
 
 SET NAMES utf8mb4;
@@ -22,7 +22,7 @@ SET FOREIGN_KEY_CHECKS = 0;
 -- ----------------------------
 DROP TABLE IF EXISTS `bc_item`;
 CREATE TABLE `bc_item` (
-  `ID` decimal(8,0) DEFAULT NULL COMMENT '主键',
+  `ID` decimal(8,0) NOT NULL COMMENT '主键',
   `ITEMNAME` varchar(20) DEFAULT NULL COMMENT '名称',
   `ITEMARR` varchar(50) DEFAULT NULL COMMENT '地址',
   `ITEMDSC` varchar(70) DEFAULT NULL COMMENT '简单描述',
@@ -30,32 +30,33 @@ CREATE TABLE `bc_item` (
   `CREATTIME` datetime DEFAULT NULL COMMENT '创建日期',
   `UPDATETIME` datetime DEFAULT NULL COMMENT '修改日期',
   `SEECOUNT` decimal(8,0) DEFAULT NULL COMMENT '查看次数',
-  `IMG_PATH` varchar(255) DEFAULT NULL
+  `IMG_PATH` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of bc_item
 -- ----------------------------
 BEGIN;
-INSERT INTO `bc_item` VALUES (112, '获取IP、位置', '/jiong/page/function/ipOrLocation.html', 'JavaScript获取客户端的IP或者地址位置', '<p>一共有三个方法，各有优缺点，方法一是最完美的，建议使用方法一。</p>\r\n', '2017-10-21 11:56:59', '2018-02-08 23:05:53', 20, 'IP.jpg');
-INSERT INTO `bc_item` VALUES (109, '天气预报', '/jiong/page/webServices/weather.html', '通过webServices接口获取未来五天的天气，并使用layui的grid进行展示', '<p>1、layui的grid功能也较为强大，但是目前使用中，无法做到grid的宽度自适应。</p>\r\n\r\n<p>2、通过webServices接口获取未来五天的天气，并使用了DOM对返回的XML进行了解析。</p>\r\n', '2017-10-12 23:35:13', '2018-02-08 23:09:38', 35, 'tqyb.jpg');
-INSERT INTO `bc_item` VALUES (111, '右键菜单', '/jiong/page/function/rightMenu.html', '抄袭网上右键菜单，以便下次使用', '<p>&nbsp;oncontextmenu=&quot;return false&quot; &nbsp;屏蔽原来的右键菜单<br />\r\n&nbsp;onmousedown &nbsp;在鼠标按钮在元素上按下时触发。<br />\r\n&nbsp;event.button == 2 右键 &nbsp;0 左键 &nbsp;1 滑轮按下。</p>\r\n', '2017-10-18 22:37:50', '2018-02-08 23:06:09', 8, 'yj.jpg');
-INSERT INTO `bc_item` VALUES (113, 'JavaScript获取宽高', '', 'js获取屏幕、网页、分辨率等操作', '<p><strong>网页可见区域宽： document.body.clientWidth&nbsp;<br />\r\n网页可见区域高： document.body.clientHeight&nbsp;</strong><br />\r\n网页可见区域宽： document.body.offsetWidth (包括边线的宽)&nbsp;<br />\r\n网页可见区域高： document.body.offsetHeight (包括边线的高)&nbsp;<br />\r\n网页正文全文宽： document.body.scrollWidth&nbsp;<br />\r\n网页正文全文高： document.body.scrollHeight&nbsp;<br />\r\n网页被卷去的高： document.body.scrollTop&nbsp;<br />\r\n网页被卷去的左： document.body.scrollLeft&nbsp;<br />\r\n网页正文部分上： window.screenTop&nbsp;<br />\r\n网页正文部分左： window.screenLeft&nbsp;<br />\r\n屏幕分辨率的高： window.screen.height&nbsp;<br />\r\n屏幕分辨率的宽： window.screen.width&nbsp;<br />\r\n屏幕可用工作区高度： window.screen.availHeight&nbsp;<br />\r\n屏幕可用工作区宽度： window.screen.availWidth</p>\r\n', '2017-10-21 23:37:37', '2018-02-08 22:50:24', 26, 'js.jpg');
 INSERT INTO `bc_item` VALUES (77, 'zTree', '/jiong/page/Tree/zTree/jianghu_zTree.html', '使用jQuery easyUI实现zTree相关操作，包括异步加载，右键菜单等', '<p>功能强大的树组件，这个就不多介绍了，应该都用过。</p>\r\n\r\n<p>后台实现了，拖拽排序，调整上下级，右键菜单等不常用的功能，可以参考。</p>\r\n', '2017-07-06 22:43:58', '2018-02-08 23:07:20', 24, 'ztree.jpg');
-INSERT INTO `bc_item` VALUES (84, '地图', '/jiong/page/map/helloWorld.html', '目前只能简单的定位到当前位置，暂时想不到什么需要开发的', '<p>需要开发时查看 http://lbsyun.baidu.com/jsdemo.htm</p>\r\n\r\n<p>开发过程和Echarts差不多，找到需要的复制过来就行了</p>\r\n', '2017-07-06 22:58:05', '2018-02-08 22:34:53', 26, 'dt.jpg');
+INSERT INTO `bc_item` VALUES (78, 'ECharts', '/jiong/page/echarts/echarts.html', 'ECharts的简单操作，包括ECharts3 Demo', '<p>这个没有什么好说的，需要什么样的样式去echarts的官网查就是了。</p>\r\n\r\n<p>这个的重点是取数。</p>\r\n', '2017-07-06 22:46:49', '2018-02-08 22:44:42', 8, 'echarts.jpg');
 INSERT INTO `bc_item` VALUES (79, 'AngularJS', '/jiong/page/AngularJS/HelloWorld2.html', 'AngularJS学习时写的各种Demo，暂时没有具体应用', '<p>应该是比较火的技术，但是已经没有实际运用上。后期就会完善。</p>\r\n', '2017-07-06 22:48:29', '2018-02-08 22:31:04', 12, 'angularJs.jpg');
+INSERT INTO `bc_item` VALUES (81, '爬虫', '/jiong/page/pcAndMail/pc.html', '通过URL获取制定内容，Excel导入导出，JavaMail的实现，EasyUI grid与分页的实现', '<p>这个实现的功能较多</p>\r\n\r\n<ol>\r\n	<li>通过URL获取页面内容，然后通过正则表达式获取指定内容</li>\r\n	<li>Excel的导入导出，包括导出的样式等</li>\r\n	<li>Javamail的实现</li>\r\n	<li>jQuery easyui的grid与分页功能的实现。</li>\r\n</ol>\r\n', '2017-07-06 22:53:17', '2018-02-08 22:48:09', 16, 'pc.jpg');
+INSERT INTO `bc_item` VALUES (82, '贪吃蛇', '/jiong/game_snakeEat.do', '使用Java图形化组件实现贪吃蛇游戏的基本功能', '<p>与俄罗斯方块的功能差不多</p>\r\n', '2017-07-06 22:55:56', '2018-02-08 22:26:00', 11, 'tcs.jpg');
+INSERT INTO `bc_item` VALUES (83, '俄罗斯方块', '/jiong/game_tetris.do', '使用Java图形化组件awing实现俄罗斯方块的基本功能', '<p>使用了工厂模式，逻辑性也比较强，就是需要熟悉的API太多，使用上可能较为麻烦，一般也不使用Java开发图形化界面。</p>\r\n', '2017-07-06 22:57:04', '2018-02-08 22:18:35', 80, 'elsfk.jpg');
+INSERT INTO `bc_item` VALUES (84, '地图', '/jiong/page/map/helloWorld.html', '目前只能简单的定位到当前位置，暂时想不到什么需要开发的', '<p>需要开发时查看 http://lbsyun.baidu.com/jsdemo.htm</p>\r\n\r\n<p>开发过程和Echarts差不多，找到需要的复制过来就行了</p>\r\n', '2017-07-06 22:58:05', '2018-02-08 22:34:53', 26, 'dt.jpg');
 INSERT INTO `bc_item` VALUES (85, 'Fileinput', '/jiong/page/upload/upLoad.html', '使用Bootstrap Fileinput实现图片的上传下载功能，包括toastr弹窗提示', '<p>FileInput应该是比较好用的图片上传预览控件，支持的功能也比较多，但是可能没有开发好，所以相关的代码有点烂尾。有待后期完善。</p>\r\n\r\n<p>toastr是一个弹出框，经常用做提示等，但是由于支持的功能太少，所以建议使用layer，功能强大，使用简答。</p>\r\n', '2017-07-06 23:04:16', '2018-02-08 22:36:21', 102, 'fileinput.jpg');
+INSERT INTO `bc_item` VALUES (86, 'ocupload', '/jiong/page/upload/ocUpload.html', 'ocupload一键上传功能实现', '<p>一键上传，插件较为简单，点击即上传。</p>\r\n\r\n<p>原理：在页面上生成一个表单，点击后自动提交表单。</p>\r\n', '2017-07-06 23:05:01', '2018-02-08 22:53:38', 6, 'ocupload.jpg');
 INSERT INTO `bc_item` VALUES (87, '序列管理', '/jiong/page/basic/sequence.html', 'Jquery EasyUI 实现序列管理的显示功能', '<p>最简单的序列管理功能，简单实验一下</p>\r\n', '2017-07-06 23:07:09', '2017-10-09 21:53:18', 17, NULL);
 INSERT INTO `bc_item` VALUES (93, 'OrgChart', '/jiong/page/Tree/OrgChart/OrgChart.html', '做组织机构图做好用的控件', '<p>个人觉得就是做组织结构最强大的控件，功能强大，使用简单，相关文档完善。</p>\r\n\r\n<p>就是有一些小bug，比如从左到右显示，图形不在显示的页面中。</p>\r\n', '2017-09-27 21:55:21', '2018-02-08 22:46:38', 10, 'orgChart.jpg');
 INSERT INTO `bc_item` VALUES (98, 'Lucene', '/jiong/page/basic/lucene.html', '实现了索引的CURD，并且在定时器中更新索引', '<p>实现了lucene的简单功能，包括CURD，以及手动更新（单线程）的功能，自动更新（定时器）的功能。</p>\r\n', '2017-09-30 23:48:53', '2018-02-08 22:55:23', 38, 'lucene.jpg');
-INSERT INTO `bc_item` VALUES (78, 'ECharts', '/jiong/page/echarts/echarts.html', 'ECharts的简单操作，包括ECharts3 Demo', '<p>这个没有什么好说的，需要什么样的样式去echarts的官网查就是了。</p>\r\n\r\n<p>这个的重点是取数。</p>\r\n', '2017-07-06 22:46:49', '2018-02-08 22:44:42', 8, 'echarts.jpg');
-INSERT INTO `bc_item` VALUES (82, '贪吃蛇', '/jiong/game_snakeEat.do', '使用Java图形化组件实现贪吃蛇游戏的基本功能', '<p>与俄罗斯方块的功能差不多</p>\r\n', '2017-07-06 22:55:56', '2018-02-08 22:26:00', 11, 'tcs.jpg');
-INSERT INTO `bc_item` VALUES (86, 'ocupload', '/jiong/page/upload/ocUpload.html', 'ocupload一键上传功能实现', '<p>一键上传，插件较为简单，点击即上传。</p>\r\n\r\n<p>原理：在页面上生成一个表单，点击后自动提交表单。</p>\r\n', '2017-07-06 23:05:01', '2018-02-08 22:53:38', 6, 'ocupload.jpg');
-INSERT INTO `bc_item` VALUES (81, '爬虫', '/jiong/page/pcAndMail/pc.html', '通过URL获取制定内容，Excel导入导出，JavaMail的实现，EasyUI grid与分页的实现', '<p>这个实现的功能较多</p>\r\n\r\n<ol>\r\n	<li>通过URL获取页面内容，然后通过正则表达式获取指定内容</li>\r\n	<li>Excel的导入导出，包括导出的样式等</li>\r\n	<li>Javamail的实现</li>\r\n	<li>jQuery easyui的grid与分页功能的实现。</li>\r\n</ol>\r\n', '2017-07-06 22:53:17', '2018-02-08 22:48:09', 16, 'pc.jpg');
-INSERT INTO `bc_item` VALUES (83, '俄罗斯方块', '/jiong/game_tetris.do', '使用Java图形化组件awing实现俄罗斯方块的基本功能', '<p>使用了工厂模式，逻辑性也比较强，就是需要熟悉的API太多，使用上可能较为麻烦，一般也不使用Java开发图形化界面。</p>\r\n', '2017-07-06 22:57:04', '2018-02-08 22:18:35', 80, 'elsfk.jpg');
+INSERT INTO `bc_item` VALUES (109, '天气预报', '/jiong/page/webServices/weather.html', '通过webServices接口获取未来五天的天气，并使用layui的grid进行展示', '<p>1、layui的grid功能也较为强大，但是目前使用中，无法做到grid的宽度自适应。</p>\r\n\r\n<p>2、通过webServices接口获取未来五天的天气，并使用了DOM对返回的XML进行了解析。</p>\r\n', '2017-10-12 23:35:13', '2018-02-08 23:09:38', 36, 'tqyb.jpg');
 INSERT INTO `bc_item` VALUES (110, '注册', '/jiong/page/basic/register.html', '使用layui的表单与阿里的短信服务完成用户注册功能的开发（可以获取手机归属地）', '<p>1、layui的表单相关验证封装的比较好，UI也比较好看，看了文档功能也比较强大，但是使用起来总是不顺手，在一些细节上的处理不够好，遇到的问题的比较多。</p>\r\n\r\n<p>2、阿里的短信服务封装的比较好，也有现成的demo，费用上也比较便宜。</p>\r\n\r\n<p>3、button标签增加点击事件后，点击是会刷新页面（有点坑），需要增加属性 type=&quot;button&quot;就不会刷新页面。</p>\r\n\r\n<p>4、增加了获取手机归属地的功能，使用了webxml的接口开发完成。</p>\r\n', '2017-10-17 00:08:01', '2018-02-08 22:28:41', 17, 'zc.jpg');
+INSERT INTO `bc_item` VALUES (111, '右键菜单', '/jiong/page/function/rightMenu.html', '抄袭网上右键菜单，以便下次使用', '<p>&nbsp;oncontextmenu=&quot;return false&quot; &nbsp;屏蔽原来的右键菜单<br />\r\n&nbsp;onmousedown &nbsp;在鼠标按钮在元素上按下时触发。<br />\r\n&nbsp;event.button == 2 右键 &nbsp;0 左键 &nbsp;1 滑轮按下。</p>\r\n', '2017-10-18 22:37:50', '2018-02-08 23:06:09', 8, 'yj.jpg');
+INSERT INTO `bc_item` VALUES (112, '获取IP、位置', '/jiong/page/function/ipOrLocation.html', 'JavaScript获取客户端的IP或者地址位置', '<p>一共有三个方法，各有优缺点，方法一是最完美的，建议使用方法一。</p>\r\n', '2017-10-21 11:56:59', '2018-02-08 23:05:53', 20, 'IP.jpg');
+INSERT INTO `bc_item` VALUES (113, 'JavaScript获取宽高', '', 'js获取屏幕、网页、分辨率等操作', '<p><strong>网页可见区域宽： document.body.clientWidth&nbsp;<br />\r\n网页可见区域高： document.body.clientHeight&nbsp;</strong><br />\r\n网页可见区域宽： document.body.offsetWidth (包括边线的宽)&nbsp;<br />\r\n网页可见区域高： document.body.offsetHeight (包括边线的高)&nbsp;<br />\r\n网页正文全文宽： document.body.scrollWidth&nbsp;<br />\r\n网页正文全文高： document.body.scrollHeight&nbsp;<br />\r\n网页被卷去的高： document.body.scrollTop&nbsp;<br />\r\n网页被卷去的左： document.body.scrollLeft&nbsp;<br />\r\n网页正文部分上： window.screenTop&nbsp;<br />\r\n网页正文部分左： window.screenLeft&nbsp;<br />\r\n屏幕分辨率的高： window.screen.height&nbsp;<br />\r\n屏幕分辨率的宽： window.screen.width&nbsp;<br />\r\n屏幕可用工作区高度： window.screen.availHeight&nbsp;<br />\r\n屏幕可用工作区宽度： window.screen.availWidth</p>\r\n', '2017-10-21 23:37:37', '2018-02-08 22:50:24', 26, 'js.jpg');
 INSERT INTO `bc_item` VALUES (119, 'Task', '/jiong/page/task/task_list.jsp', '记录任务相关信息以及完成情况', '<p>1、再次使用layui的表单，的确不太好用，很多常用的均没有实现。</p>\r\n\r\n<p>2、jquery easyUI还是很强大，但是前台展示不如layui好看。</p>\r\n', '2018-04-02 22:58:48', '2018-04-02 22:58:48', 1, 'task.jpg');
-INSERT INTO `bc_item` VALUES (120, '图片缩放', '/jiong/page/imagerZoom/index.jsp', '图片在鼠标焦点位置通过滑轮缩放', '<p>前台Zoom缩放</p>\r\n', '2020-08-14 11:02:38', '2020-08-14 11:04:26', 6, 'zoom.jpg');
+INSERT INTO `bc_item` VALUES (120, '图片缩放', '/jiong/page/imagerZoom/index.jsp', '图片在鼠标焦点位置通过滑轮缩放', '<p>前台Zoom缩放</p>\r\n', '2020-08-14 11:02:38', '2020-08-14 11:04:26', 9, 'zoom.jpg');
 COMMIT;
 
 -- ----------------------------
@@ -414,149 +415,20 @@ COMMIT;
 -- ----------------------------
 DROP TABLE IF EXISTS `mails`;
 CREATE TABLE `mails` (
-  `ID` decimal(5,0) DEFAULT NULL COMMENT '主键',
-  `MAILS` varchar(30) DEFAULT NULL COMMENT '邮箱'
+  `ID` decimal(5,0) NOT NULL COMMENT '主键',
+  `MAILS` varchar(30) DEFAULT NULL COMMENT '邮箱',
+  PRIMARY KEY (`ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of mails
 -- ----------------------------
 BEGIN;
-INSERT INTO `mails` VALUES (1, '2758720486@qq.com');
-INSERT INTO `mails` VALUES (3, '1806002126@qq.com');
-INSERT INTO `mails` VALUES (5, '1981293830@qq.com');
-INSERT INTO `mails` VALUES (7, '610925833@qq.com');
-INSERT INTO `mails` VALUES (9, '1505912151@qq.com');
-INSERT INTO `mails` VALUES (11, '1165529986@qq.com');
-INSERT INTO `mails` VALUES (12, '841842747@qq.com');
-INSERT INTO `mails` VALUES (14, '454870196@qq.com');
-INSERT INTO `mails` VALUES (16, '1368388915@qq.com');
-INSERT INTO `mails` VALUES (17, '1759350328@qq.com');
-INSERT INTO `mails` VALUES (19, '839162908@qq.com');
-INSERT INTO `mails` VALUES (21, 'weng_902@163.com');
-INSERT INTO `mails` VALUES (23, '996759779@qq.com');
-INSERT INTO `mails` VALUES (25, '2474617705@qq.comwin');
-INSERT INTO `mails` VALUES (2, '1464986394@qq.com');
-INSERT INTO `mails` VALUES (4, '531609263@qq.com');
-INSERT INTO `mails` VALUES (6, '1312146339@qq.com');
-INSERT INTO `mails` VALUES (8, '1539921349@qq.com');
-INSERT INTO `mails` VALUES (10, '1921543035@qq.com');
-INSERT INTO `mails` VALUES (11, '1165529986@qq.com');
-INSERT INTO `mails` VALUES (13, '362436414@qq.com');
-INSERT INTO `mails` VALUES (15, '1028277698@qq.com');
-INSERT INTO `mails` VALUES (17, '1759350328@qq.com');
-INSERT INTO `mails` VALUES (19, '839162908@qq.com');
-INSERT INTO `mails` VALUES (21, 'weng_902@163.com');
-INSERT INTO `mails` VALUES (23, '996759779@qq.com');
-INSERT INTO `mails` VALUES (25, '2474617705@qq.comwin');
-INSERT INTO `mails` VALUES (2, '1464986394@qq.com');
-INSERT INTO `mails` VALUES (4, '531609263@qq.com');
-INSERT INTO `mails` VALUES (6, '1312146339@qq.com');
-INSERT INTO `mails` VALUES (8, '1539921349@qq.com');
-INSERT INTO `mails` VALUES (10, '1921543035@qq.com');
-INSERT INTO `mails` VALUES (13, '362436414@qq.com');
-INSERT INTO `mails` VALUES (15, '1028277698@qq.com');
-INSERT INTO `mails` VALUES (18, '924003073@qq.com');
-INSERT INTO `mails` VALUES (20, '75521726@qq.com');
-INSERT INTO `mails` VALUES (22, '1309238637@qq.comwin');
-INSERT INTO `mails` VALUES (24, '1178872096@qq.com');
-INSERT INTO `mails` VALUES (26, '921681535@qq.com');
-INSERT INTO `mails` VALUES (5, '1981293830@qq.com');
-INSERT INTO `mails` VALUES (7, '610925833@qq.com');
-INSERT INTO `mails` VALUES (9, '1505912151@qq.com');
-INSERT INTO `mails` VALUES (12, '841842747@qq.com');
-INSERT INTO `mails` VALUES (14, '454870196@qq.com');
-INSERT INTO `mails` VALUES (16, '1368388915@qq.com');
-INSERT INTO `mails` VALUES (18, '924003073@qq.com');
-INSERT INTO `mails` VALUES (20, '75521726@qq.com');
-INSERT INTO `mails` VALUES (22, '1309238637@qq.comwin');
-INSERT INTO `mails` VALUES (24, '1178872096@qq.com');
-INSERT INTO `mails` VALUES (26, '921681535@qq.com');
-INSERT INTO `mails` VALUES (1, '2758720486@qq.com');
+INSERT INTO `mails` VALUES (1, '2222@222.com');
 INSERT INTO `mails` VALUES (2, '1464986394@qq.com');
 INSERT INTO `mails` VALUES (3, '1806002126@qq.com');
 INSERT INTO `mails` VALUES (4, '531609263@qq.com');
 INSERT INTO `mails` VALUES (5, '1981293830@qq.com');
-INSERT INTO `mails` VALUES (6, '1312146339@qq.com');
-INSERT INTO `mails` VALUES (7, '610925833@qq.com');
-INSERT INTO `mails` VALUES (8, '1539921349@qq.com');
-INSERT INTO `mails` VALUES (9, '1505912151@qq.com');
-INSERT INTO `mails` VALUES (10, '1921543035@qq.com');
-INSERT INTO `mails` VALUES (11, '1165529986@qq.com');
-INSERT INTO `mails` VALUES (12, '841842747@qq.com');
-INSERT INTO `mails` VALUES (13, '362436414@qq.com');
-INSERT INTO `mails` VALUES (14, '454870196@qq.com');
-INSERT INTO `mails` VALUES (15, '1028277698@qq.com');
-INSERT INTO `mails` VALUES (16, '1368388915@qq.com');
-INSERT INTO `mails` VALUES (17, '1759350328@qq.com');
-INSERT INTO `mails` VALUES (18, '924003073@qq.com');
-INSERT INTO `mails` VALUES (19, '839162908@qq.com');
-INSERT INTO `mails` VALUES (22, '1309238637@qq.comwin');
-INSERT INTO `mails` VALUES (23, '996759779@qq.com');
-INSERT INTO `mails` VALUES (24, '1178872096@qq.com');
-INSERT INTO `mails` VALUES (25, '2474617705@qq.comwin');
-INSERT INTO `mails` VALUES (26, '921681535@qq.com');
-INSERT INTO `mails` VALUES (1, '2758720486@qq.com');
-INSERT INTO `mails` VALUES (2, '1464986394@qq.com');
-INSERT INTO `mails` VALUES (3, '1806002126@qq.com');
-INSERT INTO `mails` VALUES (4, '531609263@qq.com');
-INSERT INTO `mails` VALUES (5, '1981293830@qq.com');
-INSERT INTO `mails` VALUES (6, '1312146339@qq.com');
-INSERT INTO `mails` VALUES (7, '610925833@qq.com');
-INSERT INTO `mails` VALUES (8, '1539921349@qq.com');
-INSERT INTO `mails` VALUES (9, '1505912151@qq.com');
-INSERT INTO `mails` VALUES (10, '1921543035@qq.com');
-INSERT INTO `mails` VALUES (11, '1165529986@qq.com');
-INSERT INTO `mails` VALUES (12, '841842747@qq.com');
-INSERT INTO `mails` VALUES (13, '362436414@qq.com');
-INSERT INTO `mails` VALUES (14, '454870196@qq.com');
-INSERT INTO `mails` VALUES (15, '1028277698@qq.com');
-INSERT INTO `mails` VALUES (16, '1368388915@qq.com');
-INSERT INTO `mails` VALUES (17, '1759350328@qq.com');
-INSERT INTO `mails` VALUES (18, '924003073@qq.com');
-INSERT INTO `mails` VALUES (19, '839162908@qq.com');
-INSERT INTO `mails` VALUES (22, '1309238637@qq.comwin');
-INSERT INTO `mails` VALUES (23, '996759779@qq.com');
-INSERT INTO `mails` VALUES (20, '75521726@qq.com');
-INSERT INTO `mails` VALUES (21, 'weng_902@163.com');
-INSERT INTO `mails` VALUES (24, '1178872096@qq.com');
-INSERT INTO `mails` VALUES (25, '2474617705@qq.comwin');
-INSERT INTO `mails` VALUES (26, '921681535@qq.com');
-INSERT INTO `mails` VALUES (20, '75521726@qq.com');
-INSERT INTO `mails` VALUES (21, 'weng_902@163.com');
-INSERT INTO `mails` VALUES (27, '903023764@qq.com');
-INSERT INTO `mails` VALUES (27, '903023764@qq.com');
-INSERT INTO `mails` VALUES (1, '2758720486@qq.com');
-INSERT INTO `mails` VALUES (2, '1464986394@qq.com');
-INSERT INTO `mails` VALUES (3, '1806002126@qq.com');
-INSERT INTO `mails` VALUES (4, '531609263@qq.com');
-INSERT INTO `mails` VALUES (5, '1981293830@qq.com');
-INSERT INTO `mails` VALUES (6, '1312146339@qq.com');
-INSERT INTO `mails` VALUES (7, '610925833@qq.com');
-INSERT INTO `mails` VALUES (8, '1539921349@qq.com');
-INSERT INTO `mails` VALUES (9, '1505912151@qq.com');
-INSERT INTO `mails` VALUES (10, '1921543035@qq.com');
-INSERT INTO `mails` VALUES (11, '1165529986@qq.com');
-INSERT INTO `mails` VALUES (12, '841842747@qq.com');
-INSERT INTO `mails` VALUES (13, '362436414@qq.com');
-INSERT INTO `mails` VALUES (14, '454870196@qq.com');
-INSERT INTO `mails` VALUES (15, '1028277698@qq.com');
-INSERT INTO `mails` VALUES (16, '1368388915@qq.com');
-INSERT INTO `mails` VALUES (17, '1759350328@qq.com');
-INSERT INTO `mails` VALUES (18, '924003073@qq.com');
-INSERT INTO `mails` VALUES (19, '839162908@qq.com');
-INSERT INTO `mails` VALUES (22, '1309238637@qq.comwin');
-INSERT INTO `mails` VALUES (23, '996759779@qq.com');
-INSERT INTO `mails` VALUES (24, '1178872096@qq.com');
-INSERT INTO `mails` VALUES (25, '2474617705@qq.comwin');
-INSERT INTO `mails` VALUES (26, '921681535@qq.com');
-INSERT INTO `mails` VALUES (20, '75521726@qq.com');
-INSERT INTO `mails` VALUES (21, 'weng_902@163.com');
-INSERT INTO `mails` VALUES (27, '903023764@qq.com');
-INSERT INTO `mails` VALUES (1, '2758720486@qq.com');
-INSERT INTO `mails` VALUES (3, '1806002126@qq.com');
-INSERT INTO `mails` VALUES (30, '222222222');
-INSERT INTO `mails` VALUES (40, '22222222222222');
 COMMIT;
 
 -- ----------------------------
