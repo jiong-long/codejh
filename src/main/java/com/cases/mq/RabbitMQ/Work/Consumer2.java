@@ -1,15 +1,10 @@
-package com.cases.RabbitMQ.Work;
+package com.cases.mq.RabbitMQ.Work;
+
+import com.cases.mq.RabbitMQ.RabbitTools;
+import com.common.Log;
+import com.rabbitmq.client.*;
 
 import java.io.IOException;
-
-import com.common.Log;
-import com.cases.RabbitMQ.RabbitTools;
-import com.rabbitmq.client.AMQP;
-import com.rabbitmq.client.Channel;
-import com.rabbitmq.client.Connection;
-import com.rabbitmq.client.Consumer;
-import com.rabbitmq.client.DefaultConsumer;
-import com.rabbitmq.client.Envelope;
 
 /**
  * 消费者2

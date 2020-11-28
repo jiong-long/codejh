@@ -1,4 +1,4 @@
-package com.cases.RabbitMQ;
+package com.cases.mq.RabbitMQ;
 
 import com.rabbitmq.client.Connection;
 import com.rabbitmq.client.ConnectionFactory;

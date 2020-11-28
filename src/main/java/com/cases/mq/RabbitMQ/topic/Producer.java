@@ -1,6 +1,6 @@
-package com.cases.RabbitMQ.topic;
+package com.cases.mq.RabbitMQ.topic;
 
-import com.cases.RabbitMQ.RabbitTools;
+import com.cases.mq.RabbitMQ.RabbitTools;
 import com.rabbitmq.client.Channel;
 import com.rabbitmq.client.Connection;
 

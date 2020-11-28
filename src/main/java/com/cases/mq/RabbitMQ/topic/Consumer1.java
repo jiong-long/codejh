@@ -1,22 +1,19 @@
-package com.cases.RabbitMQ.routing;
+package com.cases.mq.RabbitMQ.topic;
+
+import com.cases.mq.RabbitMQ.RabbitTools;
+import com.common.Log;
+import com.rabbitmq.client.*;
 
 import java.io.IOException;
 
-import com.cases.RabbitMQ.RabbitTools;
-import com.rabbitmq.client.AMQP;
-import com.rabbitmq.client.Channel;
-import com.rabbitmq.client.Connection;
-import com.rabbitmq.client.Consumer;
-import com.rabbitmq.client.DefaultConsumer;
-import com.rabbitmq.client.Envelope;
-
 public class Consumer1 {
 
-	private final static String QUEUE_NAME = "test_queue_direct_1";
+	private final static String QUEUE_NAME = "test_queue_topic_1";
 
-	private final static String EXCHANGE_NAME = "test_exchange_direct";
+	private final static String EXCHANGE_NAME = "test_exchange_topic";
 
 	public static void main(String[] argv) throws Exception {
+
 		// 获取到连接以及mq通道
 		Connection connection = RabbitTools.getConnection();
 		Channel channel = connection.createChannel();
@@ -24,23 +21,26 @@ public class Consumer1 {
 		// 声明队列
 		channel.queueDeclare(QUEUE_NAME, false, false, false, null);
 
-		//绑定队列到交换机 
-		//参数1：队列的名称
-		//参数2：交换机的名称
-		//参数3：routingKey（接收该EXCHANGE_NAME上发送的routingKey为A的消息）
-		channel.queueBind(QUEUE_NAME, EXCHANGE_NAME, "A");
+		// 绑定队列到交换机
+		channel.queueBind(QUEUE_NAME, EXCHANGE_NAME, "order.#");
 
 		// 同一时刻服务器只会发一条消息给消费者
 		channel.basicQos(1);
 
+		
 		// 定义队列的消费者
 		Consumer consumer = new DefaultConsumer(channel) {
             @Override
             public void handleDelivery(String consumerTag, Envelope envelope,
                                        AMQP.BasicProperties properties, byte[] body) throws IOException {
                 String message = new String(body, "UTF-8");
-                System.out.println(" [消费者1] Received '" + message + "'");
+                System.out.println(" [财务系统] Received '" + message + "'");
                 channel.basicAck(envelope.getDeliveryTag(), false);
+                try {
+					Thread.sleep(10);
+				} catch (InterruptedException e) {
+					Log.error(e);
+				}
             }
         };
 

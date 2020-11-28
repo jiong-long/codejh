@@ -1,51 +1,37 @@
-package com.cases.RabbitMQ.topic;
+package com.cases.mq.RabbitMQ.HelloWorld;
+
+import com.cases.mq.RabbitMQ.RabbitTools;
+import com.rabbitmq.client.*;
 
 import java.io.IOException;
 
-import com.common.Log;
-import com.cases.RabbitMQ.RabbitTools;
-import com.rabbitmq.client.AMQP;
-import com.rabbitmq.client.Channel;
-import com.rabbitmq.client.Connection;
-import com.rabbitmq.client.Consumer;
-import com.rabbitmq.client.DefaultConsumer;
-import com.rabbitmq.client.Envelope;
+/**
+ * 消费者
+ * 
+ * @creatTime 2018年10月29日 下午10:16:00
+ * @author jinlong
+ */
+public class Consumer {
 
-public class Consumer1 {
-
-	private final static String QUEUE_NAME = "test_queue_topic_1";
-
-	private final static String EXCHANGE_NAME = "test_exchange_topic";
+	private final static String QUEUE_NAME = "HelloWorld";
 
 	public static void main(String[] argv) throws Exception {
-
 		// 获取到连接以及mq通道
 		Connection connection = RabbitTools.getConnection();
+		// 从连接中创建通道
 		Channel channel = connection.createChannel();
 
-		// 声明队列
+		// 声明队列(如果你已经明确的知道有这个队列,那么下面这句代码可以注释掉,如果不注释掉的话,也可以理解为消费者必须监听一个队列,如果没有就创建一个)
 		channel.queueDeclare(QUEUE_NAME, false, false, false, null);
 
-		// 绑定队列到交换机
-		channel.queueBind(QUEUE_NAME, EXCHANGE_NAME, "order.#");
-
-		// 同一时刻服务器只会发一条消息给消费者
-		channel.basicQos(1);
-
-		
 		// 定义队列的消费者
-		Consumer consumer = new DefaultConsumer(channel) {
+		com.rabbitmq.client.Consumer consumer = new DefaultConsumer(channel) {
             @Override
             public void handleDelivery(String consumerTag, Envelope envelope,
                                        AMQP.BasicProperties properties, byte[] body) throws IOException {
                 String message = new String(body, "UTF-8");
-                System.out.println(" [财务系统] Received '" + message + "'");
+                System.out.println(" [消费者2] Received '" + message + "'");
                 channel.basicAck(envelope.getDeliveryTag(), false);
-                try {
-					Thread.sleep(10);
-				} catch (InterruptedException e) {
-					Log.error(e);
-				}
             }
         };
 
