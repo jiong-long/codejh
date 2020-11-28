@@ -53,6 +53,8 @@ public class TopicTest {
                     if(message instanceof TextMessage){
                         TextMessage textMessage = (TextMessage)message;
                         System.out.println(textMessage.getText());
+                        // 字段串必须是JSON格式的
+                        // System.out.println(JSON.parseObject(textMessage.getText(), Map.class));
                     } else if(message instanceof ObjectMessage){
                         String text = JSON.toJSONString(((ObjectMessage) message).getObject());
                         Map map = JSON.parseObject(text, Map.class);
